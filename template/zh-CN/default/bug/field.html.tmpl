@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -53,7 +53,7 @@
       <button type="button" class="calendar_button"
               id="button_calendar_[% field.name FILTER html %]"
               onclick="showCalendar('[% field.name FILTER js %]')">
-       <span>月曆</span>
+       <span>月历</span>
       </button>
 
       <div id="con_calendar_[% field.name FILTER html %]"></div>
@@ -75,7 +75,7 @@
           [% value FILTER bug_link(value, use_alias => 1) FILTER none %]
         [% END %]
         <span id="[% field.name FILTER html %]_edit_container" class="edit_me bz_default_hidden">
-          （<a href="#" id="[% field.name FILTER html %]_edit_action">編輯</a>）
+          （<a href="#" id="[% field.name FILTER html %]_edit_action">编辑</a>）
         </span>
         <script type="text/javascript">
         hideEditableField('[% field.name FILTER js %]_edit_container',
@@ -147,7 +147,7 @@
      [% CASE constants.FIELD_TYPE_TEXTAREA %]
        <div id="[% field.name FILTER html %]_edit_container" class="bz_default_hidden">
          <div>
-             （<a href="#" id="[% field.name FILTER html %]_edit_action">編輯</a>）
+             （<a href="#" id="[% field.name FILTER html %]_edit_action">编辑</a>）
          </div>
          [% IF value %]
            <pre class="field_textarea_readonly">[% value FILTER html %]</pre>
@@ -175,7 +175,7 @@
              [% PROCESS bug_url_link bug_url = bug_url %]
              <label><input type="checkbox" value="[% bug_url.name FILTER html %]"
                            name="remove_[% field.name FILTER html %]">
-               刪除</label>
+               删除</label>
            </li>
          [% END %]
          </ul>
@@ -243,7 +243,7 @@
 
 [% IF bug && field.name == 'component' %]
   (<a href="buglist.cgi?component=[% bug.component FILTER uri %]&amp;product=[% bug.product FILTER uri %]&amp;bug_status=__open__"
-      target="_blank">顯示其他 [% terms.bugs %]</a>)
+      target="_blank">显示其他 [% terms.bugs %]</a>)
 [% END %]
 
 [% Hook.process('end_field_column') %]

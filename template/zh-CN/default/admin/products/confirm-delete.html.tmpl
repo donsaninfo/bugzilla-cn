@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -16,7 +16,7 @@
   #
   #%]
 
-[% title = BLOCK %]刪除產品 '[% product.name FILTER html %]'
+[% title = BLOCK %]删除产品 '[% product.name FILTER html %]'
 [% END %]
 
 [% PROCESS global/header.html.tmpl
@@ -26,28 +26,28 @@
 
 <table id="admin_table">
   <tr class="column_header">
-    <th>欄位</th>
+    <th>栏位</th>
     <th>值</th>
 
   [% IF Param('useclassification') %]
     <tr>
-      <td>分類</td>
+      <td>分类</td>
       <td>[% classification.name FILTER html %]</td>
     </tr>
     <tr>
-      <td>分類描述</td>
+      <td>分类描述</td>
       <td>
         [% IF classification.description %]
           [% classification.description FILTER html_light %]
         [% ELSE %]
-          <span class="warning">無</span>
+          <span class="warning">无</span>
         [% END %]
       </td>
     </tr>
   [% END %]
 
   <tr>
-    <td>產品</td>
+    <td>产品</td>
     <td>
       <a href="editproducts.cgi?product=[% product.name FILTER uri %]">
         [%- product.name FILTER html %]</a>
@@ -60,24 +60,24 @@
 
   [% IF Param('usetargetmilestone') %]
     <tr>
-      <td>里程碑網址</td>
+      <td>里程碑网址</td>
       <td>
         [% IF product.milestone_url %]
           <a href="[% product.milestone_url FILTER html %]">[% product.milestone_url FILTER html %]</a>
         [% ELSE %]
-          無
+          无
         [% END %]
       </td>
     </tr>
   [% END %]
 
   <tr>
-    <td>[% terms.bugs %] 回報</td>
+    <td>[% terms.bugs %] 回报</td>
     <td>
       [% IF product.is_active %]
-        開
+        开
       [% ELSE %]
-        關
+        关
       [% END %]
     </td>
   </tr>
@@ -86,9 +86,9 @@
     <td>
       [% IF product.components.size > 0 %]
         <a href="editcomponents.cgi?product=[% product.name FILTER uri %]"
-           title="編輯產品 '[% product.name FILTER html %]' 的子產品">子產品</a>
+           title="编辑产品 '[% product.name FILTER html %]' 的子产品">子产品</a>
       [% ELSE %]
-        子產品
+        子产品
       [% END %]
     </td>
     <td>
@@ -102,7 +102,7 @@
           [% END %]
         </table>
       [% ELSE %]
-        無
+        无
       [% END %]
     </td>
   </tr>
@@ -123,7 +123,7 @@
           [% END %]
         </div>
       [% ELSE %]
-        無
+        无
       [% END %]
     </td>
   </tr>
@@ -146,7 +146,7 @@
             [% END %]
           </div>
         [% ELSE %]
-          無
+          无
         [% END %]
       </td>
     </tr>
@@ -157,34 +157,34 @@
     <td>
       [% IF product.bug_count %]
         <a href="buglist.cgi?product=[% product.name FILTER uri %]"
-           title="列出產品 '[% product.name FILTER html %]' 的 [% terms.bugs %]">
+           title="列出产品 '[% product.name FILTER html %]' 的 [% terms.bugs %]">
           [%- product.bug_count FILTER html %]</a>
       [% ELSE %]
-        無
+        无
       [% END %]
     </td>
   </tr>
 </table>
 
-<h2>確認</h2>
+<h2>确认</h2>
 
 [% IF product.bug_count %]
 
   [% IF !Param("allowbugdeletion") %]
 
     <p class="confirmation">
-      很抱歉，此產品還有
-      [%+ product.bug_count FILTER html %] 個 [% terms.bugs %] 。
-      在你刪除此產品之前，你必須將[% '們' IF product.bug_count > 1 %]變更至其他產品中。
+      很抱歉，此产品还有
+      [%+ product.bug_count FILTER html %] 个 [% terms.bugs %] 。
+      在你删除此产品之前，你必须将[% '们' IF product.bug_count > 1 %]变更至其他产品中。
     </p>
 
   [% ELSE %]
 
     <p class="confirmation">
-      此產品中已輸入
-      [%+ product.bug_count FILTER html %] 個 [% terms.bugs %] ！
-      當你刪除此產品時，
-      <b>所有</b>已儲存的 [% terms.bugs %] 和他們的歷史記錄也會一併刪除。
+      此产品中已输入
+      [%+ product.bug_count FILTER html %] 个 [% terms.bugs %] ！
+      当你删除此产品时，
+      <b>所有</b>已储存的 [% terms.bugs %] 和他们的历史记录也会一并删除。
     </p>
 
   [% END %]
@@ -195,15 +195,15 @@
 
 [% IF product.bug_count == 0 || Param('allowbugdeletion') %]
 
-  <p>你確定要刪除此產品嗎？</p>
+  <p>你确定要删除此产品吗？</p>
 
   <form method="post" action="editproducts.cgi">
     <input type="checkbox" id="delete_series" name="delete_series" value=1>
     <label for="delete_series">
-      刪除相關的系列（你也可以稍後檢視
-      <a href="chart.cgi?category=[% product.name FILTER html %]">「新圖表」頁面</a>來刪除它們）。
+      删除相关的系列（你也可以稍後检视
+      <a href="chart.cgi?category=[% product.name FILTER html %]">「新图表」页面</a>来删除它们）。
     </label><p>
-    <input type="submit" id="delete" value="是的，刪除">
+    <input type="submit" id="delete" value="是的，删除">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="product" value="[% product.name FILTER html %]">
     <input type="hidden" name="token" value="[% token FILTER html %]">

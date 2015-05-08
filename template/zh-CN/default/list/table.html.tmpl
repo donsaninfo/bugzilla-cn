@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -31,32 +31,32 @@
 [%# Setting maxlength => 0 means no limit. We set it for performance reasons. %]
 [% abbrev =
   {
-    "bug_severity"         => { maxlength => 8 , title => "嚴重等級" } ,
-    "priority"             => { maxlength => 2 , title => "優先程度" } ,
-    "rep_platform"         => { maxlength => 5 , title => "硬體平台" } ,
+    "bug_severity"         => { maxlength => 8 , title => "严重等级" } ,
+    "priority"             => { maxlength => 2 , title => "优先程度" } ,
+    "rep_platform"         => { maxlength => 5 , title => "硬体平台" } ,
     "bug_status"           => { maxlength => 9 } ,
     "assigned_to"          => { maxlength => 15 , ellipsis => "..." } ,
     "assigned_to_realname" => { maxlength => 10 , ellipsis => "..." } ,
     "reporter"             => { maxlength => 15 , ellipsis => "..." } ,
     "reporter_realname"    => { maxlength => 10 , ellipsis => "..." } ,
-    "qa_contact"           => { maxlength => 15 , ellipsis => "..." , title => "QA 連絡人" } ,
-    "qa_contact_realname"  => { maxlength => 10 , ellipsis => "..." , title => "QA 連絡人" } ,
+    "qa_contact"           => { maxlength => 15 , ellipsis => "..." , title => "QA 连络人" } ,
+    "qa_contact_realname"  => { maxlength => 10 , ellipsis => "..." , title => "QA 连络人" } ,
     "resolution"        => { maxlength => 9 } ,
     "short_desc"        => { maxlength => 0, wrap => 1 } ,
     "short_short_desc"  => { maxlength => 60 , ellipsis => "..." , wrap => 1 } ,
-    "status_whiteboard" => { maxlength => 0, title => "狀態白板" , wrap => 1 } ,
+    "status_whiteboard" => { maxlength => 0, title => "状态白板" , wrap => 1 } ,
     "keywords"          => { maxlength => 0, wrap => 1 } ,
-    "tags"              => { maxlength => 0, title => "標籤", wrap => 1},
+    "tags"              => { maxlength => 0, title => "标签", wrap => 1},
     "dependson"         => { maxlength => 0, wrap => 1 } ,
     "blocked"           => { maxlength => 0, wrap => 1 } ,
     "flagtypes.name"    => { maxlength => 0, wrap => 1 } ,
-    "component"         => { maxlength => 8 , title => "子產品" } ,
+    "component"         => { maxlength => 8 , title => "子产品" } ,
     "product"           => { maxlength => 8 } ,
     "version"           => { maxlength => 5 , title => "版本" } ,
     "op_sys"            => { maxlength => 12 } ,
     "bug_file_loc"      => { maxlength => 30 } ,
-    "target_milestone"  => { maxlength => 0, title => "目標里程碑" } ,
-    "longdescs.count"   => { maxlength => 0, title => "# 意見" },
+    "target_milestone"  => { maxlength => 0, title => "目标里程碑" } ,
+    "longdescs.count"   => { maxlength => 0, title => "# 意见" },
     "percentage_complete" => { maxlength => 0, format_value => "%d %%" } ,
   }
 %]
@@ -247,7 +247,7 @@
             column == 'percentage_complete' %]
         [% IF columns_to_span > 0 %]
           <td class="bz_total bz_total_label" colspan="
-              [%- columns_to_span FILTER html %]"><b>總計</b></td>
+              [%- columns_to_span FILTER html %]"><b>总计</b></td>
           [% columns_to_span = 0 %]
         [% END %]
         [% IF column == 'percentage_complete' %]

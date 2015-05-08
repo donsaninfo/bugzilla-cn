@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -15,7 +15,7 @@
   #                                                  the product is in
   #%]
 
-[% title = BLOCK %]編輯產品 '[% product.name FILTER html %]'[% END %]
+[% title = BLOCK %]编辑产品 '[% product.name FILTER html %]'[% END %]
 
 [% PROCESS global/header.html.tmpl
   title = title
@@ -23,10 +23,10 @@
   javascript_urls = ['js/util.js']
 %]
 
-[% group_control = {${constants.CONTROLMAPNA}        => '不適用',
-                    ${constants.CONTROLMAPSHOWN}     => '顯示',
-                    ${constants.CONTROLMAPDEFAULT}   => '預設',
-                    ${constants.CONTROLMAPMANDATORY} => '強制'}
+[% group_control = {${constants.CONTROLMAPNA}        => '不适用',
+                    ${constants.CONTROLMAPSHOWN}     => '显示',
+                    ${constants.CONTROLMAPDEFAULT}   => '预设',
+                    ${constants.CONTROLMAPMANDATORY} => '强制'}
 %]
 
 <form method="post" action="editproducts.cgi">
@@ -37,7 +37,7 @@
     <tr>
       <th>
         <a href="editcomponents.cgi?product=[% product.name FILTER uri %]">
-        編輯子產品：</a>
+        编辑子产品：</a>
       </th>
       <td>
         [% IF product.components.size -%]
@@ -55,7 +55,7 @@
     </tr>
     <tr>
       <th>
-        <a href="editversions.cgi?product=[% product.name FILTER uri %]">編輯版本：</a>
+        <a href="editversions.cgi?product=[% product.name FILTER uri %]">编辑版本：</a>
       </th>
       <td>
         [%- IF product.versions.size -%]
@@ -73,7 +73,7 @@
       <tr>
         <th>
           <a href="editmilestones.cgi?product=[% product.name FILTER uri %]">
-          編輯里程碑：</a>
+          编辑里程碑：</a>
         </th>
         <td>
           [%- IF product.milestones.size -%]
@@ -92,7 +92,7 @@
       <th>
         <a href="editproducts.cgi?action=editgroupcontrols&product=
           [%- product.name FILTER uri %]">
-          編輯群組控管：</a>
+          编辑群组控管：</a>
       </th>
       <td>
         [% IF product.group_controls.size %]
@@ -112,7 +112,7 @@
             <br>
           [% END %]
         [% ELSE %]
-          沒有群組
+          没有群组
         [% END %]
       </td>
     </tr>
@@ -129,7 +129,7 @@
         value="[% product.name FILTER html %]">
   <input type="hidden" name="action" value="update">
   <input type="hidden" name="token" value="[% token FILTER html %]">
-  <input type="submit" id="update-product" value="儲存變更">
+  <input type="submit" id="update-product" value="储存变更">
 </form>
 
 [% PROCESS "admin/products/footer.html.tmpl"

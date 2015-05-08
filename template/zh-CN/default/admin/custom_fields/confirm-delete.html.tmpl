@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -14,7 +14,7 @@
 [% PROCESS "global/field-descs.none.tmpl" %]
 
 [% title = BLOCK %]
-  刪除自訂欄位 '[% field.name FILTER html %]' ([% field.description FILTER html %])
+  删除自订栏位 '[% field.name FILTER html %]' ([% field.description FILTER html %])
 [% END %]
 
 [% PROCESS global/header.html.tmpl
@@ -25,11 +25,11 @@
 
 <table id="admin_table">
   <tr class="column_header">
-    <th>欄位</th>
+    <th>栏位</th>
     <th>值</th>
   </tr>
   <tr>
-    <td>自訂欄位</td>
+    <td>自订栏位</td>
     <td>[% field.name FILTER html %]</td>
   </tr>
   <tr>
@@ -37,23 +37,23 @@
     <td>[% field.description FILTER html %]</td>
   </tr>
   <tr>
-    <td>種類</td>
+    <td>种类</td>
     <td>[% field_types.${field.type} FILTER html %]</td>
   </tr>
 </table>
 
-<h2>確認</h2>
+<h2>确认</h2>
 
 <p class="confirmation">
-  你確定要從資料庫中刪除此自訂欄位嗎？<br>
-  <em>此動作僅在該欄位已廢棄，且從未於任何 [% terms.bug FILTER html %] 中使用過，才會成功。</em>
+  你确定要从资料库中删除此自订栏位吗？<br>
+  <em>此动作仅在该栏位已废弃，且从未於任何 [% terms.bug FILTER html %] 中使用过，才会成功。</em>
 </p>
 
 <a href="editfields.cgi?action=delete&amp;name=[% field.name FILTER html %]&amp;token=[% token FILTER html %]">
-  刪除欄位 '[% field.description FILTER html %]'</a>
+  删除栏位 '[% field.description FILTER html %]'</a>
 
 <p>
-  <a href="editfields.cgi">回到現有的自訂欄位列表</a>
+  <a href="editfields.cgi">回到现有的自订栏位列表</a>
 </p>
 
 [% PROCESS global/footer.html.tmpl %]

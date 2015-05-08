@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -11,14 +11,14 @@
   #%]
 
 [% PROCESS global/header.html.tmpl
-  title = "編輯關鍵字"
+  title = "编辑关键字"
   style_urls = ['skins/standard/admin.css']
 %]
 
 <form method="post" action="editkeywords.cgi">
   <table id="admin_table_edit">
     <tr>
-      <th>名稱：</th>
+      <th>名称：</th>
       <td><input size="64" maxlength="64" name="name"
                  value="[% keyword.name FILTER html %]" required></td>
     </tr>
@@ -42,18 +42,18 @@
           <a href="buglist.cgi?keywords=[% keyword.name FILTER uri %]"
             >[% keyword.bug_count FILTER html %]</a>
         [% ELSE %]
-          無
+          无
         [% END %]
       </td>
     </tr>
   </table>
 
-  <input type="submit" id="update" value="儲存設定">
+  <input type="submit" id="update" value="储存设定">
   <input type="hidden" name="action" value="update">
   <input type="hidden" name="id" value="[% keyword.id FILTER html %]">
   <input type="hidden" name="token" value="[% token FILTER html %]">
 </form>
 
-<p><a href="editkeywords.cgi">編輯其他關鍵字</a>。</p>
+<p><a href="editkeywords.cgi">编辑其他关键字</a>。</p>
 
 [% PROCESS global/footer.html.tmpl %]

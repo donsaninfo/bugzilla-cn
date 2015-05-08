@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -15,15 +15,15 @@
   #%]
 
 [% PROCESS "reports/series-common.html.tmpl"
-   newtext = "新的（在下方輸入）"
+   newtext = "新的（在下方输入）"
  %]
 
 <table id="edit_series">
     <tr>
-      <th>分類</th>
+      <th>分类</th>
       <th></th>
-      <th>子分類</th>
-      <th>名稱</th>
+      <th>子分类</th>
+      <th>名称</th>
       <th></th>
     </tr>
     <tr>
@@ -50,14 +50,14 @@
         每
         <input type="text" size="2" id="frequency" name="frequency"
                value="[% (default.frequency.0 OR 7) FILTER html %]">
-        天執行<br>
+        天执行<br>
         [%# Change 'admin' here and in Series.pm, or remove the check
             completely, if you want to change who can make series public. %]
         [% IF user.in_group('admin') %]
           <input type="checkbox" name="public"
                  [%+ "checked='checked'" IF default.public.0 %]>
-          (在群組限制中)<br>
-          全部可見
+          (在群组限制中)<br>
+          全部可见
         [% END %]
       </td>
     </tr>

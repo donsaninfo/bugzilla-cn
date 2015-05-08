@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -6,13 +6,13 @@
   # defined by the Mozilla Public License, v. 2.0.
   #%]
 
-[% title = "時間統計" %]
+[% title = "时间统计" %]
 [% IF do_depends %]
     [% header = "$terms.Bug $ids.0" FILTER bug_link(ids.0) FILTER none %]
-    [% header = header _ " (包括把這個 $terms.bug 擋掉的所有 $terms.bugs)" _ title %]
+    [% header = header _ " (包括把这个 $terms.bug 挡掉的所有 $terms.bugs)" _ title %]
     [% title = "$terms.Bug $ids.0 " _ title %]
 [% ELSE %]
-    [% title = "$ids.size 個已選的 $terms.bugs " _ title %]
+    [% title = "$ids.size 个已选的 $terms.bugs " _ title %]
     [% header = title %]
 [% END %]
 
@@ -36,9 +36,9 @@
     [% part = parts.shift %]
     <h4>
       [% IF part.0 or part.1 %]
-        [% part.0 OR "直" FILTER html %]到[% part.1 OR "現在" FILTER html %]
+        [% part.0 OR "直" FILTER html %]到[% part.1 OR "现在" FILTER html %]
       [% ELSE %]
-        完整統計 (不特別指定時段）
+        完整统计 (不特别指定时段）
       [% END %]
     </h4>
     [% IF group_by == "number" %]
@@ -50,8 +50,8 @@
 
   [% IF detailed %]
     <h4>
-      原先估計的 [% global.estimated FILTER format("%.2f") %]
-      小時中，一共剩餘 [% global.remaining FILTER format("%.2f") %] 小時
+      原先估计的 [% global.estimated FILTER format("%.2f") %]
+      小时中，一共剩余 [% global.remaining FILTER format("%.2f") %] 小时
       [% IF global.deadline %]
         （截止期限： [% global.deadline FILTER html %] ）
       [% END %]
@@ -59,13 +59,13 @@
   [% END %]
 
   [% IF monthly %]
-    <h4>總計已工作 [% global.grand_total FILTER format("%.2f") %] 小時</h4>
+    <h4>总计已工作 [% global.grand_total FILTER format("%.2f") %] 小时</h4>
     <hr>
   [% END %]
 
   [% IF null.size > 0 %]
     [% INCLUDE inactive_report %]
-    <h4>總計有 [% null.size %] 個不活躍的 [% terms.bugs %]</h4>
+    <h4>总计有 [% null.size %] 个不活跃的 [% terms.bugs %]</h4>
   [% END %]
 
 [% END %]
@@ -86,8 +86,8 @@
                                     detailed=detailed %]
         [% END %]
 
-    [% additional = "$global.owner_count.size 位開發者 @
-                     $global.bug_count.size 個 $terms.bugs" %]
+    [% additional = "$global.owner_count.size 位开发者 @
+                     $global.bug_count.size 个 $terms.bugs" %]
     [% INCLUDE section_total colspan=3 additional=additional %]
     </table>
 [% END %]
@@ -109,7 +109,7 @@
         [% subtotal = subtotal + bugdata.total_time %]
     [% END %]
     <tr>
-      <th colspan="4" class="right">總計：</th>
+      <th colspan="4" class="right">总计：</th>
       <td class="subtotal">[% subtotal FILTER format("%.2f") %]</td>
     </tr>
     [% global.total = global.total + subtotal %]
@@ -130,8 +130,8 @@
                               detailed=detailed %]
     [% END %]
 
-    [% additional = "$global.bug_count.size 個 $terms.bugs &
-                     $global.owner_count.size 位開發者" %]
+    [% additional = "$global.bug_count.size 个 $terms.bugs &
+                     $global.owner_count.size 位开发者" %]
     [% INCLUDE section_total additional=additional colspan=2 %]
     </table>
 [% END %]
@@ -158,7 +158,7 @@
         [% END %]
     [% END %]
     <tr>
-      <th colspan="3" class="right">總計：</th>
+      <th colspan="3" class="right">总计：</th>
       <td class="subtotal">[% subtotal FILTER format("%.2f") %]</td>
     </tr>
     [% global.total = global.total + subtotal %]
@@ -180,13 +180,13 @@
         <td>&nbsp;</td>
         <td colspan="3">
           <span class="time_info">
-            原先估計時數： [% bugs.$id.estimated_time FILTER format("%.2f") %] 小時
+            原先估计时数： [% bugs.$id.estimated_time FILTER format("%.2f") %] 小时
           </span>
           <span class="time_info">
-            剩餘時數： [% bugs.$id.remaining_time FILTER format("%.2f") %] 小時
+            剩余时数： [% bugs.$id.remaining_time FILTER format("%.2f") %] 小时
           </span>
           <span class="time_info">
-            截止期限： [% bugs.$id.deadline || "<b>未設定</b>" %]
+            截止期限： [% bugs.$id.deadline || "<b>未设定</b>" %]
           </span>
         </td>
         [% IF extra %]
@@ -208,7 +208,7 @@
 [% END %]
 
 [% BLOCK inactive_report %]
-    <h3>不活躍的 [% terms.bugs %]</h3>
+    <h3>不活跃的 [% terms.bugs %]</h3>
     <table class="zeroitems">
     [% cid = 0 %]
     [% FOREACH bug_id = null.nsort %]
@@ -222,13 +222,13 @@
 [% BLOCK section_total %]
   [% IF global.total > 0 %]
     <tr class="section_total">
-      <td><b>總計</b></td>
+      <td><b>总计</b></td>
       <th colspan="[% colspan FILTER html %]" class="right">[% additional FILTER html %]</th>
       <th class="right">[% global.total FILTER format("%.2f") %]</th>
     </tr>
   [% ELSE %]
     <tr>
-      <td>在指定的時段中，並無分配時間。</td>
+      <td>在指定的时段中，并无分配时间。</td>
     </tr>
   [% END %]
   [% global.grand_total = global.grand_total + global.total %]
@@ -249,51 +249,51 @@
 
 [% IF warn_swap_dates %]
   <p class="warning_swapped_data">
-    結束時間在開始時間之前並不合理，因此系統將兩者調換過來。
+    结束时间在开始时间之前并不合理，因此系统将两者调换过来。
   </p>
 [% END %]
 
 <table>
   <tr>
     <th>
-      <label accesskey="s" for="start_date">開始時間 (<u>S</u>)</label>:
+      <label accesskey="s" for="start_date">开始时间 (<u>S</u>)</label>:
     </th>
     <td>
       <input id="start_date" name="start_date" size="10" autofocus
              value="[% start_date FILTER html %]" maxlength="10"
              onchange="updateCalendarFromField(this)">
       <button type="button" class="calendar_button" id="button_calendar_start_date"
-              onclick="showCalendar('start_date')"><span>月曆</span>
+              onclick="showCalendar('start_date')"><span>月历</span>
       </button>
       <span class="label">
-        以及 <label accesskey="e" for="end_date">結束時間 (<u>E</u>)</label>:
+        以及 <label accesskey="e" for="end_date">结束时间 (<u>E</u>)</label>:
       </span>
       <input type="text" name="end_date" size="10" id="end_date"
              value ="[% end_date FILTER html %]" maxlength="10"
              onchange="updateCalendarFromField(this)">
       <button type="button" class="calendar_button" id="button_calendar_end_date"
-              onclick="showCalendar('end_date')"><span>月曆</span>
+              onclick="showCalendar('end_date')"><span>月历</span>
       </button>
       <br>
-      <span class="bz_info">(日期為選填，若要輸入則以 YYYY-MM-DD 格式輸入)</span>
+      <span class="bz_info">(日期为选填，若要输入则以 YYYY-MM-DD 格式输入)</span>
     </td>
-    <th><input type="submit" id="summarize" value="統計"></th>
+    <th><input type="submit" id="summarize" value="统计"></th>
   </tr>
 
   <tr>
-    <th>以...分組：</th>
+    <th>以...分组：</th>
     <td>
       <input type="radio" name="group_by" id="number" value="number"
              [% 'checked="checked"' IF group_by == "number" %]>
-      <label for="number" accesskey="n">[% terms.Bug %] 編號 (<u>N</u>)</label>
+      <label for="number" accesskey="n">[% terms.Bug %] 编号 (<u>N</u>)</label>
       <input type="radio" name="group_by" id="owner" value="owner"
              [% 'checked="checked"' IF group_by == "owner" %]>
-      <label for="owner" accesskey="d">開發者 (<u>D</u>)</label>
+      <label for="owner" accesskey="d">开发者 (<u>D</u>)</label>
     </td>
     <th>
       <label for="ctype">格式</label>:
       <select name="ctype" id="ctype">
-        <option value="html">HTML 報告</option>
+        <option value="html">HTML 报告</option>
       </select>
     </th>
   </tr>
@@ -303,14 +303,14 @@
     <td colspan="2">
       <input type="checkbox" name="monthly" id="monthly"
              [% 'checked="checked"' IF monthly %]>
-      <label for="monthly" accesskey="m">以月份做區隔 (<u>M</u>)</label>
+      <label for="monthly" accesskey="m">以月份做区隔 (<u>M</u>)</label>
       [%# XXX: allow splitting by other intervals %]
       <input type="checkbox" name="detailed" id="detailed"
              [% 'checked="checked"' IF detailed %]>
-      <label for="detailed" accesskey="t">詳細摘要 (<u>T</u>)</label>
+      <label for="detailed" accesskey="t">详细摘要 (<u>T</u>)</label>
       <input type="checkbox" name="inactive" id="inactive"
              [% 'checked="checked"' IF inactive %]>
-      <label for="inactive" accesskey="i">允許顯示不活躍的 [%+ terms.bugs %] (<u>I</u>)</label>
+      <label for="inactive" accesskey="i">允许显示不活跃的 [%+ terms.bugs %] (<u>I</u>)</label>
     </td>
   </tr>
 </table>

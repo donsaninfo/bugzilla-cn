@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -40,7 +40,7 @@
 [% switchbase     = switchbase FILTER html %]
 
 [% title = BLOCK %]
-  報告：
+  报告：
   [% IF tbl_field %]
     [% tbl_field_disp FILTER html %]
   [% END %]
@@ -96,14 +96,14 @@
         [% END %]width=[% width %]&amp;height=[% height %]
       [% END %]
 
-      <img id="graphical_report" alt="圖形式報表結果" src="[% imageurl %]">
+      <img id="graphical_report" alt="图形式报表结果" src="[% imageurl %]">
     [% END %]
     <br>
   [% END %]
 
-  [% formats = [ { name => "pie",   description => "圓餅圖" },
-                 { name => "bar",   description => "柱狀圖" },
-                 { name => "line",  description => "折線圖" },
+  [% formats = [ { name => "pie",   description => "圆饼图" },
+                 { name => "bar",   description => "柱状图" },
+                 { name => "line",  description => "折线图" },
                  { name => "table", description => "表格" } ] %]
 
   [% formaturl = "report.cgi?$switchbase&amp;width=$width&amp;height=$height&amp;action=wrap" %]
@@ -120,11 +120,11 @@
   </p>
 
   [% IF format == "table" %]
-    <a href="query.cgi?[% switchbase %]&amp;format=report-table">編輯此份報告</a>
+    <a href="query.cgi?[% switchbase %]&amp;format=report-table">编辑此份报告</a>
   [% ELSE %]
     <a href="query.cgi?[% switchbase %]&amp;chart_format=
              [%~ format FILTER uri %]&amp;format=report-graph&amp;cumulate=[% cumulate %]">
-      編輯此份報告</a>
+      编辑此份报告</a>
   [% END %]
   |
   [% IF saved_report_id %]
@@ -132,7 +132,7 @@
              [%~ issue_hash_token(['delete_report', saved_report_id]) FILTER uri %]">Forget this report</a>
   [% ELSE %]
     <form method="get" action="report.cgi" class="inline">
-      <input type="submit" id="remember" value="儲存此份報告">，名稱：
+      <input type="submit" id="remember" value="储存此份报告">，名称：
       <input type="hidden" name="query" value="[% switchbase %]&amp;format=[% format FILTER uri %]&amp;action=wrap">
       <input type="hidden" name="action" value="add">
       <input type="hidden" name="token" value="[% issue_hash_token(['save_report']) FILTER html %]">

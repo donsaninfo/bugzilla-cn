@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -8,18 +8,18 @@
 
 From: [% Param('mailfrom') %]
 To: [% emailaddress %]
-Subject: [% terms.Bugzilla %] 要求變更電子郵件地址
+Subject: [% terms.Bugzilla %] 要求变更电子邮件地址
 Importance: High
 X-MSMail-Priority: High
 X-Priority: 1
 X-Bugzilla-Type: admin
 
-[%+ terms.Bugzilla %] 收到將你的帳號改為使用 [%+ newemailaddress %] 註冊的要求。
+[%+ terms.Bugzilla %] 收到将你的帐号改为使用 [%+ newemailaddress %] 注册的要求。
 
-如果你並非提出此項要求的人，或者你想要取消此項要求，請點選以下網址：
+如果你并非提出此项要求的人，或者你想要取消此项要求，请点选以下网址：
 
 [%+ urlbase %]token.cgi?t=[% token FILTER uri %]&a=cxlem
 
-如果你什麼也不做，而且 [%+ newemailaddress %] 也確認了此一要求，
-那麼此項變更將會在 [% constants.MAX_TOKEN_AGE %] 天後
-([% expiration_ts FILTER time("%Y-%m-%d %H:%M %Z") %]) 永遠生效。
+如果你什麽也不做，而且 [%+ newemailaddress %] 也确认了此一要求，
+那麽此项变更将会在 [% constants.MAX_TOKEN_AGE %] 天後
+([% expiration_ts FILTER time("%Y-%m-%d %H:%M %Z") %]) 永远生效。

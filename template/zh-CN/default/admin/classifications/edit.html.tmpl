@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -7,7 +7,7 @@
   #%]
 
 [% PROCESS global/header.html.tmpl
-  title = "編輯分類"
+  title = "编辑分类"
   style_urls = ['skins/standard/admin.css']
 %]
 
@@ -18,7 +18,7 @@
 
     <tr>
       <th>
-        <a href="editproducts.cgi?classification=[% classification.name FILTER uri %]">編輯產品</a>：
+        <a href="editproducts.cgi?classification=[% classification.name FILTER uri %]">编辑产品</a>：
       </th>
       <td>
         [% IF classification.products.size > 0 %]
@@ -31,7 +31,7 @@
             [% END %]
           </table>
         [% ELSE %]
-          <span class="warning">無</span>
+          <span class="warning">无</span>
         [% END %]
       </td>
     </tr>

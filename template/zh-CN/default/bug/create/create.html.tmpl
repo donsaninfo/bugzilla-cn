@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -6,7 +6,7 @@
   # defined by the Mozilla Public License, v. 2.0.
   #%]
 
-[% title = BLOCK %]在 [% product.name FILTER html %] 產品下輸入 [% terms.Bug %][% END %]
+[% title = BLOCK %]在 [% product.name FILTER html %] 产品下输入 [% terms.Bug %][% END %]
 [% use_qa_contact = Param("useqacontact") %]
 
 [% PROCESS global/header.html.tmpl
@@ -67,7 +67,7 @@ var status_comment_required = new Array();
     [% status.comment_required_on_change_from() ? 'true' : 'false' %]
 [% END %]
 
-TUI_alternates['expert_fields'] = '顯示進階欄位';
+TUI_alternates['expert_fields'] = '显示进阶栏位';
 // Hide the Advanced Fields by default, unless the user has a cookie
 // that specifies otherwise.
 TUI_hide_default('expert_fields');
@@ -96,7 +96,7 @@ TUI_hide_default('attachment_text_field');
   <tr>
     <td colspan="2">
       <a id="expert_fields_controller" class="controller bz_default_hidden"
-         href="javascript:TUI_toggle_class('expert_fields')">隱藏進階欄位</a>
+         href="javascript:TUI_toggle_class('expert_fields')">隐藏进阶栏位</a>
       [%# Show the link if the browser supports JS %]
       <script type="text/javascript">
         YAHOO.util.Dom.removeClass('expert_fields_controller',
@@ -105,7 +105,7 @@ TUI_hide_default('attachment_text_field');
     </td>
     <td colspan="2">
       (<span class="required_star">*</span> =
-      <span class="required_explanation">必填欄位</span>)
+      <span class="required_explanation">必填栏位</span>)
    </td>
   </tr>
 
@@ -172,8 +172,8 @@ TUI_hide_default('attachment_text_field');
         <tr>
           <td>
             <fieldset>
-              <legend>子產品描述</legend>
-              <div id="comp_desc" class="comment">選擇一項子產品來閱讀描述。</div>
+              <legend>子产品描述</legend>
+              <div id="comp_desc" class="comment">选择一项子产品来阅读描述。</div>
             </fieldset>
           </td>
         </tr>
@@ -228,15 +228,15 @@ TUI_hide_default('attachment_text_field');
       <td colspan="2" class="expert_fields">&nbsp;</td>
       <td>&nbsp;</td>
       <td id="os_guess_note" class="comment">
-        <div>我們對於你的
+        <div>我们对於你的
         [% IF Param('defaultplatform') %]
-          作業系統
+          作业系统
         [% ELSIF Param('defaultopsys') %]
-          硬體平台
+          硬体平台
         [% ELSE %]
-          作業系統及硬體平台
+          作业系统及硬体平台
         [% END %]
-        做了推測。請檢查是否正確。如果有任何錯誤，請做出必要的更正。</div>
+        做了推测。请检查是否正确。如果有任何错误，请做出必要的更正。</div>
       </td>
     </tr>
   [% END %]
@@ -306,7 +306,7 @@ TUI_hide_default('attachment_text_field');
          emptyok => 1
          custom_userlist => assignees_list
        %]
-      <noscript>（如不填，則會設定為該子產品的預設負責人）</noscript>
+      <noscript>（如不填，则会设定为该子产品的预设负责人）</noscript>
     </td>
   </tr>
 
@@ -325,7 +325,7 @@ TUI_hide_default('attachment_text_field');
          emptyok => 1
          custom_userlist => qa_contacts_list
        %]
-        <noscript>（如不填，則會設定為預設的 QA 連絡人）</noscript>
+        <noscript>（如不填，则会设定为预设的 QA 连络人）</noscript>
       </td>
     </tr>
 [% END %]
@@ -347,7 +347,7 @@ TUI_hide_default('attachment_text_field');
   </tr>
 
   <tr>
-    <th>預設[% field_descs.cc FILTER html %]：</th>
+    <th>预设[% field_descs.cc FILTER html %]：</th>
     <td colspan="2">
       <div id="initial_cc">
       </div>
@@ -428,7 +428,7 @@ TUI_hide_default('attachment_text_field');
   [% IF feature_enabled('jsonrpc') AND !cloned_bug_id
         AND user.settings.possible_duplicates.value == 'on' %]
     <tr id="possible_duplicates_container" class="bz_default_hidden">
-      <th>可能<br>重複：</th>
+      <th>可能<br>重复：</th>
       <td colspan="3">
         <div id="possible_duplicates"></div>
         <script type="text/javascript">
@@ -444,16 +444,16 @@ TUI_hide_default('attachment_text_field');
               { key: "update_token", label: '',
                 formatter: YAHOO.bugzilla.dupTable.formatCcButton }
           ];
-          YAHOO.bugzilla.dupTable.addCcMessage = "將我加入寄件副本清單中";
+          YAHOO.bugzilla.dupTable.addCcMessage = "将我加入寄件副本清单中";
           YAHOO.bugzilla.dupTable.init({
             container: 'possible_duplicates',
             columns: dt_columns,
             product_name: '[% product.name FILTER js %]',
             summary_field: 'short_desc',
             options: {
-              MSG_LOADING: '搜尋可能重複的 [% terms.bugs %] 中...',
-              MSG_EMPTY:   '找不到可能重複的 [% terms.bugs %] 。',
-              SUMMARY:     '可能重複'
+              MSG_LOADING: '搜寻可能重复的 [% terms.bugs %] 中...',
+              MSG_EMPTY:   '找不到可能重复的 [% terms.bugs %] 。',
+              SUMMARY:     '可能重复'
             }
           });
         </script>
@@ -467,7 +467,7 @@ TUI_hide_default('attachment_text_field');
 
       [% defaultcontent = BLOCK %]
         [% IF cloned_bug_id %]
-+++ 此 [% terms.bug %] 是複製自 [% terms.Bug %] #[% cloned_bug_id %] +++
++++ 此 [% terms.bug %] 是复制自 [% terms.Bug %] #[% cloned_bug_id %] +++
 
 
         [% END %]
@@ -494,9 +494,9 @@ TUI_hide_default('attachment_text_field');
           [% ' checked="checked"' IF comment_is_private %]
                onClick="updateCommentTagControl(this, 'comment')">
         <label for="comment_is_private">
-          將描述和新附加的附件設定為不公開（僅
+          将描述和新附加的附件设定为不公开（仅
           <strong>[% Param('insidergroup') FILTER html %]</strong>
-          群組成員可見）
+          群组成员可见）
         </label>
       </td>
     </tr>
@@ -583,16 +583,16 @@ TUI_hide_default('attachment_text_field');
         <strong>
           只有在
           [% IF Param('or_groups') %]
-            已選擇的群組中至少一個群組
+            已选择的群组中至少一个群组
           [% ELSE %]
-            所有已選擇的群組
+            所有已选择的群组
           [% END %]
-          的使用者才能瀏覽這個
+          的使用者才能浏览这个
           [+% terms.bug %] ：
         </strong>
       <br>
       <span class="bz_info">
-        (若均不勾選，則此 [% terms.bug %] 將會公開。)
+        (若均不勾选，则此 [% terms.bug %] 将会公开。)
       </span>
       <br>
       <br>
@@ -622,7 +622,7 @@ TUI_hide_default('attachment_text_field');
       <input type="submit" id="commit" value="送出 [% terms.Bug %]">
       &nbsp;&nbsp;&nbsp;&nbsp;
       <input type="submit" name="maketemplate" id="maketemplate"
-             value="將所有的值儲存為書籤模版"
+             value="将所有的值储存为书签模版"
              onclick="bz_no_validate_enter_bug=true" class="expert_fields">
     </td>
   </tr>

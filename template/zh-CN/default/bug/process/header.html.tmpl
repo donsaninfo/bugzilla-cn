@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -16,16 +16,16 @@
 
 [% IF    title_tag == "bug_processed" %]
   [% title = BLOCK %]
-    已對
+    已对
     [% IF Bugzilla.cgi.param('id') %]
       [%+ id FILTER html %]
     [% ELSE %]
       [% terms.Bugs %]
     [% END %]
-    進行處理
+    进行处理
   [% END %]
 [% ELSIF title_tag == "mid_air" %]
-  [% title = "發生衝突！" %]
+  [% title = "发生冲突！" %]
 [% END %]
 
 [% Hook.process('title') %]

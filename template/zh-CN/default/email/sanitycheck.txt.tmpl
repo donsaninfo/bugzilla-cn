@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -8,16 +8,16 @@
 
 From: [% Param('mailfrom') %]
 To: [% addressee %]
-Subject: [[% terms.Bugzilla %]] 健全度測試結果
+Subject: [[% terms.Bugzilla %]] 健全度测试结果
 X-Bugzilla-Type: sanitycheck
 
 [%+ urlbase %]sanitycheck.cgi
 
-你可以在下方看見健全度測試的結果。
+你可以在下方看见健全度测试的结果。
 [% IF error_found %]
-找到一些錯誤。
+找到一些错误。
 [% ELSE %]
-並未找到任何錯誤。
+并未找到任何错误。
 [% END %]
 
 [% output %]

@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -12,17 +12,17 @@
   #%]
 
 [% IF target == "enter_bug.cgi" %]
-  [% title = "輸入 $terms.bug" %]
-  [% subheader = "選擇分類" %]
+  [% title = "输入 $terms.bug" %]
+  [% subheader = "选择分类" %]
 [% END %]
 
-[% DEFAULT title = "選擇分類" %]
+[% DEFAULT title = "选择分类" %]
 [% PROCESS global/header.html.tmpl %]
 
 [% USE Bugzilla %]
 [% previous_params = Bugzilla.cgi.canonicalise_query('classification') %]
 
-<h2>首先，你必須選擇一個分類來輸入 [% terms.bug %] ：</h2>
+<h2>首先，你必须选择一个分类来输入 [% terms.bug %] ：</h2>
 <table id="choose_classification">
   <tr>
     <th class="right">
@@ -31,7 +31,7 @@
       全部</a>：
     </th>
 
-    <td>顯示所有產品</td>
+    <td>显示所有产品</td>
   </tr>
   <tr>
     <th colspan="2">&nbsp;</th>

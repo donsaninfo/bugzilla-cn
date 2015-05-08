@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -29,13 +29,13 @@
       YAHOO.bugzilla.commentTagging.init([% user.can_tag_comments ? 'true' : 'false' %]);
       YAHOO.bugzilla.commentTagging.min_len = [% constants.MIN_COMMENT_TAG_LENGTH FILTER js %];
       YAHOO.bugzilla.commentTagging.max_len = [% constants.MAX_COMMENT_TAG_LENGTH FILTER js %];
-      YAHOO.bugzilla.commentTagging.label = '意見標籤：';
+      YAHOO.bugzilla.commentTagging.label = '意见标签：';
       YAHOO.bugzilla.commentTagging.min_len_error =
-        '意見標籤必須至少
-        [%~ " " _ constants.MIN_COMMENT_TAG_LENGTH FILTER js %] 個字元。';
+        '意见标签必须至少
+        [%~ " " _ constants.MIN_COMMENT_TAG_LENGTH FILTER js %] 个字元。';
       YAHOO.bugzilla.commentTagging.max_len_error =
-        '意見標籤不能長於
-        [%~ " " _ constants.MAX_COMMENT_TAG_LENGTH FILTER js %] 個字元。';
+        '意见标签不能长於
+        [%~ " " _ constants.MAX_COMMENT_TAG_LENGTH FILTER js %] 个字元。';
     </script>
   [% END %]
 [% END %]
@@ -195,7 +195,7 @@
       [% END %]
       - <span id="short_desc_nonedit_display">[% bug.short_desc FILTER quoteUrls(bug) %]</span>
       [% IF bug.check_can_change_field('short_desc', 0, 1) %]
-        <small>(<a href="#" id="summary_edit_action">編輯</a>)</small>
+        <small>(<a href="#" id="summary_edit_action">编辑</a>)</small>
       [% END %]
      </span>
 
@@ -303,7 +303,7 @@
 [% BLOCK section_status %]
   <tr>
     <th class="field_label">
-      <a href="page.cgi?id=fields.html#bug_status">狀態</a>：
+      <a href="page.cgi?id=fields.html#bug_status">状态</a>：
     </th>
     <td id="bz_field_status">
       <span id="static_bug_status">
@@ -316,7 +316,7 @@
         [% END %]
         [% IF bug.user.canedit || bug.user.isreporter %]
           (<a href="#add_comment"
-              onclick="window.setTimeout(function() { document.getElementById('bug_status').focus(); }, 10)">編輯</a>)
+              onclick="window.setTimeout(function() { document.getElementById('bug_status').focus(); }, 10)">编辑</a>)
         [% END %]
       </span>
     </td>
@@ -373,16 +373,16 @@
 
     <tr>
       <th class="field_label">
-        <a href="page.cgi?id=fields.html#assigned_to">負責人</a>：
+        <a href="page.cgi?id=fields.html#assigned_to">负责人</a>：
       </th>
       <td>
         [% IF bug.check_can_change_field("assigned_to", 0, 1) %]
           <div id="bz_assignee_edit_container" class="bz_default_hidden">
             <span>
               [% INCLUDE global/user.html.tmpl who = bug.assigned_to %]
-              (<a href="#" id="bz_assignee_edit_action">編輯</a>)
+              (<a href="#" id="bz_assignee_edit_action">编辑</a>)
               [% IF bug.assigned_to.id != user.id %]
-                (<a title="分配給自己"
+                (<a title="分配给自己"
                     href="#" id="bz_assignee_take_action">接受</a>)
               [% END %]
             </span>
@@ -397,7 +397,7 @@
             %]
             <br>
             <input type="checkbox" id="set_default_assignee" name="set_default_assignee" value="1">
-            <label id="set_default_assignee_label" for="set_default_assignee">將負責人設回預設值</label>
+            <label id="set_default_assignee_label" for="set_default_assignee">将负责人设回预设值</label>
           </div>
           <script type="text/javascript">
            hideEditableField('bz_assignee_edit_container',
@@ -431,10 +431,10 @@
           <div id="bz_qa_contact_edit_container" class="bz_default_hidden">
             <span>
               [% INCLUDE global/user.html.tmpl who = bug.qa_contact %]
-               (<a href="#" id="bz_qa_contact_edit_action">編輯</a>)
+               (<a href="#" id="bz_qa_contact_edit_action">编辑</a>)
               [% IF bug.qa_contact.id != user.id %]
-                (<a title="將 QA 連絡人換成你自己"
-                    href="#" id="bz_qa_contact_take_action">設為自己</a>)
+                (<a title="将 QA 连络人换成你自己"
+                    href="#" id="bz_qa_contact_take_action">设为自己</a>)
               [% END %]
             </span>
           </div>
@@ -449,7 +449,7 @@
             %]
             <br>
             <input type="checkbox" id="set_default_qa_contact" name="set_default_qa_contact" value="1">
-            <label for="set_default_qa_contact">將 QA 連絡人設回預設值</label>
+            <label for="set_default_qa_contact">将 QA 连络人设回预设值</label>
           </div>
           <script type="text/javascript">
             hideEditableField('bz_qa_contact_edit_container',
@@ -498,7 +498,7 @@
         [% ELSE %]
           [% bug.bug_file_loc FILTER html %]
         [% END %]
-        (<a href="#" id="bz_url_edit_action">編輯</a>)</span>
+        (<a href="#" id="bz_url_edit_action">编辑</a>)</span>
       [% END %]
       <span id="bz_url_input_area">
         [% url_output =  PROCESS input no_td=1 inputname => "bug_file_loc" size => "40" colspan => 2 %]
@@ -561,7 +561,7 @@
   [% RETURN UNLESS bug.duplicates.size %]
   <tr>
     <th class="field_label">
-      <label for="duplicates">重複的 ([% bug.duplicates.size %])</label>：
+      <label for="duplicates">重复的 ([% bug.duplicates.size %])</label>：
     </th>
     <td class="field_value" colspan="2">
       <span id="duplicates">
@@ -570,7 +570,7 @@
         [% END %]
       </span>
       (<a href="buglist.cgi?bug_id=[% bug.duplicate_ids.join(",") FILTER html %]">
-       [%-%]以 [% terms.bug %] 清單方式瀏覽</a>)
+       [%-%]以 [% terms.bug %] 清单方式浏览</a>)
     </td>
   </tr>
 [% END %]
@@ -595,10 +595,10 @@
       <th>&nbsp;</th>
 
       <td colspan="2" id="show_dependency_tree_or_graph">
-        顯示依賴關係<a href="showdependencytree.cgi?id=[% bug.bug_id %]&amp;hide_resolved=1">樹</a>
+        显示依赖关系<a href="showdependencytree.cgi?id=[% bug.bug_id %]&amp;hide_resolved=1">树</a>
 
         [% IF Param('webdotbase') %]
-          ／<a href="showdependencygraph.cgi?id=[% bug.bug_id %]">圖表</a>
+          ／<a href="showdependencygraph.cgi?id=[% bug.bug_id %]">图表</a>
         [% END %]
       </td>
     </tr>
@@ -629,15 +629,15 @@
           <div id="bz_restrict_group_visibility_help">
             <b>只有在
               [% IF Param('or_groups') %]
-                已選擇群組中至少一個群組
+                已选择群组中至少一个群组
               [% ELSE %]
-                所有已選擇群組中
+                所有已选择群组中
               [% END %]
-              的使用者可以瀏覽這個
+              的使用者可以浏览这个
               [%+ terms.bug %] ：
             </b>
             <p class="instructions">
-              若不勾選， [% terms.bug %] 將會公開。
+              若不勾选， [% terms.bug %] 将会公开。
             </p>
           </div>
       [% END %]
@@ -664,8 +664,8 @@
 
     [% IF inagroup %]
       <div id="bz_enable_role_visibility_help">
-        <b>只有群組的成員可以變更屬於該群組的
-          [%+ terms.bug %] 的可見性：</b>
+        <b>只有群组的成员可以变更属於该群组的
+          [%+ terms.bug %] 的可见性：</b>
       </div>
       <div id="bz_enable_role_visibility">
         <div>
@@ -679,7 +679,7 @@
                  name="reporter_accessible" id="reporter_accessible"
                  [% " checked" IF bug.reporter_accessible %]
                  [% " disabled=\"disabled\"" UNLESS user_can_edit_accessible %]>
-          <label for="reporter_accessible">回報者</label>
+          <label for="reporter_accessible">回报者</label>
         </div>
         <div>
           [% user_can_edit_accessible =
@@ -692,15 +692,15 @@
                  name="cclist_accessible" id="cclist_accessible"
                  [% " checked" IF bug.cclist_accessible %]
                  [% " disabled=\"disabled\"" UNLESS user_can_edit_accessible %]>
-          <label for="cclist_accessible">寄件副本清單</label>
+          <label for="cclist_accessible">寄件副本清单</label>
         </div>
         <p class="instructions">
-          [% terms.bug %] 的負責人
+          [% terms.bug %] 的负责人
           [% IF (Param('useqacontact')) %]
-             和 QA 連絡人
+             和 QA 连络人
           [% END %]
-          一定可以看見這個 [% terms.bug %] 。
-          這個部份的設定只有在 [% terms.bug %] 被限制在至少一個群組時，才會生效。
+          一定可以看见这个 [% terms.bug %] 。
+          这个部份的设定只有在 [% terms.bug %] 被限制在至少一个群组时，才会生效。
         </p>
       </div>
     [% END %]
@@ -714,21 +714,21 @@
 [% BLOCK section_dates %]
   <tr>
     <th class="field_label">
-      回報於：
+      回报於：
     </th>
     <td>
      於 [% bug.creation_ts FILTER time("%Y-%m-%d %H:%M %Z") %]
-     由 [% INCLUDE global/user.html.tmpl who = bug.reporter %] 回報
+     由 [% INCLUDE global/user.html.tmpl who = bug.reporter %] 回报
     </td>
   </tr>
 
   <tr>
     <th class="field_label">
-      變更於：
+      变更於：
     </th>
     <td>
       [% bug.delta_ts FILTER time FILTER replace(':\d\d$', '') FILTER replace(':\d\d ', ' ')%]
-      (<a href="show_activity.cgi?id=[% bug.bug_id %]">[%# terms.Bug %] 歷史</a>)
+      (<a href="show_activity.cgi?id=[% bug.bug_id %]">[%# terms.Bug %] 历史</a>)
     </td>
 
   </tr>
@@ -740,7 +740,7 @@
 [% BLOCK section_cclist %]
     <tr>
       <th class="field_label">
-        <label for="newcc" accesskey="a">寄件副本清單：</label>
+        <label for="newcc" accesskey="a">寄件副本清单：</label>
       </th>
       <td>
         [% IF user.id %]
@@ -750,7 +750,7 @@
                    IF user.settings.state_addselfcc.value == 'always'
                       || (!bug.user.has_any_role
                           && user.settings.state_addselfcc.value == 'cc_unless_role') %]>
-            <label for="addselfcc">把自己加入寄件副本清單</label>
+            <label for="addselfcc">把自己加入寄件副本清单</label>
             <br>
           [% END %]
         [% END %]
@@ -761,7 +761,7 @@
         [% END %]
         [% IF user.id || bug.cc.size %]
           <span id="cc_edit_area_showhide_container" class="bz_default_hidden">
-            （<a href="#" id="cc_edit_area_showhide">[% IF user.id %]編輯[% ELSE %]顯示[% END %]</a>）
+            （<a href="#" id="cc_edit_area_showhide">[% IF user.id %]编辑[% ELSE %]显示[% END %]</a>）
           </span>
         [% END %]
         <div id="cc_edit_area">
@@ -795,9 +795,9 @@
               <input type="checkbox" id="removecc" name="removecc">
               <label for="removecc">
                 [% IF bug.user.canedit %]
-                  刪除選擇的寄件副本清單
+                  删除选择的寄件副本清单
                 [% ELSE %]
-                  將我從寄件副本清單中刪除
+                  将我从寄件副本清单中删除
                 [% END %]
               </label>
               <br>
@@ -830,10 +830,10 @@
       </th>
       <td>
         <input type="hidden" name="defined_bug_ignored" value="1">
-        <span title="你還是會收到指向你的旗標要求電子郵件通知。">
+        <span title="你还是会收到指向你的旗标要求电子邮件通知。">
           <input type="checkbox" name="bug_ignored" id="bug_ignored" value="1"
                  [% ' checked="checked"' IF user.is_bug_ignored(bug.id) %]>
-          （關於這個 [% terms.bug %] 不要寄信通知我）
+          （关於这个 [% terms.bug %] 不要寄信通知我）
         </span>
       </td>
     </tr>
@@ -864,11 +864,11 @@
       [% IF bug.alias.size %]
         [% bug.alias.join(', ') FILTER html %]
       [% ELSE %]
-        無
+        无
       [% END %]
       [% IF bug.check_can_change_field('alias', 0, 1) %]
         <span id="alias_edit_area_showhide_container" class="bz_default_hidden">
-          (<a href="#" id="alias_edit_area_showhide">編輯</a>)
+          (<a href="#" id="alias_edit_area_showhide">编辑</a>)
         </span>
         <br>
         <div id="alias_edit_area">
@@ -889,7 +889,7 @@
             <br>
 
             <input type="checkbox" id="removealias" name="removealias">
-            <label for="removealias">移除已選擇的別名</label>
+            <label for="removealias">移除已选择的别名</label>
 
           [% END %]
         </div>
@@ -929,7 +929,7 @@
   [% IF show_bug_flags %]
     <tr>
       <th class="field_label">
-        <label>旗標：</label>
+        <label>旗标：</label>
       </th>
       <td>
         [% IF bug.flag_types.size %]
@@ -939,8 +939,8 @@
         [% END %]
         [% IF show_more_flags %]
           <span id="bz_flags_more_container" class="bz_default_hidden">
-            [% IF !bug_flags_set %]<em>尚未設定</em>[% END %]
-            (<a href="#" id="bz_flags_more_action">[% IF !bug_flags_set %]設定[% ELSE %]更多[% END %]旗標</a>)
+            [% IF !bug_flags_set %]<em>尚未设定</em>[% END %]
+            (<a href="#" id="bz_flags_more_action">[% IF !bug_flags_set %]设定[% ELSE %]更多[% END %]旗标</a>)
           </span>
           <script type="text/javascript">
             YAHOO.util.Dom.removeClass('bz_flags_more_container', 'bz_default_hidden');
@@ -1022,7 +1022,7 @@
     [% IF bug.check_can_change_field(field.name, 0, 1) %]
       <span id="[% field.name FILTER html %]_edit_container"
             class="edit_me bz_default_hidden">
-        (<a href="#" id="[% field.name FILTER html %]_edit_action">編輯</a>)
+        (<a href="#" id="[% field.name FILTER html %]_edit_action">编辑</a>)
       </span>
       <script type="text/javascript">
         hideEditableField('[% field.name FILTER js %]_edit_container',
@@ -1047,7 +1047,7 @@
          field = bug_fields.estimated_time, editable = 1
       %]
       <th>
-        現在估計時數：
+        现在估计时数：
       </th>
       [% INCLUDE "bug/field-label.html.tmpl"
          field = bug_fields.work_time, editable = 1
@@ -1059,7 +1059,7 @@
          field = bug_fields.percentage_complete, editable = 1
       %]
       <th>
-        節省：
+        节省：
       </th>
       [% INCLUDE "bug/field-label.html.tmpl"
          field = bug_fields.deadline, editable = 1
@@ -1104,7 +1104,7 @@
     <tr>
       <td colspan="7" align="right">
         <a href="summarize_time.cgi?id=[% bug.bug_id %]&amp;do_depends=1">
-        統計時間 (包含把這個 [% terms.bug %] 擋掉的 [% terms.bugs %] 的時間)</a>
+        统计时间 (包含把这个 [% terms.bug %] 挡掉的 [% terms.bugs %] 的时间)</a>
       </td>
     </tr>
   </table>
@@ -1117,7 +1117,7 @@
 [% BLOCK comment_box %]
   <div id="add_comment" class="bz_section_additional_comments">
     [% IF user.id %]
-      <label for="comment" accesskey="c"><b>附加意見
+      <label for="comment" accesskey="c"><b>附加意见
         (<u>C</u>)</b></label> ：
 
       [% IF user.is_insider && bug.check_can_change_field('longdesc', 0, 1) %]
@@ -1125,8 +1125,8 @@
                id="newcommentprivacy"
                onClick="updateCommentTagControl(this, 'comment')">
         <label for="newcommentprivacy">
-          將意見設定為不公開（僅有
-          <strong>[% Param('insidergroup') FILTER html %]</strong> 群組可見）
+          将意见设定为不公开（仅有
+          <strong>[% Param('insidergroup') FILTER html %]</strong> 群组可见）
         </label>
       [% END %]
 
@@ -1145,7 +1145,7 @@
           [% END %]
           [% Hook.process("after_comment_textarea", 'bug/edit.html.tmpl') %]
         [% ELSE %]
-          你並未被允許在這個 [% terms.bug %] 新增留言。
+          你并未被允许在这个 [% terms.bug %] 新增留言。
         [% END %]
         <br>
         [% PROCESS commit_button id=""%]
@@ -1155,7 +1155,7 @@
         <table id="bug_status_bottom" class="status">
           <tr>
             <th class="field_label">
-              <a href="page.cgi?id=fields.html#bug_status">狀態</a>：
+              <a href="page.cgi?id=fields.html#bug_status">状态</a>：
             </th>
             <td>
               [% PROCESS bug/knob.html.tmpl %]
@@ -1174,7 +1174,7 @@
               你需要
               <a href="show_bug.cgi?id=
                       [%- bug.bug_id %]&amp;GoAheadAndLogIn=1">登入</a>
-              才能夠發表意見，或對此 [% terms.bug %] 做變更。
+              才能够发表意见，或对此 [% terms.bug %] 做变更。
             </fieldset>
           </td>
         </tr>
@@ -1242,7 +1242,7 @@
 [% BLOCK commit_button %]
   [% IF user.id %]
     <div class="knob-buttons">
-      <input type="submit" value="儲存變更"
+      <input type="submit" value="储存变更"
              id="commit[% id FILTER css_class_quote %]">
     </div>
   [% END %]

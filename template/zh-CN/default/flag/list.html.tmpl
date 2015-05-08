@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -24,7 +24,7 @@
   [% UNLESS flag_no_header %]
     <tr>
       <th colspan="3">
-        旗標：
+        旗标：
       </th>
       [% IF any_flags_requesteeble %]
         <th>
@@ -72,7 +72,7 @@
   [% FOREACH type = flag_types %]
     [% FOREACH flag = type.flags %]
       [% IF !flag_no_header AND !header_displayed %]
-        <p><b>旗標：</b></p>
+        <p><b>旗标：</b></p>
         [% header_displayed = 1 %]
       [% END %]
       [% IF flag.setter.name %]
@@ -176,8 +176,8 @@
           <input type="checkbox" name="flags_add-[% type.id %]"
                  id="flags_add-[% type.id %]" value="1">
           <label for="flags_add-[% type.id %]"
-                 title="若勾選此選項，總是建立一個新的旗標。若不勾選，則會更新現有的旗標；當旗標不存在時，則會建立新的旗標。">
-            總是新增旗標
+                 title="若勾选此选项，总是建立一个新的旗标。若不勾选，则会更新现有的旗标；当旗标不存在时，则会建立新的旗标。">
+            总是新增旗标
           </label>
         [% END %]
       </td>

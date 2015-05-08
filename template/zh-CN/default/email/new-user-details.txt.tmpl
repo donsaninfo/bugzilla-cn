@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -12,19 +12,19 @@
 
 From: [% Param('mailfrom') %]
 To: [% new_user.email %]
-Subject: [% terms.Bugzilla %]: 已建立新帳號
+Subject: [% terms.Bugzilla %]: 已建立新帐号
 X-Bugzilla-Type: admin
 
-[此電子郵件已自動產生]
+[此电子邮件已自动产生]
 
-一個新的 [% terms.Bugzilla %] 使用者帳號已於 [% urlbase %] 建立：
+一个新的 [% terms.Bugzilla %] 使用者帐号已於 [% urlbase %] 建立：
 
-帳號： [% new_user.login %]
+帐号： [% new_user.login %]
 [% IF new_user.realname %]
-真實姓名： [% new_user.realname %]
+真实姓名： [% new_user.realname %]
 [% END %]
 
-為了安全性考量，我們沒有在這封電子郵件中列出你的密碼。
-如果你沒有透過其他方式得到你的密碼，你可以使用「忘記密碼」的連結來重設一組新的密碼。
+为了安全性考量，我们没有在这封电子邮件中列出你的密码。
+如果你没有透过其他方式得到你的密码，你可以使用「忘记密码」的连结来重设一组新的密码。
 
-如果你對於你的帳號有任何問題，請聯絡 [% Param('maintainer') %] 。
+如果你对於你的帐号有任何问题，请联络 [% Param('maintainer') %] 。

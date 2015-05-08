@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -14,18 +14,18 @@
   #%]
 
 [% IF target == "enter_bug.cgi" %]
-  [% title = "輸入 $terms.Bug" %]
-  [% subheader = "選擇產品" %]
+  [% title = "输入 $terms.Bug" %]
+  [% subheader = "选择产品" %]
   [% h2 = BLOCK %]
     [% IF Param('useclassification') %]其次[% ELSE %]首先[% END %]，
-    在輸入 [% terms.bug %] 之前，你必須先選擇一項產品：
+    在输入 [% terms.bug %] 之前，你必须先选择一项产品：
   [% END %]
 [% ELSIF target == "describecomponents.cgi" %]
-  [% title = "瀏覽" %]
-  [% h2 = "選擇要瀏覽的產品分類：" %]
+  [% title = "浏览" %]
+  [% h2 = "选择要浏览的产品分类：" %]
 [% END %]
 
-[% DEFAULT title = "選擇一項產品" %]
+[% DEFAULT title = "选择一项产品" %]
 [% PROCESS global/header.html.tmpl %]
 
 [% USE Bugzilla %]

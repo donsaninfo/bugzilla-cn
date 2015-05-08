@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -15,10 +15,10 @@
 
   [% IF product.size %]
     [% title = BLOCK %]
-      產品 [% product.join(', ') FILTER html %] 最常回報的 [% $terms.Bugs %]
+      产品 [% product.join(', ') FILTER html %] 最常回报的 [% $terms.Bugs %]
     [% END %]
   [% ELSE %]
-    [% title = "最常回報的 $terms.Bugs" %]
+    [% title = "最常回报的 $terms.Bugs" %]
   [% END%]
 
   <head>

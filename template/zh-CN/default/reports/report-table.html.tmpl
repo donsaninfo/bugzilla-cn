@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -83,9 +83,9 @@ YAHOO.util.Event.addListener(window, "load", function() {
     var a_total_test = a.getData("row_title");
     var b_total_test = b.getData("row_title");
     var comp_result = YAHOO.util.Sort.compare(a_value, b_value, desc);
-    if( a_total_test == "總計" ){
+    if( a_total_test == "总计" ){
       comp_result = 1;
-    }else if( b_total_test == "總計" ){
+    }else if( b_total_test == "总计" ){
       comp_result = -1;
     }
     return comp_result;
@@ -175,7 +175,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
         </th>
       [% END %]
       <th class="ttotal">
-        總計
+        总计
       </th>
     </tr>
     </thead>
@@ -213,7 +213,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
     <tr>
       [% row_idx = 1 - row_idx %]
       <td class="ttotal">
-        總計
+        总计
       </td>
       [% FOREACH col = col_names %]
         [% NEXT IF col == "" %]
@@ -243,7 +243,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 
 [% IF note_multi_select %]
   <p class="extra_info">
-    備註：座標軸含有多重數值的欄位，而一個 [% terms.bug %] 可以符合多行或多列，所以總數可能沒被加到。
+    备注：座标轴含有多重数值的栏位，而一个 [% terms.bug %] 可以符合多行或多列，所以总数可能没被加到。
   </p>
 [% END %]
 

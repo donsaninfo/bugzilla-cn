@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -24,22 +24,22 @@
 
 [% filtered_login = user.login FILTER html %]
 
-[% tabs = [{ name => "settings", label => "一般設定",
+[% tabs = [{ name => "settings", label => "一般设定",
               link => "userprefs.cgi?tab=settings", saveable => "1",
               doc_section => "using/preferences.html#general-preferences" },
-            { name => "email", label => "電子郵件設定",
+            { name => "email", label => "电子邮件设定",
               link => "userprefs.cgi?tab=email", saveable => "1",
               doc_section => "using/preferences.html#email-preferences" },
-            { name => "saved-searches", label => "已儲存的搜尋",
+            { name => "saved-searches", label => "已储存的搜寻",
               link => "userprefs.cgi?tab=saved-searches", saveable => "1",
               doc_section => "using/preferences.html#saved-searches" },
-            { name => "account", label => "帳號資訊",
+            { name => "account", label => "帐号资讯",
               link => "userprefs.cgi?tab=account", saveable => "1",
               doc_section => "using/preferences.html#account-information" },
             { name => "apikey", label => "API key",
               link => "userprefs.cgi?tab=apikey", saveable => "1",
               doc_section => "using/preferences.html#api-keys" },
-            { name => "permissions", label => "權限",
+            { name => "permissions", label => "权限",
               link => "userprefs.cgi?tab=permissions", saveable => "0",
               doc_section => "using/preferences.html#permissions" } ] %]
 
@@ -68,11 +68,11 @@
 
 [% IF changes_saved %]
   <div id="message">
-    對[% current_tab.label FILTER lower %]所做的變更已經儲存。
+    对[% current_tab.label FILTER lower %]所做的变更已经储存。
 
     [% IF email_changes_saved %]
       <p>
-        為了確認你的請求，我們已寄發一封電子郵件至你新的電子郵件地址。做為預防措施，我們也寄發了一封電子郵件至你原本的電子郵件地址，讓你有需要時可以取消這個請求。
+        为了确认你的请求，我们已寄发一封电子邮件至你新的电子邮件地址。做为预防措施，我们也寄发了一封电子邮件至你原本的电子邮件地址，让你有需要时可以取消这个请求。
       </p>
     [% END %]
   </div>
@@ -93,7 +93,7 @@
     <input type="hidden" name="dosave" value="1">
     [% UNLESS dont_show_button %]
       <p>
-        <input type="submit" id="update" value="儲存設定">
+        <input type="submit" id="update" value="储存设定">
       </p>
     [% END %]
   </form>

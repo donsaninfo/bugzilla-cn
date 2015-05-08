@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -7,14 +7,14 @@
   #%]
 
 [% PROCESS global/header.html.tmpl
-  title = "重新分類產品"
+  title = "重新分类产品"
   style_urls = ['skins/standard/admin.css']
 %]
 
 <form method=post action="editclassifications.cgi">
   <table id="admin_table_edit">
     <tr>
-      <th>分類：</th>
+      <th>分类：</th>
       <td colspan=3>[% classification.name FILTER html %]</td>
     </tr>
     <tr>
@@ -23,19 +23,19 @@
         [% IF classification.description %]
           [% classification.description FILTER html_light %]
         [% ELSE %]
-          <span class="warning">沒有描述</span>
+          <span class="warning">没有描述</span>
         [% END %]
       </td>
     </tr>
     <tr>
-      <th>排序鍵：</th>
+      <th>排序键：</th>
       <td colspan=3>[% classification.sortkey FILTER html %]</td>
     </tr>
     <tr>
-      <th>產品：</th>
-      <td>其他分類</td>
+      <th>产品：</th>
+      <td>其他分类</td>
       <td></td>
-      <td>此分類</td>
+      <td>此分类</td>
     </tr>
     <tr>
       <td></td>
@@ -55,7 +55,7 @@
 
       <td>
         <input type=submit value="新增 &gt;&gt;" name="add_products"><br><br>
-        <input type=submit value="&lt;&lt; 刪除" name="remove_products">
+        <input type=submit value="&lt;&lt; 删除" name="remove_products">
       </td>
 
       <td rowspan=2 class="max-width">

@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -6,7 +6,7 @@
   # defined by the Mozilla Public License, v. 2.0.
   #%]
 
-[% dontchange = "--不要變更--" %]
+[% dontchange = "--不要变更--" %]
 <input type="hidden" name="dontchange" value="[% dontchange FILTER html %]">
 <input type="hidden" name="token" value="[% token FILTER html %]">
 
@@ -34,22 +34,22 @@
 <hr>
 
 <div class="bz_info">
-  一次變更多個 [% terms.bugs %] ：
+  一次变更多个 [% terms.bugs %] ：
   <ol>
-    <li>在上方勾選你想變更的 [% terms.bugs %] 。</li>
-    <li>在下方的欄位做出適當的變更。如果你需要解釋的話，請在意見欄留下解釋。</li>
-    <li>點選<em>送出</em>鈕。</li>
+    <li>在上方勾选你想变更的 [% terms.bugs %] 。</li>
+    <li>在下方的栏位做出适当的变更。如果你需要解释的话，请在意见栏留下解释。</li>
+    <li>点选<em>送出</em>钮。</li>
   </ol>
 </div>
 
 [% IF excluded_values %]
-  <p class="extra_info">只有顯示以上 [% terms.bugs %] 所有產品可用的數值。</p>
+  <p class="extra_info">只有显示以上 [% terms.bugs %] 所有产品可用的数值。</p>
 [% END %]
 
 <table id="form">
   <tr>
 
-    <th><label for="product">產品：</label></th>
+    <th><label for="product">产品：</label></th>
     <td>
       [% INCLUDE "global/product-select.html.tmpl"
          id         => "product"
@@ -68,7 +68,7 @@
   </tr>
   <tr>
 
-    <th><label for="component">子產品：</label></th>
+    <th><label for="component">子产品：</label></th>
     <td>
       [% PROCESS selectmenu menuname = "component"
                             menuitems = components %]
@@ -76,7 +76,7 @@
 
     <th>
       <label for="priority">
-        <a href="page.cgi?id=fields.html#priority">優先程度</a>：
+        <a href="page.cgi?id=fields.html#priority">优先程度</a>：
       </label>
     </th>
     <td>
@@ -124,7 +124,7 @@
     </td>
 
     [% IF Param("usetargetmilestone") %]
-      <th><label for="target_milestone">目標里程碑：</label></th>
+      <th><label for="target_milestone">目标里程碑：</label></th>
       <td>
         [% PROCESS selectmenu menuname = "target_milestone"
                               menuitems = milestones %]
@@ -133,7 +133,7 @@
   </tr>
 
   <tr>
-    <th><label for="bug_status">狀態：</label></th>
+    <th><label for="bug_status">状态：</label></th>
     <td colspan="3">[% PROCESS status_section %]</td>
   </tr>
   [% IF user.is_timetracker %]
@@ -167,7 +167,7 @@
   [% END %]
 
   <tr>
-    <th><label for="assigned_to">負責人：</label></th>
+    <th><label for="assigned_to">负责人：</label></th>
     <td colspan="3">
       [% INCLUDE global/userselect.html.tmpl
            id => "assigned_to"
@@ -176,13 +176,13 @@
            size => 40
       %]
       <input type="checkbox" id="set_default_assignee" name="set_default_assignee" value="1">
-      <label for="set_default_assignee">將產品負責人設回預設值</label>
+      <label for="set_default_assignee">将产品负责人设回预设值</label>
     </td>
   </tr>
 
   [% IF Param("useqacontact") %]
     <tr>
-      <th><label for="qa_contact">QA 連絡人：</label></th>
+      <th><label for="qa_contact">QA 连络人：</label></th>
       <td colspan="3">
         [% INCLUDE global/userselect.html.tmpl
              id => "qa_contact"
@@ -191,14 +191,14 @@
              size => 40
         %]
         <input type="checkbox" id="set_default_qa_contact" name="set_default_qa_contact" value="1">
-        <label for="set_default_qa_contact">將 QA 連絡人設回預設值</label>
+        <label for="set_default_qa_contact">将 QA 连络人设回预设值</label>
       </td>
     </tr>
   [% END %]
 
   <tr>
 
-    <th><label for="masscc">寄件副本清單：</label></th>
+    <th><label for="masscc">寄件副本清单：</label></th>
     <td colspan="3">
       [% INCLUDE global/userselect.html.tmpl
            id => "masscc"
@@ -208,8 +208,8 @@
            multiple => 5
       %]
       <select name="ccaction">
-        <option value="add">將他們加到寄件副本清單</option>
-        <option value="remove">將他們從寄件副本清單中刪除</option>
+        <option value="add">将他们加到寄件副本清单</option>
+        <option value="remove">将他们从寄件副本清单中删除</option>
       </select>
     </td>
 
@@ -229,9 +229,9 @@
            no_tds = 1
         %]
         <select name="keywordaction">
-          <option value="add">加入這些關鍵字</option>
-          <option value="remove">刪除這些關鍵字</option>
-          <option value="set">將關鍵字設定為此清單</option>
+          <option value="add">加入这些关键字</option>
+          <option value="remove">删除这些关键字</option>
+          <option value="set">将关键字设定为此清单</option>
         </select>
       </td>
 
@@ -241,14 +241,14 @@
   <tr>
     <th>
       <label for="dependson">
-          要先修好這些 [% terms.bugs %] ：
+          要先修好这些 [% terms.bugs %] ：
       </label>
     </th>
     <td colspan="3">
       <input id="dependson" name="dependson" size="40">
       <select name="dependson_action">
-          <option value="add">加上這些 [% terms.bugs %] 編號</option>
-          <option value="remove">刪除這些 [% terms.bugs %] 編號</option>
+          <option value="add">加上这些 [% terms.bugs %] 编号</option>
+          <option value="remove">删除这些 [% terms.bugs %] 编号</option>
       </select>
     </td>
   </tr>
@@ -256,14 +256,14 @@
   <tr>
     <th>
       <label for="blocked">
-          會擋掉這些 [% terms.bugs %] ：
+          会挡掉这些 [% terms.bugs %] ：
       </label>
     </th>
     <td colspan="3">
       <input id="blocked" name="blocked" size="40">
       <select name="blocked_action">
-          <option value="add">加上這些 [% terms.bugs %] 編號</option>
-          <option value="remove">刪除這些 [% terms.bugs %] 編號</option>
+          <option value="add">加上这些 [% terms.bugs %] 编号</option>
+          <option value="remove">删除这些 [% terms.bugs %] 编号</option>
       </select>
     </td>
   </tr>
@@ -271,7 +271,7 @@
   [% IF Param('usestatuswhiteboard') %]
     <tr>
       <th>
-        <label for="status_whiteboard">狀態白板：</label>
+        <label for="status_whiteboard">状态白板：</label>
       </th>
       <td colspan="7">
         <input name="status_whiteboard" id="status_whiteboard"
@@ -295,15 +295,15 @@
 
 </table>
 
-<b><label for="comment">附加的意見：</label></b>
+<b><label for="comment">附加的意见：</label></b>
 [% IF user.is_insider %]
   <input type="checkbox" name="comment_is_private" value="1"
          id="newcommentprivacy"
          onClick="updateCommentTagControl(this, 'comment')">
    <label for="newcommentprivacy">
-     將意見設定為不公開（僅
+     将意见设定为不公开（仅
      <strong>[% Param('insidergroup') FILTER html %]</strong>
-     群組成員可見）
+     群组成员可见）
    </label>
 [% END %]
 <br>
@@ -340,12 +340,12 @@
     }
   </script>
 
-  <b>群組：</b><br>
+  <b>群组：</b><br>
   <table id="groups_edit_multiple">
     <tr>
-      <th class="narrow_column"將 [% terms.bugs %]自此群組刪除</th>
-      <th class="narrow_column"新增 [% terms.bugs %] 到此群組</th>
-      <th>群組名稱</th>
+      <th class="narrow_column"将 [% terms.bugs %]自此群组删除</th>
+      <th class="narrow_column"新增 [% terms.bugs %] 到此群组</th>
+      <th>群组名称</th>
     </tr>
 
     [% FOREACH group = groups %]
@@ -379,8 +379,8 @@
   </table>
 
   [% IF foundinactive %]
-    <p class="bz_info">（注意：不允許將 [% terms.Bugs %]
-    新增到[% FILTER inactive %]已不活動的群組[% END %]中，僅能刪除。）</p>
+    <p class="bz_info">（注意：不允许将 [% terms.Bugs %]
+    新增到[% FILTER inactive %]已不活动的群组[% END %]中，仅能删除。）</p>
   [% END %]
 
 [% END %]

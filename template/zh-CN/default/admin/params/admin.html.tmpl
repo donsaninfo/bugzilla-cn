@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -7,22 +7,22 @@
   #%]
 
 [%
-   title = "管理者權限"
-   desc = "設定帳號權限"
+   title = "管理者权限"
+   desc = "设定帐号权限"
 %]
 
 [% param_descs = {
-  allowbugdeletion => "在編輯產品及子產品的頁面刪除一項產品或子產品時，<br>" _
-                      "可以刪除所有相關的 $terms.bugs 。",
+  allowbugdeletion => "在编辑产品及子产品的页面删除一项产品或子产品时，<br>" _
+                      "可以删除所有相关的 $terms.bugs 。",
 
-  allowemailchange => "使用者可以透過偏好設定變更電子郵件地址。<br>" _
-                      "注意：變更電子郵件地址需要寄信到原地址以及新地址做確認，<br>" _
-                      "因此使用此選項將會使使用者無法輸入無效的電子郵件。",
+  allowemailchange => "使用者可以透过偏好设定变更电子邮件地址。<br>" _
+                      "注意：变更电子邮件地址需要寄信到原地址以及新地址做确认，<br>" _
+                      "因此使用此选项将会使使用者无法输入无效的电子邮件。",
 
-  allowuserdeletion => "可以刪除使用者帳號。<br>" _
-                       "Bugzilla 會在執行刪除時警告，以免發生誤刪。<br>" _
-                       "因此當需要刪除使用者帳號時，須將此選項開啟。",
+  allowuserdeletion => "可以删除使用者帐号。<br>" _
+                       "Bugzilla 会在执行删除时警告，以免发生误删。<br>" _
+                       "因此当需要删除使用者帐号时，须将此选项开启。",
 
-  last_visit_keep_days => "當使用者瀏覽特定的 ${terms.bugs} 時，此選項控制 " _
-                          "$terms.Bugzilla 要記得多少天。"}
+  last_visit_keep_days => "当使用者浏览特定的 ${terms.bugs} 时，此选项控制 " _
+                          "$terms.Bugzilla 要记得多少天。"}
 %]

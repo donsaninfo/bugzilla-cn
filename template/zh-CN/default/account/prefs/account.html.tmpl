@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -17,11 +17,11 @@
         || (user.authorizer.can_change_email && Param('allowemailchange')) %]
     <tr>
       <td colspan="3">
-        請輸入你的密碼以確認帳號設定的變更。
+        请输入你的密码以确认帐号设定的变更。
       </td>
     </tr>
     <tr>
-      <th>密碼：</th>
+      <th>密码：</th>
       <td>
         <input type="hidden" name="old_login" value="[% user.login FILTER html %]">
         <input type="password" name="old_password">
@@ -34,14 +34,14 @@
 
   [% IF user.authorizer.can_change_password %]
     <tr>
-      <th>新的密碼：</th>
+      <th>新的密码：</th>
       <td>
         <input type="password" name="new_password1">
       </td>
     </tr>
 
     <tr>
-      <th>確認新的密碼：</th>
+      <th>确认新的密码：</th>
       <td>
         <input type="password" name="new_password2">
       </td>
@@ -49,7 +49,7 @@
   [% END %]
 
   <tr>
-    <th>真實姓名（選填，但鼓勵填寫）：</th>
+    <th>真实姓名（选填，但鼓励填写）：</th>
     <td>
       <input size="35" name="realname" value="[% realname FILTER html %]">
     </td>
@@ -59,16 +59,16 @@
     [% IF login_change_date %]
       [% IF new_login_name %]
         <tr>
-          <th>未決定的電子郵件地址：</th>
+          <th>未决定的电子邮件地址：</th>
           <td>[% new_login_name FILTER html %]</td>
         </tr>
         <tr>
-          <th>變更的要求將在此時間過期：</th>
+          <th>变更的要求将在此时间过期：</th>
           <td>[% login_change_date FILTER time %]</td>
         </tr>
       [% ELSE %]
         <tr>
-          <th>確認的電子郵件地址：</th>
+          <th>确认的电子邮件地址：</th>
           <td>[% user.login FILTER html %]</td>
         </tr>
         <tr>
@@ -80,9 +80,9 @@
       <tr>
         <th>
           [% IF Param('emailsuffix') %]
-            新的帳號：
+            新的帐号：
           [% ELSE %]
-            新的電子郵件地址：
+            新的电子邮件地址：
           [% END %]
         </th>
         <td>

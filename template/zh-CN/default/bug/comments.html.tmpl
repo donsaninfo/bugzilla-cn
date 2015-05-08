@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -15,7 +15,7 @@
 <!--
   /* Adds the reply text to the 'comment' textarea */
   function replyToComment(id, real_id, name) {
-      var prefix = "（回覆由 " + name + " 留下的意見 #" + id + " ）\n";
+      var prefix = "（回覆由 " + name + " 留下的意见 #" + id + " ）\n";
       var replytext = "";
       [% IF user.settings.quote_replies.value == 'quoted_reply' %]
         /* pre id="comment_name_N" */
@@ -62,7 +62,7 @@
   <div class="bz_add_comment">
     <a href="#"
        onclick="return goto_add_comments();">
-       新增意見</a>
+       新增意见</a>
   </div>
 [% END %]
 
@@ -76,16 +76,16 @@
   [% IF mode == "edit" %]
     <ul class="bz_collapse_expand_comments">
       <li><a href="#" onclick="toggle_all_comments('collapse');
-                               return false;">折疊所有意見</a></li>
+                               return false;">折叠所有意见</a></li>
       <li><a href="#" onclick="toggle_all_comments('expand');
-                               return false;">展開所有意見</a></li>
+                               return false;">展开所有意见</a></li>
       [% IF Param('comment_taggers_group') %]
         <li><div id="comment_tags_collapse_expand_container"></div></li>
       [% END %]
       [% IF user.settings.comment_box_position.value == "after_comments" && user.id %]
         <li class="bz_add_comment"><a href="#"
             onclick="return goto_add_comments('bug_status_bottom');">
-            新增意見</a></li>
+            新增意见</a></li>
       [% END %]
     </ul>
   [% END %]
@@ -110,7 +110,7 @@
         [% comment_label = "描述" %]
       [% ELSE %]
         [% class_name = "bz_comment_head" %]
-        [% comment_label = "意見" _ comment.count %]
+        [% comment_label = "意见" _ comment.count %]
       [% END %]
 
       <div class="[% class_name FILTER html %]">
@@ -122,7 +122,7 @@
             [% IF bug.check_can_change_field('longdesc', 0, 1) %]
               [% IF user.can_tag_comments %]
                 [<a href="#"
-                    onclick="YAHOO.bugzilla.commentTagging.toggle([% comment.id %], [% comment.count %]);return false">標籤</a>]
+                    onclick="YAHOO.bugzilla.commentTagging.toggle([% comment.id %], [% comment.count %]);return false">标签</a>]
               [% END %]
               [<a class="bz_reply_link" href="#add_comment"
                 [% IF user.settings.quote_replies.value != 'off' %]
@@ -134,13 +134,13 @@
               </span>
             [% END %]
             <script type="text/javascript">
-              addCollapseLink([% comment.count %], [% comment.collapsed FILTER js %], '折疊意見顯示');
+              addCollapseLink([% comment.count %], [% comment.collapsed FILTER js %], '折叠意见显示');
             </script>
           </span>
         [% ELSIF comment.collapsed %]
           <span class="bz_comment_actions">
             <script type="text/javascript">
-              addCollapseLink([% comment.count %], [% comment.collapsed FILTER js %], '折疊意見顯示');
+              addCollapseLink([% comment.count %], [% comment.collapsed FILTER js %], '折叠意见显示');
             </script>
           </span>
         [% END %]
@@ -154,7 +154,7 @@
                    id="isprivate_[% comment.id %]"
                    onClick="updateCommentPrivacy(this, [% comment.count %])"
                    [% " checked=\"checked\"" IF comment.is_private %]>
-            <label for="isprivate_[% comment.id %]">不公開</label>
+            <label for="isprivate_[% comment.id %]">不公开</label>
           </div>
         [% END %]
 
@@ -191,7 +191,7 @@
           <span id="cr[% comment.count %]" class="bz_comment_collapse_reason"
              title="[% comment.author.name || comment.author.login FILTER html %]
                     [%~ %] [[% comment.creation_ts FILTER time %]]">
-            意見隱藏 ([% comment.tags.join(', ') FILTER html %])
+            意见隐藏 ([% comment.tags.join(', ') FILTER html %])
           </span>
         [% END %]
       </div>
@@ -199,7 +199,7 @@
       [% IF user.is_timetracker &&
             (comment.work_time > 0 || comment.work_time < 0) %]
          <br>
-         額外工作的小時數：
+         额外工作的小时数：
          [% PROCESS formattimeunit time_unit=comment.work_time %]
       [% END %]
 

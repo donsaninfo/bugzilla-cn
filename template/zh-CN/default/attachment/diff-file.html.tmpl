@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -45,7 +45,7 @@ incremental_restore()
         [% IF file.is_add %]
           已增加
         [% ELSIF file.is_remove %]
-          已刪除
+          已删除
         [% ELSE %]
           [% IF section.old_lines > 1 %]
             第 [% section.old_start %]-[% section.old_start + section.old_lines - 1 %] 行
@@ -56,7 +56,7 @@ incremental_restore()
         [% END %]
       </span>
       <span class="link_here">
-        <a href="#[% file.filename FILTER html %]_sec[% section_num %]">按此連結</a>
+        <a href="#[% file.filename FILTER html %]_sec[% section_num %]">按此连结</a>
       </span>
     </th>
   </tr>

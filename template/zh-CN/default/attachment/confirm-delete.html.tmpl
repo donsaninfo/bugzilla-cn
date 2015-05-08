@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -12,7 +12,7 @@
   #%]
 
 [% title = BLOCK %]
-  刪除 [% terms.Bug %] [%+ a.bug_id FILTER html %] 的附件 [% a.id FILTER html %]
+  删除 [% terms.Bug %] [%+ a.bug_id FILTER html %] 的附件 [% a.id FILTER html %]
 [% END %]
 
 [% PROCESS global/header.html.tmpl
@@ -23,17 +23,17 @@
 
 <table id="admin_table">
   <tr class="column_header">
-    <th>欄位</th>
+    <th>栏位</th>
     <th>值</th>
   </tr>
   <tr>
-    <td>附件編號：</td>
+    <td>附件编号：</td>
     <td>
       <a href="attachment.cgi?id=[% a.id FILTER html %]">[% a.id FILTER html %]</a>
     </td>
   </tr>
   <tr>
-    <td>檔案名稱：</td>
+    <td>档案名称：</td>
     <td>[% a.filename FILTER html %]</td>
   </tr>
   <tr>
@@ -54,26 +54,26 @@
   </tr>
 </table>
 
-<h2>確認</h2>
+<h2>确认</h2>
 
 <p class="confirmation">
-  此附件的內容將會以<b>無法回復的</b>方式刪除。
+  此附件的内容将会以<b>无法回复的</b>方式删除。
 </p>
 
-<p>你確定要刪除此附件嗎？</p>
+<p>你确定要删除此附件吗？</p>
 
 <form action="attachment.cgi" method="POST">
-  <label for="reason">刪除原因：</label>
+  <label for="reason">删除原因：</label>
   <input type="text" id="reason" name="reason" value="" size="80" maxlength="200">
   <br>
-  <input type="submit" value="是的，刪除" id="delete">
+  <input type="submit" value="是的，删除" id="delete">
   <input type="hidden" name="action" value="delete">
   <input type="hidden" name="id" value="[% a.id FILTER html %]">
   <input type="hidden" name="token" value="[% token FILTER html %]">
 </form>
 
 <p>
-  不，取消刪除，並回到[%+ "$terms.bug " _ a.bug_id FILTER bug_link(a.bug_id) FILTER none %] 。
+  不，取消删除，并回到[%+ "$terms.bug " _ a.bug_id FILTER bug_link(a.bug_id) FILTER none %] 。
 </p>
 
 [% PROCESS global/footer.html.tmpl %]

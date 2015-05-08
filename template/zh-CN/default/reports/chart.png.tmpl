@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -16,7 +16,7 @@
 [% FILTER null;
   x_label_skip = (30 * chart.data.0.size / width);
 
-  graph.set(x_label           => "時間",
+  graph.set(x_label           => "时间",
             y_label           => $terms.Bugs,
             y_tick_number     => 8,
             y_max_value       => chart.y_max_value,

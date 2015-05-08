@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -27,135 +27,135 @@
 
 [% PROCESS "global/field-descs.none.tmpl" %]
 
-[% DEFAULT title = "錯誤" %]
+[% DEFAULT title = "错误" %]
 
 [% error_message = BLOCK %]
   [% IF    error == "account_creation_disabled" %]
-    [% title = "不允許建立帳號" %]
-    不允許建立帳號。
+    [% title = "不允许建立帐号" %]
+    不允许建立帐号。
     <hr>
-    新的帳號必須由管理者 ([% Param("maintainer") %]) 建立。
+    新的帐号必须由管理者 ([% Param("maintainer") %]) 建立。
 
   [% ELSIF error == "account_creation_restricted" %]
-    [% title = "帳號建立已被限制" %]
-    建立使用者帳號的行為已被限制。
+    [% title = "帐号建立已被限制" %]
+    建立使用者帐号的行为已被限制。
     <hr>
-    要建立帳號，請洽管理者 ([% Param("maintainer") %]) 。
+    要建立帐号，请洽管理者 ([% Param("maintainer") %]) 。
 
   [% ELSIF error == "account_disabled" %]
-    [% title = "帳號已被停權" %]
+    [% title = "帐号已被停权" %]
     [% disabled_reason FILTER none %]
     <hr>
-    如果你認為你不應被停權，請寄信給 [% Param("maintainer") %] 並解釋原因。
+    如果你认为你不应被停权，请寄信给 [% Param("maintainer") %] 并解释原因。
 
   [% ELSIF error == "account_exists" %]
-    [% title = "帳號已存在" %]
-    帳號名稱[% IF email %] [% email FILTER html %] [% END %]已存在。
+    [% title = "帐号已存在" %]
+    帐号名称[% IF email %] [% email FILTER html %] [% END %]已存在。
 
   [% ELSIF error == "account_locked" %]
-    [% title = "帳號已鎖住" %]
-    因為你已超過嘗試登入的次數，
+    [% title = "帐号已锁住" %]
+    因为你已超过尝试登入的次数，
     你的 IP ([% ip_addr FILTER html %]) 在
-    [% unlock_at FILTER time %] 前已不被允許登入此帳號。
+    [% unlock_at FILTER time %] 前已不被允许登入此帐号。
 
   [% ELSIF error == "alias_has_comma_or_space" %]
-    [% title = "別名中有無效的字元" %]
-    你所輸入的別名 <em>[% alias FILTER html %]</em>
-    內包含了至少一個逗號 (,) 或空白。由於逗號及空白是用來分隔在清單中的每一個別名，
-    因此無法在別名中使用它們。請選擇不包含逗號和空白的別名。
+    [% title = "别名中有无效的字元" %]
+    你所输入的别名 <em>[% alias FILTER html %]</em>
+    内包含了至少一个逗号 (,) 或空白。由於逗号及空白是用来分隔在清单中的每一个别名，
+    因此无法在别名中使用它们。请选择不包含逗号和空白的别名。
 
   [% ELSIF error == "alias_in_use" %]
-    [% title = "別名使用中" %]
+    [% title = "别名使用中" %]
     [% IF user.can_see_bug(bug_id) %]
       [% terms.Bug %] [%+ bug_id FILTER bug_link(bug_id) FILTER none %]
     [% ELSE %]
-      另一個 [% terms.bug %]
+      另一个 [% terms.bug %]
     [% END %]
-    已使用別名 <em>[% alias FILTER html %]</em> 。
-    請選擇其他的別名。
+    已使用别名 <em>[% alias FILTER html %]</em> 。
+    请选择其他的别名。
 
   [% ELSIF error == "alias_is_numeric" %]
-    [% title = "別名不能全為數字" %]
-    你試著替 [% terms.bug %] 取這個別名 <em>[% alias FILTER html %]</em> ，
-    但是別名不能全為數字，以免和
-    [% terms.bug %] 編號搞混。請選擇至少有一個英文字母的別名。
+    [% title = "别名不能全为数字" %]
+    你试着替 [% terms.bug %] 取这个别名 <em>[% alias FILTER html %]</em> ，
+    但是别名不能全为数字，以免和
+    [% terms.bug %] 编号搞混。请选择至少有一个英文字母的别名。
 
   [% ELSIF error == "alias_too_long" %]
-    [% title = "別名太長" %]
-    [% terms.Bug %]別名不能超過 20 字元。
-    請選擇較短的別名。
+    [% title = "别名太长" %]
+    [% terms.Bug %]别名不能超过 20 字元。
+    请选择较短的别名。
 
   [% ELSIF error == "api_key_not_valid" %]
-    [% title = "無效的 API key" %]
-    你所指定的 API key 無效。請檢查是否輸入正確。
+    [% title = "无效的 API key" %]
+    你所指定的 API key 无效。请检查是否输入正确。
 
   [% ELSIF error == "api_key_revoked" %]
-    [% title = "無效的 API key" %]
-    你所指定的 API key 已被建立此把 API key 的使用者撤銷了。
+    [% title = "无效的 API key" %]
+    你所指定的 API key 已被建立此把 API key 的使用者撤销了。
 
   [% ELSIF error == "attachment_bug_id_mismatch" %]
-    [% title = "無效的附件" %]
-    你嘗試對不同 [% terms.bugs %] 的附件執行一項動作。
-    此動作必須在所有附件來自同一個 [% terms.bug %] 的條件下才能執行。
+    [% title = "无效的附件" %]
+    你尝试对不同 [% terms.bugs %] 的附件执行一项动作。
+    此动作必须在所有附件来自同一个 [% terms.bug %] 的条件下才能执行。
 
   [% ELSIF error == "attachment_deletion_disabled" %]
-    [% title = "禁止刪除附件" %]
-    已禁止刪除附件。
+    [% title = "禁止删除附件" %]
+    已禁止删除附件。
 
   [% ELSIF error == "attachment_removed" %]
     [% title = "附件已移除" %]
-    你嘗試讀取的附件已被移除。
+    你尝试读取的附件已被移除。
 
   [% ELSIF error == "auth_cant_create_account" %]
-    [% title = "無法建立帳號" %]
-    如要建立帳號，請洽管理者。
+    [% title = "无法建立帐号" %]
+    如要建立帐号，请洽管理者。
 
   [% ELSIF error == "auth_failure" %]
-    [% title = "需要授權" %]
-    [% admindocslinks = {'groups.html' => '群組安全性'} %]
+    [% title = "需要授权" %]
+    [% admindocslinks = {'groups.html' => '群组安全性'} %]
     很抱歉，
     [% IF group %]
-      你並非 '[% group FILTER html %]' 群組的成員，
+      你并非 '[% group FILTER html %]' 群组的成员，
     [% END %]
 
     [% IF reason %]
       [% IF group %]而且[% END %]
       [% IF reason == "cant_bless" %]
-        你也沒有在群組新增或刪除成員的權限，
+        你也没有在群组新增或删除成员的权限，
       [% ELSIF reason == "not_visible" %]
-        對特定的使用者群組有瀏覽的權限限制，
+        对特定的使用者群组有浏览的权限限制，
       [% END %]
     [% END %]
 
-    [% IF group || reason %]而且[% END %]你並沒有權限可以
+    [% IF group || reason %]而且[% END %]你并没有权限可以
     [% IF action == "access" %]
-      進入
+      进入
     [% ELSIF action == "add" %]
       新增
     [% ELSIF action == "begin" %]
-      開始
+      开始
     [% ELSIF action == "modify" %]
       修改
     [% ELSIF action == "delete" %]
-      刪除
+      删除
     [% ELSIF action == "edit" %]
-      新增、修改或刪除
+      新增、修改或删除
     [% ELSIF action == "run" %]
-      執行
+      执行
     [% ELSIF action == "schedule" %]
       排程
     [% ELSIF action == "search" %]
-      搜尋
+      搜寻
     [% ELSIF action == "use" %]
       使用
     [% ELSIF action == "approve" %]
-      允許
+      允许
     [% ELSE %]
       [%+ Hook.process('auth_failure_action') %]
     [% END %]
 
     [% IF object == "administrative_pages" %]
-      管理用頁面
+      管理用页面
     [% ELSIF object == "attachment" %]
     [% IF attach_id %]
         附件 #[% attach_id FILTER html %]
@@ -165,50 +165,50 @@
     [% ELSIF object == "bugs" %]
       [%+ terms.bugs %]
     [% ELSIF object == "bug_fields" %]
-      '[% field_descs.$field FILTER html %]' 欄位
+      '[% field_descs.$field FILTER html %]' 栏位
     [% ELSIF object == "charts" %]
-      「建立新圖表」的功能
+      「建立新图表」的功能
     [% ELSIF object == "classifications" %]
-      分類
+      分类
     [% ELSIF object == "components" %]
-      子產品
+      子产品
     [% ELSIF object == "comment_tags" %]
-      意見標籤
+      意见标签
     [% ELSIF object == "custom_fields" %]
-      自訂欄位
+      自订栏位
     [% ELSIF object == "field_values" %]
-      欄位值
+      栏位值
     [% ELSIF object == "flagtypes" %]
-      旗標類型
+      旗标类型
     [% ELSIF object == "group_access" %]
-      瀏覽群組
+      浏览群组
     [% ELSIF object == "groups" %]
-      群組
+      群组
     [% ELSIF object == "keywords" %]
-      關鍵字
+      关键字
     [% ELSIF object == "milestones" %]
       里程碑
     [% ELSIF object == "multiple_bugs" %]
-      數個[% terms.bugs %]
+      数个[% terms.bugs %]
     [% ELSIF object == "parameters" %]
-      參數
+      参数
     [% ELSIF object == "products" %]
-      產品
+      产品
     [% ELSIF object == "quips" %]
-      智語
+      智语
     [% ELSIF object == "reports" %]
-      訂閱報告
+      订阅报告
     [% ELSIF object == "sanity_check" %]
-      健全度測試
+      健全度测试
     [% ELSIF object == "settings" %]
-      設定
+      设定
     [% ELSIF object == "sudo_session" %]
-      執行 sudo
+      执行 sudo
     [% ELSIF object == "timetracking_summaries" %]
-      以時間進行追蹤的摘要報告
+      以时间进行追踪的摘要报告
     [% ELSIF object == "user" %]
       [% IF userid %]
-      使用者帳號 '[% userid FILTER html %]'
+      使用者帐号 '[% userid FILTER html %]'
       [% ELSE %]
       你指定的使用者
       [% END %]
@@ -225,55 +225,55 @@
     [% Hook.process("auth_failure") %]
 
   [% ELSIF error == "auth_invalid_token" %]
-    [% title = 'Token 發生錯誤' %]
-    Token '[% token FILTER html %]' 已無效。
-    可能是你載入此頁面的時間超過三天前。
+    [% title = 'Token 发生错误' %]
+    Token '[% token FILTER html %]' 已无效。
+    可能是你载入此页面的时间超过三天前。
 
   [% ELSIF error == "auth_untrusted_request" %]
-    [% title = "不受信任的認證要求" %]
-    你試圖用 
+    [% title = "不受信任的认证要求" %]
+    你试图用 
     <em>[% login FILTER html %]</em>
-    帳號登入，但
-    [% terms.Bugzilla %] 無法信任你的要求。
-    確認你的瀏覽器支援 cookies 並且你並不是從外部網站被導到這裡。
-    如果你確定要登入，<a href="index.cgi?GoAheadAndLogIn=1">點此連結</a>。
+    帐号登入，但
+    [% terms.Bugzilla %] 无法信任你的要求。
+    确认你的浏览器支援 cookies 并且你并不是从外部网站被导到这里。
+    如果你确定要登入，<a href="index.cgi?GoAheadAndLogIn=1">点此连结</a>。
 
   [% ELSIF error == "bad_page_cgi_id" %]
-    [% title = "無效的頁面編號" %]
-    頁面編號 <code>[% page_id FILTER html %]</code> 並非有效的頁面編號。
+    [% title = "无效的页面编号" %]
+    页面编号 <code>[% page_id FILTER html %]</code> 并非有效的页面编号。
 
   [% ELSIF error == "bug_access_denied" %]
-    [% title = "沒有瀏覽 $terms.bug 的權限" %]
-    [% admindocslinks = {'groups.html' => '群組安全性'} %]
-    你沒有瀏覽 [% terms.bug %] #[% bug_id FILTER html %] 的權限。
+    [% title = "没有浏览 $terms.bug 的权限" %]
+    [% admindocslinks = {'groups.html' => '群组安全性'} %]
+    你没有浏览 [% terms.bug %] #[% bug_id FILTER html %] 的权限。
 
   [% ELSIF error == "bug_access_query" %]
-    [% title = "沒有瀏覽 $terms.bug 的權限" %]
-    [% docslinks = {'myaccount.html' => '建立新帳號'} %]
-    你並未授權瀏覽 [% terms.bug %] #[% bug_id FILTER html %] 。
-    要瀏覽這個 [% terms.bug %] ，你必須先以擁有適當權限的帳號<a
+    [% title = "没有浏览 $terms.bug 的权限" %]
+    [% docslinks = {'myaccount.html' => '建立新帐号'} %]
+    你并未授权浏览 [% terms.bug %] #[% bug_id FILTER html %] 。
+    要浏览这个 [% terms.bug %] ，你必须先以拥有适当权限的帐号<a
     href="show_bug.cgi?id=
     [% bug_id FILTER uri %]&amp;GoAheadAndLogIn=1">登入</a>。
 
   [% ELSIF error == "bug_url_invalid" %]
-    [% title = "無效的 $terms.Bug 回報資訊網址" %]
-    <code>[% url FILTER html %]</code> 對一個 [% terms.bug %] 而言並不是有效的網址。
+    [% title = "无效的 $terms.Bug 回报资讯网址" %]
+    <code>[% url FILTER html %]</code> 对一个 [% terms.bug %] 而言并不是有效的网址。
     [% IF reason == 'http' %]
-      網址必須以 "http" 或 "https" 開頭。
+      网址必须以 "http" 或 "https" 开头。
     [% ELSIF reason == 'path_only' %]
-      你必須輸入完整的網址。
+      你必须输入完整的网址。
     [% ELSIF reason == 'id' %]
-      在網址中沒有有效的 [% terms.bug %] 編號。
+      在网址中没有有效的 [% terms.bug %] 编号。
     [% ELSE %]
-      [%+ field_descs.see_also FILTER html %] 的網址應該指到以下其中一個地方：
+      [%+ field_descs.see_also FILTER html %] 的网址应该指到以下其中一个地方：
       <ul>
-        <li>已安裝的 Bugzilla 中的 <code>show_bug.cgi</code> 。</li>
+        <li>已安装的 Bugzilla 中的 <code>show_bug.cgi</code> 。</li>
         <li>在 launchpad.net 的 b[% %]ug 。</li>
         <li>在 code.google.com 的 issue 。</li>
         <li>在 b[% %]ugs.debian.org 的 b[% %]ug 。</li>
-        <li>已安裝 JIRA 中的 issue 。</li>
-        <li>已安裝 Trac 中的 ticket 。</li>
-        <li>已安裝 MantisBT 中的 b[% %]ug 。</li>
+        <li>已安装 JIRA 中的 issue 。</li>
+        <li>已安装 Trac 中的 ticket 。</li>
+        <li>已安装 MantisBT 中的 b[% %]ug 。</li>
         <li>在 sourceforge.net 的 b[% %]ug 。</li>
         <li>在 github.com 中的 issue 或 pull request 。</li>
         [% Hook.process('bug_url_invalid_tracker') %]
@@ -281,289 +281,289 @@
     [% END %]
 
   [% ELSIF error == "bug_url_too_long" %]
-    [% title = "無效的 $terms.Bug 回報資訊網址" %]
-    [% terms.Bug %] 回報資訊網址不能長於
+    [% title = "无效的 $terms.Bug 回报资讯网址" %]
+    [% terms.Bug %] 回报资讯网址不能长於
     [%+ constants.MAX_BUG_URL_LENGTH FILTER none %] 字元。
-    <code>[% url FILTER html %]</code> 太長了。
+    <code>[% url FILTER html %]</code> 太长了。
 
   [% ELSIF error == "buglist_parameters_required" %]
-    [% title = "需要輸入字串" %]
-    [% docslinks = {'query.html' => "搜尋 $terms.bugs",
-                    'query.html#list' => "$terms.Bug 清單"} %]
-    在未輸入搜尋字串時，你無法搜尋，或儲存搜尋結果。
+    [% title = "需要输入字串" %]
+    [% docslinks = {'query.html' => "搜寻 $terms.bugs",
+                    'query.html#list' => "$terms.Bug 清单"} %]
+    在未输入搜寻字串时，你无法搜寻，或储存搜寻结果。
 
   [% ELSIF error == "cc_remove_denied" %]
-    [% title = "拒絕變更" %]
-    你並沒有將其他人移出寄件副本清單的權限。
+    [% title = "拒绝变更" %]
+    你并没有将其他人移出寄件副本清单的权限。
 
   [% ELSIF error == "chart_too_large" %]
-    [% title = "圖表過大" %]
-    很抱歉，但圖表的最大尺寸為 2000 x 2000 。
+    [% title = "图表过大" %]
+    很抱歉，但图表的最大尺寸为 2000 x 2000 。
 
   [% ELSIF error == "comment_id_invalid" %]
-    [% id FILTER html %] 並非有效的意見編號。
+    [% id FILTER html %] 并非有效的意见编号。
 
   [% ELSIF error == "comment_invalid_isprivate" %]
-    你試著修改意見編號 [% id FILTER html %] 的公開與否，但它並非這個
-    [% terms.bug %] 的有效意見。
+    你试着修改意见编号 [% id FILTER html %] 的公开与否，但它并非这个
+    [% terms.bug %] 的有效意见。
 
   [% ELSIF error == "comment_is_private" %]
-    意見編號 [% id FILTER html %] 不公開。
+    意见编号 [% id FILTER html %] 不公开。
 
   [% ELSIF error == "comment_required" %]
-    [% title = "需要意見" %]
+    [% title = "需要意见" %]
     [% IF old.defined && new.defined %]
-      當把一個 [% terms.bug %] 的狀態從
+      当把一个 [% terms.bug %] 的状态从
       [% (old || "（空白）") FILTER html %]
-      變更為
+      变更为
       [% (new || "（空白）") FILTER html %]
-      時，你必須提供<b>意見</b>。
+      时，你必须提供<b>意见</b>。
     [% ELSIF new %]
-      你必須提供這個 [% terms.bug %] 的描述。
+      你必须提供这个 [% terms.bug %] 的描述。
     [% ELSE %]
-      你必須對此改變提供<b>意見</b>。
+      你必须对此改变提供<b>意见</b>。
     [% END %]
 
   [% ELSIF error == "comment_too_long" %]
-    [% title = "意見過長" %]
-    意見不能超過 [% constants.MAX_COMMENT_LENGTH FILTER html %] 字元。
+    [% title = "意见过长" %]
+    意见不能超过 [% constants.MAX_COMMENT_LENGTH FILTER html %] 字元。
 
   [% ELSIF error == "comment_tag_disabled" %]
-    [% title = "意見標籤已停用" %]
-    意見標籤未啟用。
+    [% title = "意见标签已停用" %]
+    意见标签未启用。
 
   [% ELSIF error == "comment_tag_invalid" %]
-    [% title = "無效的意見標籤" %]
-    意見標籤 "[% tag FILTER html %]" 含有無效的字元或字。
+    [% title = "无效的意见标签" %]
+    意见标签 "[% tag FILTER html %]" 含有无效的字元或字。
 
   [% ELSIF error == "comment_tag_too_long" %]
-    [% title = "意見標籤過長" %]
-    意見標籤不能比
-    [%+ constants.MAX_COMMENT_TAG_LENGTH FILTER html %] 個字元長。
+    [% title = "意见标签过长" %]
+    意见标签不能比
+    [%+ constants.MAX_COMMENT_TAG_LENGTH FILTER html %] 个字元长。
 
   [% ELSIF error == "comment_tag_too_short" %]
-    [% title = "意見標籤過短" %]
-    意見標籤至少要
-    [%+ constants.MIN_COMMENT_TAG_LENGTH FILTER html %] 個字元。
+    [% title = "意见标签过短" %]
+    意见标签至少要
+    [%+ constants.MIN_COMMENT_TAG_LENGTH FILTER html %] 个字元。
 
   [% ELSIF error == "auth_classification_not_enabled" %]
-    [% title = "分類功能未啟用" %]
-    很抱歉，分類功能並未啟用。
+    [% title = "分类功能未启用" %]
+    很抱歉，分类功能并未启用。
 
   [% ELSIF error == "classification_name_too_long" %]
-    [% title = "分類名稱過長" %]
-    分類的名稱長度限制為 [% constants.MAX_CLASSIFICATION_SIZE FILTER html %]
-    字元。 '[% name FILTER html %]' 太長了（ [% name.length %] 字元）。
+    [% title = "分类名称过长" %]
+    分类的名称长度限制为 [% constants.MAX_CLASSIFICATION_SIZE FILTER html %]
+    字元。 '[% name FILTER html %]' 太长了（ [% name.length %] 字元）。
 
   [% ELSIF error == "classification_not_specified" %]
-    [% title = "你必須輸入一個分類名稱。" %]
-    你必須輸入一個分類名稱。
+    [% title = "你必须输入一个分类名称。" %]
+    你必须输入一个分类名称。
 
   [% ELSIF error == "classification_already_exists" %]
-    [% title = "分類已存在" %]
-    分類 '[% name FILTER html %]' 已存在。
+    [% title = "分类已存在" %]
+    分类 '[% name FILTER html %]' 已存在。
 
   [% ELSIF error == "classification_invalid_sortkey" %]
-    [% title = "分類的排序鍵無效" %]
-    排序鍵 '[% sortkey FILTER html %]'  無效。它必須在 0 和
-    [% constants.MAX_SMALLINT FILTER html %] 之間。
+    [% title = "分类的排序键无效" %]
+    排序键 '[% sortkey FILTER html %]'  无效。它必须在 0 和
+    [% constants.MAX_SMALLINT FILTER html %] 之间。
 
   [% ELSIF error == "classification_not_deletable" %]
-    [% title = "不允許刪除預設分類" %]
-    你不能刪除預設分類。
+    [% title = "不允许删除预设分类" %]
+    你不能删除预设分类。
 
   [% ELSIF error == "classification_has_products" %]
-     很抱歉，分類中還有產品。在刪除分類之前，你必須將產品重新分配到其他的分類。
+     很抱歉，分类中还有产品。在删除分类之前，你必须将产品重新分配到其他的分类。
 
   [% ELSIF error == "component_already_exists" %]
-    [% title = "子產品已存在" %]
-    產品 <em>[% product.name FILTER html %]</em>
-    已擁有名稱為 '[% name FILTER html %]' 的子產品。
+    [% title = "子产品已存在" %]
+    产品 <em>[% product.name FILTER html %]</em>
+    已拥有名称为 '[% name FILTER html %]' 的子产品。
 
   [% ELSIF error == "component_blank_description" %]
-    [% title = "不允許子產品描述空白" %]
-    你必須輸入此項子產品的描述。
+    [% title = "不允许子产品描述空白" %]
+    你必须输入此项子产品的描述。
 
   [% ELSIF error == "component_blank_name" %]
-    [% title = "不允許子產品名稱空白" %]
-    你必須輸入子產品的名稱。
+    [% title = "不允许子产品名称空白" %]
+    你必须输入子产品的名称。
 
   [% ELSIF error == "component_has_bugs" %]
-    [% title = BLOCK %]子產品已有 [% terms.Bugs %][% END %]
-    此子產品內已經有 [% nb FILTER html %] 個 [% terms.bugs %] ！
-    在刪除子產品之前，你必須將 [% terms.bugs %] 重新分配到其他的子產品。
+    [% title = BLOCK %]子产品已有 [% terms.Bugs %][% END %]
+    此子产品内已经有 [% nb FILTER html %] 个 [% terms.bugs %] ！
+    在删除子产品之前，你必须将 [% terms.bugs %] 重新分配到其他的子产品。
 
   [% ELSIF error == "component_is_last" %]
-    [% title = BLOCK %]此產品中的最後一個子產品[% END %]
+    [% title = BLOCK %]此产品中的最後一个子产品[% END %]
     '[% comp.name FILTER html %]' 是
-    '[% comp.product.name FILTER html %]' 產品中的最後一個子產品。你無法刪除它。
+    '[% comp.product.name FILTER html %]' 产品中的最後一个子产品。你无法删除它。
 
   [% ELSIF error == "component_name_too_long" %]
-    [% title = "子產品名稱過長" %]
-    子產品名稱長度限制為 [% constants.MAX_COMPONENT_SIZE FILTER html %]
-    字元。 '[% name FILTER html %]' 太長了（ [% name.length %] 字元）。
+    [% title = "子产品名称过长" %]
+    子产品名称长度限制为 [% constants.MAX_COMPONENT_SIZE FILTER html %]
+    字元。 '[% name FILTER html %]' 太长了（ [% name.length %] 字元）。
 
   [% ELSIF error == "component_need_initialowner" %]
-    [% title = "子產品必須有預設負責人" %]
-    此子產品必須要有預設負責人。
+    [% title = "子产品必须有预设负责人" %]
+    此子产品必须要有预设负责人。
 
   [% ELSIF error == "customfield_nonexistent" %]
-    [% title = "未知的自訂欄位" %]
-    並沒有名稱是 '[% name FILTER html %]' 的自訂欄位。
+    [% title = "未知的自订栏位" %]
+    并没有名称是 '[% name FILTER html %]' 的自订栏位。
 
   [% ELSIF error == "customfield_has_activity" %]
-    [% title = "自訂欄位已有活動" %]
-    無法刪除自訂欄位 '[% name FILTER html %]' ，因為已有活動記錄。
+    [% title = "自订栏位已有活动" %]
+    无法删除自订栏位 '[% name FILTER html %]' ，因为已有活动记录。
 
   [% ELSIF error == "customfield_has_contents" %]
-    [% title = "自訂欄位已有內容" %]
-    無法刪除自訂欄位 '[% name FILTER html %]' ，因為至少有一個
-    [% terms.bug %] 在此自訂欄位擁有非空白的值。
+    [% title = "自订栏位已有内容" %]
+    无法删除自订栏位 '[% name FILTER html %]' ，因为至少有一个
+    [% terms.bug %] 在此自订栏位拥有非空白的值。
 
   [% ELSIF error == "customfield_not_obsolete" %]
-    [% title = "自訂欄位並非廢棄" %]
-    自訂欄位 '[% name FILTER html %]' 並非廢棄。請在嘗試刪除自訂欄位之前，先廢棄它。
+    [% title = "自订栏位并非废弃" %]
+    自订栏位 '[% name FILTER html %]' 并非废弃。请在尝试删除自订栏位之前，先废弃它。
 
   [% ELSIF error == "dependency_loop_multi" %]
-    [% title = "偵測到依賴性迴圈" %]
-    如果做出這些變更，下列的 [% terms.bug %] 將會同時出現在依賴關係樹的
-    「會擋掉這些 [% terms.bug %] 」和「要先修好這些 [% terms.bug %] 」：
+    [% title = "侦测到依赖性回圈" %]
+    如果做出这些变更，下列的 [% terms.bug %] 将会同时出现在依赖关系树的
+    「会挡掉这些 [% terms.bug %] 」和「要先修好这些 [% terms.bug %] 」：
     [% FOREACH dep = deps %]
       [%+ dep FILTER bug_link(dep) FILTER none %]
     [% END %]
-    <br>這會造成無限迴圈，因而不被允許。
+    <br>这会造成无限回圈，因而不被允许。
 
   [% ELSIF error == "dependency_loop_single" %]
-    [% title = "偵測到依賴性迴圈" %]
-    你不能把一個 [% terms.bug %] 標記為「如果沒修好這個 [% terms.bug %] ，會擋掉它自己」。
+    [% title = "侦测到依赖性回圈" %]
+    你不能把一个 [% terms.bug %] 标记为「如果没修好这个 [% terms.bug %] ，会挡掉它自己」。
 
   [% ELSIF error == "dupe_id_required" %]
-    [% title = "需要指定重複的 $terms.Bug 編號" %]
-    你必須指定和此 [% terms.bug %] 重複的 [% terms.bug %] 編號。
+    [% title = "需要指定重复的 $terms.Bug 编号" %]
+    你必须指定和此 [% terms.bug %] 重复的 [% terms.bug %] 编号。
 
   [% ELSIF error == "dupe_not_allowed" %]
-    [% title = "無法將 $terms.bugs 標記為重複" %]
-    當你一次變更數個 [% terms.bugs %] 時，無法將 [% terms.bugs %] 標記為重複。
+    [% title = "无法将 $terms.bugs 标记为重复" %]
+    当你一次变更数个 [% terms.bugs %] 时，无法将 [% terms.bugs %] 标记为重复。
 
   [% ELSIF error == "dupe_loop_detected" %]
-    [% title = "偵測到重複的迴圈" %]
-    你無法將 [% terms.bug %] [% bug_id FILTER html %] 標記為和
-    [% IF dupe_of == bug_id %]它自己重複。
+    [% title = "侦测到重复的回圈" %]
+    你无法将 [% terms.bug %] [% bug_id FILTER html %] 标记为和
+    [% IF dupe_of == bug_id %]它自己重复。
     [% ELSE %]
-      [% terms.bug %] [% dupe_of FILTER html %]重複，因為會造成重複的迴圈。
+      [% terms.bug %] [% dupe_of FILTER html %]重复，因为会造成重复的回圈。
     [% END %]
 
   [% ELSIF error == "email_change_in_progress" %]
-    [% title = "變更電子郵件進行中" %]
-    變更電子郵件進行中，請檢查你的電子郵件信箱。
+    [% title = "变更电子邮件进行中" %]
+    变更电子邮件进行中，请检查你的电子邮件信箱。
 
   [% ELSIF error == "email_no_body" %]
-    你的電子郵件並未包含任何文字，或者無法解析出文字。
+    你的电子邮件并未包含任何文字，或者无法解析出文字。
 
   [% ELSIF error == "empty_group_description" %]
-    [% title = "不允許群組描述空白" %]
-    你必須輸入群組描述。
+    [% title = "不允许群组描述空白" %]
+    你必须输入群组描述。
 
   [% ELSIF error == "empty_group_name" %]
-    [% title = "不允許群組名稱空白" %]
-    你必須輸入群組名稱。
+    [% title = "不允许群组名称空白" %]
+    你必须输入群组名称。
 
   [% ELSIF error == "entry_access_denied" %]
-    [% title = "權限不足" %]
-    [% admindocslinks = {'groups.html' => '群組安全性'} %]
-    很抱歉，產品 <em>[% product FILTER html %]</em> 不存在，或者你沒有權限在此產品輸入 [% terms.bug %] 。
+    [% title = "权限不足" %]
+    [% admindocslinks = {'groups.html' => '群组安全性'} %]
+    很抱歉，产品 <em>[% product FILTER html %]</em> 不存在，或者你没有权限在此产品输入 [% terms.bug %] 。
 
   [% ELSIF error == "extension_create_no_name" %]
-    因此程式需要，你必須替你的附加元件命名，以做為參數。
+    因此程式需要，你必须替你的附加元件命名，以做为参数。
 
   [% ELSIF error == "extension_disabled" %]
     [% title = "附加元件已停用" %]
-    你無法瀏覽此頁面，因為附加元件 '[% name FILTER html %]' 已停用。
+    你无法浏览此页面，因为附加元件 '[% name FILTER html %]' 已停用。
 
   [% ELSIF error == "extension_first_letter_caps" %]
-    你的附加元件名稱的第一個字母必須為大寫。
+    你的附加元件名称的第一个字母必须为大写。
     （你指定的是 '[% name FILTER html %]' 。）
 
   [% ELSIF error == "extern_id_exists" %]
-    [% title = "帳號已存在" %]
-    外部登入帳號 "[% extern_id FILTER html %]"
-    已經有一個帳號
+    [% title = "帐号已存在" %]
+    外部登入帐号 "[% extern_id FILTER html %]"
+    已经有一个帐号
     [% IF existing_login_name %]
        ([% existing_login_name FILTER html %])
     [% END %]。
 
   [% ELSIF error == "feature_disabled" %]
-    這台機器上的 Bugzilla 並不允許 [% install_string("feature_$feature") FILTER html %]
-    這項功能。
+    这台机器上的 Bugzilla 并不允许 [% install_string("feature_$feature") FILTER html %]
+    这项功能。
     [% IF user.in_group('admin') %]
-      如果你想要啟用此項功能，請執行
-      <kbd>checksetup.pl</kbd> 以確認啟用此功能所必須要的最低需求。
+      如果你想要启用此项功能，请执行
+      <kbd>checksetup.pl</kbd> 以确认启用此功能所必须要的最低需求。
     [% END %]
 
   [% ELSIF error == "field_already_exists" %]
-    [% title = "欄位已存在" %]
-    欄位 '[% field.name FILTER html %]'
-    ([% field.description FILTER html %]) 已存在。請選擇另一個名稱。
+    [% title = "栏位已存在" %]
+    栏位 '[% field.name FILTER html %]'
+    ([% field.description FILTER html %]) 已存在。请选择另一个名称。
 
   [% ELSIF error == "field_cant_control_self" %]
-    [% title = "欄位無法控制它自己" %]
-    欄位 [% field.description FILTER html %] 無法被設定為控制它自己。
+    [% title = "栏位无法控制它自己" %]
+    栏位 [% field.description FILTER html %] 无法被设定为控制它自己。
 
   [% ELSIF error == "field_control_must_be_select" %]
-    [% title = "選擇了無效的欄位種類" %]
-    只有下拉式選單和多選式選單的欄位可以被用來控制其他欄位的可見性／數值。
-    [% field.description FILTER html %] 不是正確的欄位種類。
+    [% title = "选择了无效的栏位种类" %]
+    只有下拉式选单和多选式选单的栏位可以被用来控制其他栏位的可见性／数值。
+    [% field.description FILTER html %] 不是正确的栏位种类。
 
   [% ELSIF error == "field_invalid_name" %]
-    [% title = "無效的欄位名稱" %]
-    '[% name FILTER html %]' 並非有效的欄位名稱。
-    欄位名稱只能有字母、數字，以及底線符號 (_) 。
+    [% title = "无效的栏位名称" %]
+    '[% name FILTER html %]' 并非有效的栏位名称。
+    栏位名称只能有字母、数字，以及底线符号 (_) 。
 
   [% ELSIF error == "field_invalid_sortkey" %]
-    [% title = "無效的欄位排序鍵" %]
-    你所指定的欄位排序鍵 [% sortkey FILTER html %] 並非有效的正整數。
+    [% title = "无效的栏位排序键" %]
+    你所指定的栏位排序键 [% sortkey FILTER html %] 并非有效的正整数。
 
   [% ELSIF error == "field_long_desc_too_long" %]
-    [% title = "較長的描述欄位內容太長" %]
-    你對此欄位所提供的較長的描述內容比
-    [% constants.MAX_FIELD_LONG_DESC_LENGTH FILTER html %] 字元還長。
+    [% title = "较长的描述栏位内容太长" %]
+    你对此栏位所提供的较长的描述内容比
+    [% constants.MAX_FIELD_LONG_DESC_LENGTH FILTER html %] 字元还长。
 
   [% ELSIF error == "field_missing_description" %]
-    [% title = "缺少欄位描述" %]
-    你必須輸入欄位描述。
+    [% title = "缺少栏位描述" %]
+    你必须输入栏位描述。
 
   [% ELSIF error == "field_missing_name" %]
-    [% title = "缺少欄位名稱" %]
-    你必須輸入欄位名稱。
+    [% title = "缺少栏位名称" %]
+    你必须输入栏位名称。
 
   [% ELSIF error == "field_value_control_select_only" %]
-    [% title = "無效的控制數值欄位" %]
-    只有下拉式選單和多選式選單的欄位可以有控制數值的欄位。
+    [% title = "无效的控制数值栏位" %]
+    只有下拉式选单和多选式选单的栏位可以有控制数值的栏位。
 
   [% ELSIF error == "field_visibility_values_must_be_selected" %]
-    [% title = "缺少可見欄位的值" %]
-    可見的欄位 '[% field.name FILTER html %]'
-    必須至少選擇一項數值。
+    [% title = "缺少可见栏位的值" %]
+    可见的栏位 '[% field.name FILTER html %]'
+    必须至少选择一项数值。
 
   [% ELSIF error == "fieldname_invalid" %]
-    [% title = "指定的欄位不存在" %]
-    欄位 '[% field.name FILTER html %]' 不存在，或者無法以此介面編輯。
+    [% title = "指定的栏位不存在" %]
+    栏位 '[% field.name FILTER html %]' 不存在，或者无法以此介面编辑。
 
   [% ELSIF error == "fieldvalue_already_exists" %]
-    [% title = "欄位值已存在" %]
-    '[% field.description FILTER html %]' 欄位已存在數值 '[% value FILTER html %]' 。
+    [% title = "栏位值已存在" %]
+    '[% field.description FILTER html %]' 栏位已存在数值 '[% value FILTER html %]' 。
 
   [% ELSIF error == "fieldvalue_is_controller" %]
-    [% title = "數值控制其他欄位中" %]
-    你無法刪除 [% value.field.description FILTER html %] 欄位的
-    '[% value.name FILTER html %]' 數值，因為
+    [% title = "数值控制其他栏位中" %]
+    你无法删除 [% value.field.description FILTER html %] 栏位的
+    '[% value.name FILTER html %]' 数值，因为
     [%- IF fields.size %]
-      它控制了下列欄位的可見性：
+      它控制了下列栏位的可见性：
       [%+ fields.join(', ') FILTER html %] 。
     [% END %]
     [%- IF vals.size %]
       它[% '也' IF fields.size AND vals.size -%]
-      控制了下列欄位值的可見性：
+      控制了下列栏位值的可见性：
       <ul>
         [% FOREACH field_name = vals.keys %]
           [% FOREACH val = vals.${field_name} %]
@@ -575,463 +575,463 @@
     [% END %]
 
   [% ELSIF error == "fieldvalue_is_default" %]
-    [% title = "指定的欄位值為預設值" %]
-    '[% value.name FILTER html %]' 是欄位 '[% field.description FILTER html %]'
-    的預設值，因此無法刪除或停用。
+    [% title = "指定的栏位值为预设值" %]
+    '[% value.name FILTER html %]' 是栏位 '[% field.description FILTER html %]'
+    的预设值，因此无法删除或停用。
     [% IF user.in_group('tweakparams') %]
-      你必須先<a href="editparams.cgi?section=bugfields#
-      [%- param_name FILTER uri %]">變更</a>預設值。
+      你必须先<a href="editparams.cgi?section=bugfields#
+      [%- param_name FILTER uri %]">变更</a>预设值。
     [% END %]
 
   [% ELSIF error == "fieldvalue_name_too_long" %]
-    [% title = "欄位值過長" %]
-    欄位值的長度限制在 [% constants.FIELD_VALUE_MAX_SIZE FILTER none %] 字元。
-    '[% value FILTER html %]' 太長了（ [% value.length %] 字元）。
+    [% title = "栏位值过长" %]
+    栏位值的长度限制在 [% constants.FIELD_VALUE_MAX_SIZE FILTER none %] 字元。
+    '[% value FILTER html %]' 太长了（ [% value.length %] 字元）。
 
   [% ELSIF error == "fieldvalue_not_editable" %]
-    [% title = "無法編輯欄位值" %]
-    無法更名欄位值 '[% old_value.name FILTER html %]' ，因為它在欄位
-    '[% field.description FILTER html %]' 中扮演特別的角色。
+    [% title = "无法编辑栏位值" %]
+    无法更名栏位值 '[% old_value.name FILTER html %]' ，因为它在栏位
+    '[% field.description FILTER html %]' 中扮演特别的角色。
 
   [% ELSIF error == "fieldvalue_not_deletable" %]
-    [% title = "無法刪除欄位值" %]
-    無法刪除或停用欄位值 '[% value.name FILTER html %]' ，因為它在欄位
-    '[% field.description FILTER html %]' 中扮演特別的角色。
+    [% title = "无法删除栏位值" %]
+    无法删除或停用栏位值 '[% value.name FILTER html %]' ，因为它在栏位
+    '[% field.description FILTER html %]' 中扮演特别的角色。
 
   [% ELSIF error == "fieldvalue_reserved_word" %]
-    [% title = "不允許使用保留字" %] 你不能在 '[% field.description FILTER html %]' 欄位使用數值
-    '[% value FILTER html %]' ，因此數值已被保留。
-    <br>請用其他的數值。
+    [% title = "不允许使用保留字" %] 你不能在 '[% field.description FILTER html %]' 栏位使用数值
+    '[% value FILTER html %]' ，因此数值已被保留。
+    <br>请用其他的数值。
 
   [% ELSIF error == "fieldvalue_sortkey_invalid" %]
-    [% title = "無效的欄位值排序鍵" %]
-    欄位 '[% field.description FILTER html %]' 的排序鍵
-    '[% sortkey FILTER html %]' 必須為 0 和
-    [% constants.MAX_SMALLINT FILTER none %] 之間的整數。
+    [% title = "无效的栏位值排序键" %]
+    栏位 '[% field.description FILTER html %]' 的排序键
+    '[% sortkey FILTER html %]' 必须为 0 和
+    [% constants.MAX_SMALLINT FILTER none %] 之间的整数。
 
   [% ELSIF error == "fieldvalue_still_has_bugs" %]
-    [% title = "無法刪除此欄位值" %]
-    你無法刪除欄位 '[% field.description FILTER html %]' 的值
-    '[% value.name FILTER html %]' ，因為還有 [% count FILTER html %] 個
-    [% terms.bugs %] 使用該欄位值。
+    [% title = "无法删除此栏位值" %]
+    你无法删除栏位 '[% field.description FILTER html %]' 的值
+    '[% value.name FILTER html %]' ，因为还有 [% count FILTER html %] 个
+    [% terms.bugs %] 使用该栏位值。
 
   [% ELSIF error == "fieldvalue_undefined" %]
-    [% title = "不允許未定義的值" %]
-    你必須指定一個值。
+    [% title = "不允许未定义的值" %]
+    你必须指定一个值。
 
   [% ELSIF error == "file_not_specified" %]
-    [% title = "未指定檔案" %]
-    你並未指定要附加的檔案。
+    [% title = "未指定档案" %]
+    你并未指定要附加的档案。
 
   [% ELSIF error == "filename_not_specified" %]
-    [% title = "未指定檔名" %]
-    你並未替附件指定檔名。
+    [% title = "未指定档名" %]
+    你并未替附件指定档名。
 
   [% ELSIF error == "file_too_large" %]
-    [% title = "檔案過大" %]
+    [% title = "档案过大" %]
     [%# Convert maxlocalattachment from Mb to Kb %]
     [% max_local = Param('maxlocalattachment') * 1024 %]
     [% max_limit = [Param('maxattachmentsize'), max_local] %]
-    你想要附加的檔案大小為 [% filesize FILTER html %] KB 。
-    但是附加檔不得大於
+    你想要附加的档案大小为 [% filesize FILTER html %] KB 。
+    但是附加档不得大於
     [%# Hack to get the max value between both limits %]
     [%+ max_limit.nsort.last FILTER html %] KB 。<br>
-    我們建議你將附件儲存在其他地方，然後在適當的文字欄位貼上網址做為附件。
-    你可以按下「貼上文字做為附件」的連結來瀏覽這個欄位。
-    <br>如果你的附件是圖片的話，你可以先將它轉換為 JPG 或 PNG 格式，然後再試一次。
+    我们建议你将附件储存在其他地方，然後在适当的文字栏位贴上网址做为附件。
+    你可以按下「贴上文字做为附件」的连结来浏览这个栏位。
+    <br>如果你的附件是图片的话，你可以先将它转换为 JPG 或 PNG 格式，然後再试一次。
 
   [% ELSIF error == "flag_type_requestee_disabled" %]
-    [% title = "無法要求特定的人設定旗標" %]
-    你不能要求特定的人設定 <em>[% type.name FILTER html %]</em> 。
+    [% title = "无法要求特定的人设定旗标" %]
+    你不能要求特定的人设定 <em>[% type.name FILTER html %]</em> 。
 
   [% ELSIF error == "flag_requestee_disabled" %]
-    [% title = "所要求的人帳號已停用" %]
-    你不能向 <em>[% requestee.identity FILTER html %]</em> 提出要求，因為該帳號已停用。
+    [% title = "所要求的人帐号已停用" %]
+    你不能向 <em>[% requestee.identity FILTER html %]</em> 提出要求，因为该帐号已停用。
 
   [% ELSIF error == "flag_requestee_needs_privs" %]
-    [% title = "旗標設定者需要權限" %]
-    [% requestee.identity FILTER html %]並沒有設定
-    <em>[% flagtype.name FILTER html %]</em> 旗標的權限。請選擇一位屬於
-    <em>[% flagtype.grant_group.name FILTER html %]</em> 群組的使用者。
+    [% title = "旗标设定者需要权限" %]
+    [% requestee.identity FILTER html %]并没有设定
+    <em>[% flagtype.name FILTER html %]</em> 旗标的权限。请选择一位属於
+    <em>[% flagtype.grant_group.name FILTER html %]</em> 群组的使用者。
 
   [% ELSIF error == "flag_requestee_unauthorized" %]
-    [% title = "你要求設定旗標的人未經授權" %]
-    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗標',
-                         'groups.html' => '群組安全性'} %]
-    [% docslinks = {'flags-overview.html' => '旗標概述',
-                    'flags.html' => '使用旗標'} %]
+    [% title = "你要求设定旗标的人未经授权" %]
+    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗标',
+                         'groups.html' => '群组安全性'} %]
+    [% docslinks = {'flags-overview.html' => '旗标概述',
+                    'flags.html' => '使用旗标'} %]
 
-    你要求 [% requestee.identity FILTER html %] 對[% terms.bug %] [% bug_id FILTER html -%]
-    [% IF attach_id && attach_id > 0 %]的附件 [% attach_id FILTER html %] [% END %]設定旗標
+    你要求 [% requestee.identity FILTER html %] 对[% terms.bug %] [% bug_id FILTER html -%]
+    [% IF attach_id && attach_id > 0 %]的附件 [% attach_id FILTER html %] [% END %]设定旗标
     <code>[% flag_type.name FILTER html %]</code> ，
-    但是該 [% terms.bug %] 僅限制屬於特定群組的使用者瀏覽，
-    而你所要求的使用者並不屬於 [% terms.bug %] 所限定的特定群組。
-    請選擇其他人，或者將該使用者加入 [% terms.bug %] 的寄件副本清單中。
+    但是该 [% terms.bug %] 仅限制属於特定群组的使用者浏览，
+    而你所要求的使用者并不属於 [% terms.bug %] 所限定的特定群组。
+    请选择其他人，或者将该使用者加入 [% terms.bug %] 的寄件副本清单中。
 
   [% ELSIF error == "flag_requestee_unauthorized_attachment" %]
-    [% title = "你要求設定旗標的人未經授權" %]
-    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗標',
-                         'groups.html' => '群組安全性'} %]
-    [% docslinks = {'flags-overview.html' => '旗標概述',
-                    'flags.html' => '使用旗標'} %]
+    [% title = "你要求设定旗标的人未经授权" %]
+    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗标',
+                         'groups.html' => '群组安全性'} %]
+    [% docslinks = {'flags-overview.html' => '旗标概述',
+                    'flags.html' => '使用旗标'} %]
 
-    你要求 [% requestee.identity FILTER html %] 對[% terms.bug %] [% bug_id FILTER html %] 的
-    附件 [% attach_id FILTER html %]設定旗標 <code>[% flag_type.name FILTER html %]</code> ，
-    但是該附件僅限制屬於 [% Param("insidergroup") FILTER html %] 群組的使用者瀏覽，
-    而你所要求的使用者並不屬於該群組。
-    請選擇屬於該群組的使用者，或是要求管理者將該使用者加入該群組中。
+    你要求 [% requestee.identity FILTER html %] 对[% terms.bug %] [% bug_id FILTER html %] 的
+    附件 [% attach_id FILTER html %]设定旗标 <code>[% flag_type.name FILTER html %]</code> ，
+    但是该附件仅限制属於 [% Param("insidergroup") FILTER html %] 群组的使用者浏览，
+    而你所要求的使用者并不属於该群组。
+    请选择属於该群组的使用者，或是要求管理者将该使用者加入该群组中。
 
   [% ELSIF error == "flag_status_invalid" %]
-    [% title = "旗標狀態無效" %]
+    [% title = "旗标状态无效" %]
     [% IF id %]
-      旗標編號 #[% id FILTER html %] 的
+      旗标编号 #[% id FILTER html %] 的
     [% END %]
-    旗標狀態 <em>[% status FILTER html %]</em> 無效。
+    旗标状态 <em>[% status FILTER html %]</em> 无效。
 
   [% ELSIF error == "flag_type_cannot_deactivate" %]
-    [% title = "無法停用旗標類型" %]
-    很抱歉，旗標類型 '[% flagtype.name FILTER html %]'
-    也用在一些你無法看見的產品，所以你無法停用 (deactivate) 它。
+    [% title = "无法停用旗标类型" %]
+    很抱歉，旗标类型 '[% flagtype.name FILTER html %]'
+    也用在一些你无法看见的产品，所以你无法停用 (deactivate) 它。
 
   [% ELSIF error == "flag_type_cannot_delete" %]
-    [% title = "不允許刪除旗標類型" %]
-    很抱歉，旗標類型 '[% flagtype.name FILTER html %]'
-    也用在一些你無法看見的產品，所以你無法刪除它。
+    [% title = "不允许删除旗标类型" %]
+    很抱歉，旗标类型 '[% flagtype.name FILTER html %]'
+    也用在一些你无法看见的产品，所以你无法删除它。
 
   [% ELSIF error == "flag_type_cc_list_invalid" %]
-    [% title = "無效的旗標類型寄件副本清單" %]
-    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗標'} %]
-    寄件副本清單 [% cc_list FILTER html %] 必須少於 200 字元。
+    [% title = "无效的旗标类型寄件副本清单" %]
+    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗标'} %]
+    寄件副本清单 [% cc_list FILTER html %] 必须少於 200 字元。
 
   [% ELSIF error == "flag_type_component_without_product" %]
-    [% title = "缺少產品" %]
-    僅選擇了子產品，但並未選擇產品。
+    [% title = "缺少产品" %]
+    仅选择了子产品，但并未选择产品。
 
   [% ELSIF error == "flag_type_description_invalid" %]
-    [% title = "無效的旗標類型描述" %]
-    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗標'} %]
-    你必須對此旗標類型輸入描述。
+    [% title = "无效的旗标类型描述" %]
+    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗标'} %]
+    你必须对此旗标类型输入描述。
 
   [% ELSIF error == "flag_type_name_invalid" %]
-    [% title = "無效的旗標類型名稱" %]
-    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗標'} %]
-    名稱 <em>[% name FILTER html %]</em> 必須是 1 到 50 字元長，且不得包含任何空白或逗號 (,) 。
+    [% title = "无效的旗标类型名称" %]
+    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗标'} %]
+    名称 <em>[% name FILTER html %]</em> 必须是 1 到 50 字元长，且不得包含任何空白或逗号 (,) 。
 
   [% ELSIF error == "flag_type_not_editable" %]
-    [% title = "無法編輯旗標類型" %]
-    你無法編輯 '[% flagtype.name FILTER html %]'
-    的旗標類型設定，因為你可以管理的產品並不適用此旗標類型。
+    [% title = "无法编辑旗标类型" %]
+    你无法编辑 '[% flagtype.name FILTER html %]'
+    的旗标类型设定，因为你可以管理的产品并不适用此旗标类型。
 
   [% ELSIF error == "flag_not_unique" %]
-    [% title = "旗標並非獨一無二" %]
-    旗標 '[% value FILTER html %]' 已設定許多次了。
-    你必須指定它的編號值來更新旗標。
+    [% title = "旗标并非独一无二" %]
+    旗标 '[% value FILTER html %]' 已设定许多次了。
+    你必须指定它的编号值来更新旗标。
 
   [% ELSIF error == "flag_type_not_unique" %]
-    [% title = "旗標類型並非獨一無二" %]
-    有多個旗標類型符合 '[% value FILTER html %]' 。
-    你必須指定它的類型編號值來新增或更新旗標。
+    [% title = "旗标类型并非独一无二" %]
+    有多个旗标类型符合 '[% value FILTER html %]' 。
+    你必须指定它的类型编号值来新增或更新旗标。
 
   [% ELSIF error == "flag_type_not_multiplicable" %]
-    [% docslinks = {'flags-overview.html' => '旗標概述',
-                    'flags.html' => '使用旗標'} %]
-    你不能對這個[% IF attachment %]附件
-    [% ELSE %] [%+ terms.bug %] [% END %]設定多個 <em>[% type.name FILTER html %]</em> 旗標。
+    [% docslinks = {'flags-overview.html' => '旗标概述',
+                    'flags.html' => '使用旗标'} %]
+    你不能对这个[% IF attachment %]附件
+    [% ELSE %] [%+ terms.bug %] [% END %]设定多个 <em>[% type.name FILTER html %]</em> 旗标。
 
   [% ELSIF error == "flag_update_denied" %]
-    [% title = "拒絕變更旗標" %]
-    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗標',
-                         'groups.html' => '群組安全性'} %]
-    [% docslinks = {'flags-overview.html' => '旗標概述',
-                    'flags.html' => '使用旗標'} %]
-    你試著[% IF status == "+" %]同意[% ELSIF status == "-" %]拒絕
+    [% title = "拒绝变更旗标" %]
+    [% admindocslinks = {'flags-overview.html#flags-admin'  => '管理旗标',
+                         'groups.html' => '群组安全性'} %]
+    [% docslinks = {'flags-overview.html' => '旗标概述',
+                    'flags.html' => '使用旗标'} %]
+    你试着[% IF status == "+" %]同意[% ELSIF status == "-" %]拒绝
     [% ELSIF status == "X" %]清除[% ELSE %]要求[% END %]
     <code>[% name FILTER html %]
           [% IF status == "X" %][% old_status FILTER html %][% END %]</code>。
 
-    只有擁有所需要權限的使用者才可以做出此項變更。
+    只有拥有所需要权限的使用者才可以做出此项变更。
 
   [% ELSIF error == "format_not_found" %]
     [% title = "找不到格式" %]
-    所要求的格式 <em>[% format FILTER html %]</em> 並不是
-    <em>[% ctype FILTER html %]</em> 的一種 MIME 類別。
+    所要求的格式 <em>[% format FILTER html %]</em> 并不是
+    <em>[% ctype FILTER html %]</em> 的一种 MIME 类别。
 
     [% IF invalid %]
-      兩者的參數只能有字母和減號 (-) 。
+      两者的参数只能有字母和减号 (-) 。
     [% END %]
 
   [% ELSIF error == "flag_type_sortkey_invalid" %]
-    [% title = "無效的旗標排序鍵" %]
-    排序鍵 <em>[% sortkey FILTER html %]</em> 必須是在 0 和
+    [% title = "无效的旗标排序键" %]
+    排序键 <em>[% sortkey FILTER html %]</em> 必须是在 0 和
     [% constants.MAX_SMALLINT FILTER none %]
-    之間的任意整數。
+    之间的任意整数。
 
   [% ELSIF error == "freetext_too_long" %]
-    [% title = "文字過長" %]
-    你在 [% field_descs.$field FILTER html %] 欄位輸入的文字太長了（
-    [% text.length FILTER html %] 字元，超過所允許的文字長度上限
+    [% title = "文字过长" %]
+    你在 [% field_descs.$field FILTER html %] 栏位输入的文字太长了（
+    [% text.length FILTER html %] 字元，超过所允许的文字长度上限
     [% constants.MAX_FREETEXT_LENGTH FILTER none %] 字元）。
 
   [% ELSIF error == "get_products_invalid_type" %]
-    產品類別 '[% type FILTER html %]' 無效。
-    有效的選項為：
-    「可瀏覽」 (accessible) 、
-    「可選擇」 (selectable) 、
-    「可進入」 (enterable) 。
+    产品类别 '[% type FILTER html %]' 无效。
+    有效的选项为：
+    「可浏览」 (accessible) 、
+    「可选择」 (selectable) 、
+    「可进入」 (enterable) 。
 
   [% ELSIF error == "group_cannot_delete" %]
-    [% title = "無法刪除群組" %]
-    無法刪除 <em>[% group.name FILTER html %]</em> 群組，因為在資料庫中有指向該群組的
+    [% title = "无法删除群组" %]
+    无法删除 <em>[% group.name FILTER html %]</em> 群组，因为在资料库中有指向该群组的
     <a href="editgroups.cgi?action=del&amp;group=
-             [%- gid FILTER uri %]">記錄</a>。
-    在你能夠刪除此群組前，必須先刪除所有指向此群組的參照。
+             [%- gid FILTER uri %]">记录</a>。
+    在你能够删除此群组前，必须先删除所有指向此群组的参照。
 
   [% ELSIF error == "group_cannot_view" %]
-    [% title = "無法瀏覽群組" %]
-    如要瀏覽群組，你必須是 'editusers' 或 'creategroups' 群組的成員，
-    或是擁有對至少一個群組的 bless （在群組中新增成員）權限。
+    [% title = "无法浏览群组" %]
+    如要浏览群组，你必须是 'editusers' 或 'creategroups' 群组的成员，
+    或是拥有对至少一个群组的 bless （在群组中新增成员）权限。
 
   [% ELSIF error == "group_exists" %]
-    [% title = "群組已存在" %]
-    群組[% name FILTER html %]已存在。
+    [% title = "群组已存在" %]
+    群组[% name FILTER html %]已存在。
 
   [% ELSIF error == "group_has_special_role" %]
-    [% title = "群組不可刪除" %]
-    [% param = "參數" %]
+    [% title = "群组不可删除" %]
+    [% param = "参数" %]
     [% IF groups.size == 1 %]
       [% attr = "它" %]
     [% ELSE %]
-      [% attr = "它們" %]
+      [% attr = "它们" %]
     [% END %]
-    群組 '[% name FILTER html %]' 已被
+    群组 '[% name FILTER html %]' 已被
     '[% groups.join("' 和 '") FILTER html %]' [% param FILTER html %] 使用。
-    如要刪除此群組，你必須先變更[% param FILTER html %]，將[% attr FILTER html %]指向另一個群組。
+    如要删除此群组，你必须先变更[% param FILTER html %]，将[% attr FILTER html %]指向另一个群组。
 
   [% ELSIF error == "group_invalid_removal" %]
-    你試著從群組 '[% name FILTER html %]' 中移除
-    [% terms.bug %] [%+ bug_id FILTER html %] ，但是該群組並不存在，
-    或是你在產品 '[% product FILTER html %]' 中不被允許從該群組移除
+    你试着从群组 '[% name FILTER html %]' 中移除
+    [% terms.bug %] [%+ bug_id FILTER html %] ，但是该群组并不存在，
+    或是你在产品 '[% product FILTER html %]' 中不被允许从该群组移除
     [% terms.bugs %] 。
 
   [% ELSIF error == "group_restriction_not_allowed" %]
-    [% title = "不被允許的群組限制" %]
-    你試著將 [% bug_id ? "$terms.bug $bug_id" : terms.abug FILTER html %]
-    限制於群組 '[% name FILTER html %]' 中，但是該群組並不存在，
-    或是你在產品 '[% product FILTER html %]' 中不被允許將
-    [% terms.bugs %] 限制於該群組。
+    [% title = "不被允许的群组限制" %]
+    你试着将 [% bug_id ? "$terms.bug $bug_id" : terms.abug FILTER html %]
+    限制於群组 '[% name FILTER html %]' 中，但是该群组并不存在，
+    或是你在产品 '[% product FILTER html %]' 中不被允许将
+    [% terms.bugs %] 限制於该群组。
 
   [% ELSIF error == "group_not_specified" %]
-    [% title = "未指定群組" %]
-    未指定群組。
+    [% title = "未指定群组" %]
+    未指定群组。
 
   [% ELSIF error == "group_not_visible" %]
-    [% title = "不允許的群組" %]
-    你並未被允許可以查看 [% group.name FILTER html %]
-    群組的成員。
+    [% title = "不允许的群组" %]
+    你并未被允许可以查看 [% group.name FILTER html %]
+    群组的成员。
 
   [% ELSIF error == "illegal_attachment_edit" %]
-    [% title = "未經授權的動作" %]
-    你並未被授權編輯附件 [% attach_id FILTER html %] 。
+    [% title = "未经授权的动作" %]
+    你并未被授权编辑附件 [% attach_id FILTER html %] 。
 
   [% ELSIF error == "illegal_attachment_edit_bug" %]
-    [% title = "未經授權的動作" %]
-    你並未被授權編輯 [% terms.bug %]
+    [% title = "未经授权的动作" %]
+    你并未被授权编辑 [% terms.bug %]
     [%+ bug_id FILTER html %] 的附件。
 
   [% ELSIF error == "illegal_bug_status_transition" %]
-    [% title = "無效的 $terms.Bug 狀態變更" %]
+    [% title = "无效的 $terms.Bug 状态变更" %]
     [% IF old.defined %]
-      你並未被允許可以將 [% terms.bug %]
-      的狀態自[%+ old FILTER html %]變更為[+% new FILTER html %]。
+      你并未被允许可以将 [% terms.bug %]
+      的状态自[%+ old FILTER html %]变更为[+% new FILTER html %]。
     [% ELSE %]
-      你並未被允許可以將新的 [% terms.bugs %] 設定為
-      [%+ new.name FILTER html %] 此狀態。
+      你并未被允许可以将新的 [% terms.bugs %] 设定为
+      [%+ new.name FILTER html %] 此状态。
     [% END %]
 
   [% ELSIF error == "illegal_change" %]
-    [% title = "不被允許" %]
-    你試著將
-    <strong>[% field_descs.$field FILTER html %]</strong> 欄位
+    [% title = "不被允许" %]
+    你试着将
+    <strong>[% field_descs.$field FILTER html %]</strong> 栏位
     [% IF oldvalue.defined AND oldvalue != "" %]
       自 <em>[% oldvalue.join(', ') FILTER html %]</em>
     [% END %]
     [% IF newvalue.defined AND newvalue != "" %]
-      變更為 <em>[% newvalue.join(', ') FILTER html %]</em>
+      变更为 <em>[% newvalue.join(', ') FILTER html %]</em>
     [% END %]
     ，但是只有
     [% IF privs < constants.PRIVILEGES_REQUIRED_EMPOWERED %]
-      [% terms.bug %] 的負責人
-      [% IF privs < constants.PRIVILEGES_REQUIRED_ASSIGNEE %]或回報者[% END %]
+      [% terms.bug %] 的负责人
+      [% IF privs < constants.PRIVILEGES_REQUIRED_ASSIGNEE %]或回报者[% END %]
       ，或
     [% END %]
-    擁有所需要權限的使用者才能變更該欄位。
+    拥有所需要权限的使用者才能变更该栏位。
 
   [% ELSIF error == "illegal_time" %]
-    [% title = "不合法的時間" %]
-    '<tt>[% time FILTER html %]</tt>' 並非合法的時間。
+    [% title = "不合法的时间" %]
+    '<tt>[% time FILTER html %]</tt>' 并非合法的时间。
     [% IF format %]
-      請使用此格式： '<tt>[% format FILTER html %]</tt>' 。
+      请使用此格式： '<tt>[% format FILTER html %]</tt>' 。
     [% END %]
 
   [% ELSIF error == "illegal_change_deps" %]
-    [% title = "不被允許" %]
-    你試著變更
-    <strong>[% field_descs.$field FILTER html %]</strong> 欄位，
-    但只有被允許編輯相關
-    [% terms.bugs %] 的人才能變更該欄位。
+    [% title = "不被允许" %]
+    你试着变更
+    <strong>[% field_descs.$field FILTER html %]</strong> 栏位，
+    但只有被允许编辑相关
+    [% terms.bugs %] 的人才能变更该栏位。
 
   [% ELSIF error == "illegal_date" %]
-    [% title = "無效的日期" %]
-    '<kbd>[% date FILTER html %]</kbd>' 並非有效的日期。
+    [% title = "无效的日期" %]
+    '<kbd>[% date FILTER html %]</kbd>' 并非有效的日期。
     [% IF format %]
-      請使用此格式： '<code>[% format FILTER html %]</code>' 。
+      请使用此格式： '<code>[% format FILTER html %]</code>' 。
     [% END %]
 
   [% ELSIF error == "illegal_email_address" %]
-    [% title = "無效的電子郵件地址" %]
-    你輸入的電子郵件地址 (<b>[% addr FILTER html %]</b>)
-    並未通過有效的電子郵件地址測試。
+    [% title = "无效的电子邮件地址" %]
+    你输入的电子邮件地址 (<b>[% addr FILTER html %]</b>)
+    并未通过有效的电子邮件地址测试。
     [% IF default %]
-      一個有效的電子郵件地址必須要有一個 @ 符號，以及在 @ 之後至少有一個 . 符號。
+      一个有效的电子邮件地址必须要有一个 @ 符号，以及在 @ 之後至少有一个 . 符号。
     [% ELSE %]
       [%+ Param('emailregexpdesc') FILTER html_light %]
     [% END %]
     另外，不可以含有任何不合法的字元。
 
   [% ELSIF error == "illegal_frequency" %]
-    [% title = "過於頻繁" %]
-    除非你是管理者，否則你不能夠新增執行頻率高於每
-    [% minimum FILTER html %] 天執行一次的系列。
+    [% title = "过於频繁" %]
+    除非你是管理者，否则你不能够新增执行频率高於每
+    [% minimum FILTER html %] 天执行一次的系列。
 
   [% ELSIF error == "illegal_group_control_combination" %]
-    [% title = "所做的群組合併無效" %]
-    [% admindocslinks = {'groups.html' => '分配群組控管至產品'} %]
-    你對群組 &quot;[% groupname FILTER html %]&quot; 所做的群組合併無效。
+    [% title = "所做的群组合并无效" %]
+    [% admindocslinks = {'groups.html' => '分配群组控管至产品'} %]
+    你对群组 &quot;[% groupname FILTER html %]&quot; 所做的群组合并无效。
 
   [% ELSIF error == "illegal_pronoun" %]
-    [% title = "無效的代名詞" %]
-    你所使用的代名詞 ([% pronoun FILTER html %]) 無效。你必須使用核可的代名詞。
-    詳細列表請參考
-    <a href="[% docs_urlbase FILTER html %]query.html#pronouns">代名詞替換</a>。
+    [% title = "无效的代名词" %]
+    你所使用的代名词 ([% pronoun FILTER html %]) 无效。你必须使用核可的代名词。
+    详细列表请参考
+    <a href="[% docs_urlbase FILTER html %]query.html#pronouns">代名词替换</a>。
 
   [% ELSIF error == "illegal_query_name" %]
-    [% title = "無效的搜尋名稱" %]
-    你的搜尋名稱不得包含下列任一字元： &lt; 、 &gt; 、 &amp; 。
+    [% title = "无效的搜寻名称" %]
+    你的搜寻名称不得包含下列任一字元： &lt; 、 &gt; 、 &amp; 。
 
   [% ELSIF error == "illegal_series_creation" %]
-    [% admindocslinks = {'groups.html' => '群組安全性'} %]
-    [% docslinks = {'reporting.html' => '報告'} %]
-    你並未被授權允許新增一個系列。
+    [% admindocslinks = {'groups.html' => '群组安全性'} %]
+    [% docslinks = {'reporting.html' => '报告'} %]
+    你并未被授权允许新增一个系列。
 
   [% ELSIF error == "illegal_series_edit" %]
-    [% admindocslinks = {'groups.html' => '群組安全性'} %]
-    [% docslinks = {'reporting.html' => '報告'} %]
-    你並未被授權編輯此一系列。必須是建立此系列的人或管理者才能編輯。
+    [% admindocslinks = {'groups.html' => '群组安全性'} %]
+    [% docslinks = {'reporting.html' => '报告'} %]
+    你并未被授权编辑此一系列。必须是建立此系列的人或管理者才能编辑。
 
   [% ELSIF error == "illegal_regexp" %]
-    [% title = "無效的正規表達式" %]
-    你所提供的正規表達式 [% value FILTER html %] 無效。錯誤是：
+    [% title = "无效的正规表达式" %]
+    你所提供的正规表达式 [% value FILTER html %] 无效。错误是：
     [% dberror FILTER html %] 。
 
  [% ELSIF error == "illegal_user_id" %]
-    [% title = "無效的使用者編號" %]
-    使用者編號 '[% userid FILTER html %]' 並非有效的整數。
+    [% title = "无效的使用者编号" %]
+    使用者编号 '[% userid FILTER html %]' 并非有效的整数。
 
   [% ELSIF error == "insufficient_data_points" %]
-    [% docslinks = {'reporting.html' => '報告'} %]
-    我們目前沒有足夠的資料可以產生圖表。
+    [% docslinks = {'reporting.html' => '报告'} %]
+    我们目前没有足够的资料可以产生图表。
 
   [% ELSIF error == "invalid_attach_id" %]
-    [% title = "無效的附件編號" %]
-    附件編號 [% attach_id FILTER html %] 無效。
+    [% title = "无效的附件编号" %]
+    附件编号 [% attach_id FILTER html %] 无效。
 
   [% ELSIF error == "bug_id_does_not_exist" %]
-    [% title = BLOCK %]無效的 [% terms.Bug %] 編號[% END %]
+    [% title = BLOCK %]无效的 [% terms.Bug %] 编号[% END %]
     [% terms.Bug %] #[% bug_id FILTER html %] 不存在。
 
   [% ELSIF error == "improper_bug_id_field_value" %]
     [% title = BLOCK %]
-      [% IF bug_id %]無效的[% ELSE %]缺少[% END %] [% terms.Bug %] 編號
+      [% IF bug_id %]无效的[% ELSE %]缺少[% END %] [% terms.Bug %] 编号
     [% END %]
     [% IF bug_id %]
-      '[% bug_id FILTER html %]'並非有效的 [% terms.bug %]
-      編號，也不是 [% terms.bug %] 的別名。
+      '[% bug_id FILTER html %]'并非有效的 [% terms.bug %]
+      编号，也不是 [% terms.bug %] 的别名。
     [% ELSE %]
       [% IF field %]
-        欄位 '[% field_descs.$field FILTER html %]' 不得空白。
+        栏位 '[% field_descs.$field FILTER html %]' 不得空白。
       [% END %]
-      你必須輸入有效的 [% terms.bug %] 編號！
+      你必须输入有效的 [% terms.bug %] 编号！
     [% END %]
 
   [% ELSIF error == "invalid_changedsince" %]
-    [% title = "無效的 changedsince 值" %]
-    'changedsince' 的值 ('[% changedsince FILTER html %]') 必須是 0 或正整數。
+    [% title = "无效的 changedsince 值" %]
+    'changedsince' 的值 ('[% changedsince FILTER html %]') 必须是 0 或正整数。
 
   [% ELSIF error == "invalid_content_type" %]
-    [% title = "無效的 MIME 類別" %]
-    無效的 MIME 類別 <em>[% contenttype FILTER html %]</em>。
-    有效的類別必須是類似 <em>foo/bar</em> 的格式，其中 <em>foo</em>
-    必須是 <em>[% constants.LEGAL_CONTENT_TYPES.join(', ') FILTER html %]</em>
-    的其中一種，而 <em>bar</em> 不能含有特殊符號［例如等號 (=) 、問號 (?) 等等］。
+    [% title = "无效的 MIME 类别" %]
+    无效的 MIME 类别 <em>[% contenttype FILTER html %]</em>。
+    有效的类别必须是类似 <em>foo/bar</em> 的格式，其中 <em>foo</em>
+    必须是 <em>[% constants.LEGAL_CONTENT_TYPES.join(', ') FILTER html %]</em>
+    的其中一种，而 <em>bar</em> 不能含有特殊符号〔例如等号 (=) 、问号 (?) 等等〕。
 
   [% ELSIF error == "invalid_cookies_or_token" %]
-    [% title = "無效的 cookies 或 token" %]
-    所提供的 cookies 或 token 無效或已過期。
+    [% title = "无效的 cookies 或 token" %]
+    所提供的 cookies 或 token 无效或已过期。
     你可能需要重新登入，以取得新的 cookies 或 token 。
 
   [% ELSIF error == "invalid_datasets" %]
-    [% title = "無效的資料組" %]
-    <em>[% datasets.join(":") FILTER html %]</em> 是無效的資料組。僅允許數字、英文字母以及冒號 (:)。
+    [% title = "无效的资料组" %]
+    <em>[% datasets.join(":") FILTER html %]</em> 是无效的资料组。仅允许数字、英文字母以及冒号 (:)。
 
   [% ELSIF error == "invalid_dimensions" %]
-    [% title = "無效的維度" %]
-    所指定的寬度或高度並非正整數。
+    [% title = "无效的维度" %]
+    所指定的宽度或高度并非正整数。
 
   [% ELSIF error == "invalid_format" %]
-    [% title = "無效的格式" %]
-    格式 "[% format FILTER html %]" 無效。必須是
+    [% title = "无效的格式" %]
+    格式 "[% format FILTER html %]" 无效。必须是
     [% FOREACH my_format = formats %]
       "[% my_format FILTER html %]"
     [% END %]其中之一。
 
   [% ELSIF error == "invalid_group_ID" %]
-    [% title = "無效的群組編號" %]
-    你所指定的群組不存在。
+    [% title = "无效的群组编号" %]
+    你所指定的群组不存在。
 
   [% ELSIF error == "invalid_group_name" %]
-    [% title = "無效的群組名稱" %]
-    你所指定的群組名稱 [% name FILTER html %] 無效。
+    [% title = "无效的群组名称" %]
+    你所指定的群组名称 [% name FILTER html %] 无效。
 
   [% ELSIF error == "invalid_keyword_id" %]
-    找不到關鍵字編號 <em>[% id FILTER html %]</em> 。
+    找不到关键字编号 <em>[% id FILTER html %]</em> 。
 
   [% ELSIF error == "invalid_maxrows" %]
-    [% title = "無效的最大列數" %]
-    最大列數的數字 '[% maxrows FILTER html %]' 必須是正整數。
+    [% title = "无效的最大列数" %]
+    最大列数的数字 '[% maxrows FILTER html %]' 必须是正整数。
 
   [% ELSIF error == "invalid_parameter" %]
-    [% title = "無效的參數" %]
-    [% name FILTER html %] 的新數值是無效的，原因： [% err FILTER html %] 。
+    [% title = "无效的参数" %]
+    [% name FILTER html %] 的新数值是无效的，原因： [% err FILTER html %] 。
 
   [% ELSIF error == "invalid_regexp" %]
-    [% title = "無效的正規表達式" %]
-    你所輸入的正規表達式無效。
+    [% title = "无效的正规表达式" %]
+    你所输入的正规表达式无效。
 
   [% ELSIF error == "invalid_user" %]
-    [% title = "無效的使用者" %]
+    [% title = "无效的使用者" %]
     [% IF user_id %]
-      沒有帳號為 <em>[% user_id FILTER html %]</em> 的使用者。
+      没有帐号为 <em>[% user_id FILTER html %]</em> 的使用者。
     [% ELSIF user_login %]
-      沒有帳號為 <em>[% user_login FILTER html %]</em> 的使用者。
+      没有帐号为 <em>[% user_login FILTER html %]</em> 的使用者。
     [% ELSE %]
-      並未輸入使用者帳號。
+      并未输入使用者帐号。
     [% END %]
 
   [% ELSIF error == "invalid_user_group" %]
-    [% title = "無效的使用者群組" %]
+    [% title = "无效的使用者群组" %]
     使用者
     '[% users.join(', ') FILTER html %]'
-    無法編輯
+    无法编辑
     [% IF product %]
       '[% product FILTER html %]'
     [% END %]
@@ -1039,614 +1039,614 @@
     [% IF bug_id %]
       [% "中的" IF product %][% terms.bug %] '[% bug_id FILTER html %]'。
     [% ELSIF new %]
-      ，也無法被指定於新的 [% terms.bug %] 。
+      ，也无法被指定於新的 [% terms.bug %] 。
     [% ELSE %]
-      [% "中" IF product %]已變更的 [% terms.bug %]。
+      [% "中" IF product %]已变更的 [% terms.bug %]。
     [% END %]
 
   [% ELSIF error == "invalid_username" %]
-    [% title = "無效的使用者名稱" %]
-    <kbd>[% name FILTER html %]</kbd> 並非有效的使用者名稱。
-    可能是你拼錯了，或者他還沒有註冊 [% terms.Bugzilla %] 帳號。
+    [% title = "无效的使用者名称" %]
+    <kbd>[% name FILTER html %]</kbd> 并非有效的使用者名称。
+    可能是你拼错了，或者他还没有注册 [% terms.Bugzilla %] 帐号。
 
   [% ELSIF error == "invalid_username_or_password" %]
-    [% title = "無效的帳號或密碼" %]
-    你輸入的帳號或密碼不正確。
+    [% title = "无效的帐号或密码" %]
+    你输入的帐号或密码不正确。
     [%# People get two login attempts before being warned about
       # being locked out.
       #%]
     [% IF remaining <=  2 %]
-      如果你再嘗試
-      [%+ remaining FILTER html %] 次後仍無法輸入正確的密碼，
-      你將會有
-      [%+ constants.LOGIN_LOCKOUT_INTERVAL FILTER html %] 分鐘無法登入此帳號。
-      如要避免帳號被鎖住，可以用「忘記密碼」的連結來重設密碼。
+      如果你再尝试
+      [%+ remaining FILTER html %] 次後仍无法输入正确的密码，
+      你将会有
+      [%+ constants.LOGIN_LOCKOUT_INTERVAL FILTER html %] 分钟无法登入此帐号。
+      如要避免帐号被锁住，可以用「忘记密码」的连结来重设密码。
     [% END %]
 
   [% ELSIF error == "json_rpc_get_method_required" %]
-    當透過 GET 使用 JSON-RPC 時，你必須指定 'method' 參數。
-    請參考
+    当透过 GET 使用 JSON-RPC 时，你必须指定 'method' 参数。
+    请参考
     [%+ docs_urlbase FILTER html %]api/Bugzilla/WebService/Server/JSONRPC.html
 
   [% ELSIF error == "json_rpc_illegal_content_type" %]
-    當透過 POST 使用 JSON-RPC 時，你無法使用 [% content_type FILTER html %]
-    做為 MIME 類別。只允許使用 application/json 和 application/json-rpc 。
+    当透过 POST 使用 JSON-RPC 时，你无法使用 [% content_type FILTER html %]
+    做为 MIME 类别。只允许使用 application/json 和 application/json-rpc 。
 
   [% ELSIF error == "json_rpc_invalid_params" %]
-    無法將 'params' 參數內容解讀為有效的 JSON 。
-    錯誤： [% err_msg FILTER html %]
-    數值： [% params FILTER html %]
+    无法将 'params' 参数内容解读为有效的 JSON 。
+    错误： [% err_msg FILTER html %]
+    数值： [% params FILTER html %]
 
   [% ELSIF error == "json_rpc_invalid_callback" %]
-    無法以 '[% callback FILTER html %]' 做為 'callback' 參數。
-    由於安全性考量，僅允許英文字母、數字和 <code>[]._</code> 這些字元出現於
-    'callback' 參數中。
+    无法以 '[% callback FILTER html %]' 做为 'callback' 参数。
+    由於安全性考量，仅允许英文字母、数字和 <code>[]._</code> 这些字元出现於
+    'callback' 参数中。
 
   [% ELSIF error == "json_rpc_post_only" %]
-    為了安全性考量，你必須透過 HTTP POST 呼叫 '[% method FILTER html %]' 。
+    为了安全性考量，你必须透过 HTTP POST 呼叫 '[% method FILTER html %]' 。
 
   [% ELSIF error == "keyword_already_exists" %]
-    [% title = "關鍵字已存在" %]
-    關鍵字 [% name FILTER html %] 已存在。
+    [% title = "关键字已存在" %]
+    关键字 [% name FILTER html %] 已存在。
 
   [% ELSIF error == "keyword_blank_description" %]
-    [% title = "不允許空白的關鍵字描述" %]
-    你必須輸入關鍵字的描述，不得為空白。
+    [% title = "不允许空白的关键字描述" %]
+    你必须输入关键字的描述，不得为空白。
 
   [% ELSIF error == "keyword_blank_name" %]
-    [% title = "不允許空白的關鍵字名稱" %]
-    你必須輸入關鍵字的名稱，不得為空白。
+    [% title = "不允许空白的关键字名称" %]
+    你必须输入关键字的名称，不得为空白。
 
   [% ELSIF error == "keyword_invalid_name" %]
-    [% title = "無效的關鍵字名稱" %]
-    不允許在關鍵字名稱中使用逗號 (,) 或空白。
+    [% title = "无效的关键字名称" %]
+    不允许在关键字名称中使用逗号 (,) 或空白。
 
   [% ELSIF error == "login_needed_for_password_change" %]
-    [% title = "必須輸入帳號" %]
-    如要變更你的密碼，你必須輸入你的帳號。
+    [% title = "必须输入帐号" %]
+    如要变更你的密码，你必须输入你的帐号。
 
   [% ELSIF error == "login_required" %]
     [%# Used for non-web-based LOGIN_REQUIRED situations. %]
-    你必須登入 [% terms.Bugzilla %] ，才能使用該部份功能。
+    你必须登入 [% terms.Bugzilla %] ，才能使用该部份功能。
 
   [% ELSIF error == "login_required_for_pronoun" %]
-    [% title = "必須輸入帳號" %]
-    你不能在未登入狀態下使用 %user% ，因為 %user% 代表你的帳號，但系統並不知道你的帳號是什麼。
+    [% title = "必须输入帐号" %]
+    你不能在未登入状态下使用 %user% ，因为 %user% 代表你的帐号，但系统并不知道你的帐号是什麽。
 
   [% ELSIF error == "migrate_config_created" %]
-    檔案 <kbd>[% file FILTER html %]</kbd> 包含了必須在合併前設定的變數設定。
+    档案 <kbd>[% file FILTER html %]</kbd> 包含了必须在合并前设定的变数设定。
 
   [% ELSIF error == "migrate_from_invalid" %]
-    '[% from FILTER html %]' 並非可以合併的 [% terms.bug %] 追蹤種類。
-    請參考 <kbd>Bugzilla/Migrate/</kbd> 目錄下的內容，該處列有
-    [% terms.bug %] 的追蹤種類。
+    '[% from FILTER html %]' 并非可以合并的 [% terms.bug %] 追踪种类。
+    请参考 <kbd>Bugzilla/Migrate/</kbd> 目录下的内容，该处列有
+    [% terms.bug %] 的追踪种类。
 
   [% ELSIF error == "milestone_already_exists" %]
     [% title = "里程碑已存在" %]
-    [% admindocslinks = {'products.html' => '管理產品',
-                         'milestones.html' => '關於里程碑'} %]
-    產品 '[%- product FILTER html %]' 的里程碑 '[% name FILTER html %]' 已存在。
+    [% admindocslinks = {'products.html' => '管理产品',
+                         'milestones.html' => '关於里程碑'} %]
+    产品 '[%- product FILTER html %]' 的里程碑 '[% name FILTER html %]' 已存在。
 
   [% ELSIF error == "milestone_blank_name" %]
-    [% title = "不允許里程碑名稱空白" %]
-    你必須輸入此里程碑的名稱。
+    [% title = "不允许里程碑名称空白" %]
+    你必须输入此里程碑的名称。
 
   [% ELSIF error == "milestone_is_default" %]
-    [% title = "無法刪除預設里程碑" %]
-    [% admindocslinks = {'products.html' => '管理產品',
-                         'milestones.html' => '關於里程碑'} %]
-    很抱歉， [% milestone.name FILTER html %] 是產品
-    '[% milestone.product.name FILTER html %]' 的預設里程碑，因此無法刪除。
+    [% title = "无法删除预设里程碑" %]
+    [% admindocslinks = {'products.html' => '管理产品',
+                         'milestones.html' => '关於里程碑'} %]
+    很抱歉， [% milestone.name FILTER html %] 是产品
+    '[% milestone.product.name FILTER html %]' 的预设里程碑，因此无法删除。
 
   [% ELSIF error == "milestone_name_too_long" %]
-    [% title = "里程碑名稱過長" %]
-    里程碑名稱限制為 [% constants.MAX_MILESTONE_SIZE FILTER html %]
-    字元。 '[% name FILTER html %]' 太長了（ [% name.length %] 字元）。
+    [% title = "里程碑名称过长" %]
+    里程碑名称限制为 [% constants.MAX_MILESTONE_SIZE FILTER html %]
+    字元。 '[% name FILTER html %]' 太长了（ [% name.length %] 字元）。
 
   [% ELSIF error == "milestone_required" %]
-    [% title = "需要輸入里程碑" %]
-    如果你決定要負責 [% terms.bug %] [% bug.id FILTER html %]
-    的話，你必須選擇一個目標里程碑。
-    訂出修復 [% terms.bug %] 的大概期限，也是負責的一部份。
+    [% title = "需要输入里程碑" %]
+    如果你决定要负责 [% terms.bug %] [% bug.id FILTER html %]
+    的话，你必须选择一个目标里程碑。
+    订出修复 [% terms.bug %] 的大概期限，也是负责的一部份。
 
   [% ELSIF error == "milestone_sortkey_invalid" %]
-    [% title = "無效的里程碑排序鍵" %]
-    排序鍵 '[% sortkey FILTER html %]' 不在範圍
-    [%+ constants.MIN_SMALLINT FILTER html %] &le; 排序鍵 &le;
+    [% title = "无效的里程碑排序键" %]
+    排序键 '[% sortkey FILTER html %]' 不在范围
+    [%+ constants.MIN_SMALLINT FILTER html %] &le; 排序键 &le;
     [%+ constants.MAX_SMALLINT FILTER html %] 中。
 
   [% ELSIF error == "misarranged_dates" %]
-    [% title = "日期順序錯誤" %]
-    你的開始日期 ([% datefrom FILTER html %]) 晚於結束日期 ([% dateto FILTER html %])。
+    [% title = "日期顺序错误" %]
+    你的开始日期 ([% datefrom FILTER html %]) 晚於结束日期 ([% dateto FILTER html %])。
 
   [% ELSIF error == "mismatched_bug_ids_on_obsolete" %]
     附件 [% attach_id FILTER html %] （[% description FILTER html %]）是附加在 [% terms.bug %]
-    [%+ attach_bug_id FILTER html %] 的附件，但在對 [% terms.bug %]
-    [%+ my_bug_id FILTER html %] 新增附件時，你嘗試將它標記為「已廢棄的附件」。
+    [%+ attach_bug_id FILTER html %] 的附件，但在对 [% terms.bug %]
+    [%+ my_bug_id FILTER html %] 新增附件时，你尝试将它标记为「已废弃的附件」。
 
   [% ELSIF error == "missing_attachment_description" %]
     [% title = "缺少附件描述" %]
-    你必須為附件輸入描述。
+    你必须为附件输入描述。
 
   [% ELSIF error == "missing_bug_id" %]
-    並未輸入 [% terms.bug %] 編號。
+    并未输入 [% terms.bug %] 编号。
 
   [% ELSIF error == "missing_category" %]
-    [% title = "缺少分類" %]
-    你並未對此系列指定分類。
+    [% title = "缺少分类" %]
+    你并未对此系列指定分类。
 
   [% ELSIF error == "missing_component" %]
-    [% title = "缺少子產品" %]
-    [% admindocslinks = {'products.html'   => '管理產品',
-                         'components.html' => '新增子產品'} %]
-    很抱歉，產品 <em>[% product.name FILTER html %]</em>
-    中必須至少有一項啟用的子產品，才能夠輸入 [% terms.bug %] 。<br>
+    [% title = "缺少子产品" %]
+    [% admindocslinks = {'products.html'   => '管理产品',
+                         'components.html' => '新增子产品'} %]
+    很抱歉，产品 <em>[% product.name FILTER html %]</em>
+    中必须至少有一项启用的子产品，才能够输入 [% terms.bug %] 。<br>
     [% IF user.in_group("editcomponents", product.id) %]
-      <a href="editcomponents.cgi?action=add&amp;product=[% product.name FILTER uri %]">新增子產品</a>。
+      <a href="editcomponents.cgi?action=add&amp;product=[% product.name FILTER uri %]">新增子产品</a>。
     [% ELSE %]
-      請洽管理員 [% Param("maintainer") %] 並要求他們新增子產品到此產品中。
+      请洽管理员 [% Param("maintainer") %] 并要求他们新增子产品到此产品中。
     [% END %]
 
   [% ELSIF error == "missing_content_type" %]
-    [% title = "未指定 MIME 類別" %]
-     你要求 [% terms.Bugzilla %] 自動偵測 MIME 類別，但在上傳檔案的時候你的瀏覽器並未指明 MIME 類別，因此你必須手動輸入。
+    [% title = "未指定 MIME 类别" %]
+     你要求 [% terms.Bugzilla %] 自动侦测 MIME 类别，但在上传档案的时候你的浏览器并未指明 MIME 类别，因此你必须手动输入。
 
   [% ELSIF error == "missing_cookie" %]
     [% title = "缺少 cookie" %]
-    很抱歉，系統遺失了記錄你前次搜尋結果的 cookie 。你必須到<a href="query.cgi">搜尋頁</a>重新來過。
+    很抱歉，系统遗失了记录你前次搜寻结果的 cookie 。你必须到<a href="query.cgi">搜寻页</a>重新来过。
 
   [% ELSIF error == "missing_datasets" %]
-    [% title = "並未選擇資料組" %]
-    [% docslinks = {'reporting.html' => '報告'} %]
-    你必須選擇資料組才能產生報告。
+    [% title = "并未选择资料组" %]
+    [% docslinks = {'reporting.html' => '报告'} %]
+    你必须选择资料组才能产生报告。
 
   [% ELSIF error == "missing_frequency" %]
-    [% title = "缺少產生頻率" %]
-    [% docslinks = {'reporting.html' => '報告'} %]
-    你並未指定此一系列的有效產生頻率。
+    [% title = "缺少产生频率" %]
+    [% docslinks = {'reporting.html' => '报告'} %]
+    你并未指定此一系列的有效产生频率。
 
   [% ELSIF error == "missing_name" %]
-    [% title = "缺少名稱" %]
-    [% docslinks = {'reporting.html' => '報告'} %]
-    你並未指定此一系列的名稱。
+    [% title = "缺少名称" %]
+    [% docslinks = {'reporting.html' => '报告'} %]
+    你并未指定此一系列的名称。
 
   [% ELSIF error == "missing_query" %]
-    [% title = "缺少搜尋" %]
-    [% docslinks = {'query.html' => "搜尋 $terms.bugs",
-                    'query.html#list' => "$terms.Bug 清單"} %]
-    名稱是 <em>[% name FILTER html %]</em> 的搜尋
+    [% title = "缺少搜寻" %]
+    [% docslinks = {'query.html' => "搜寻 $terms.bugs",
+                    'query.html#list' => "$terms.Bug 清单"} %]
+    名称是 <em>[% name FILTER html %]</em> 的搜寻
     [% IF sharer_id && sharer_id != user.id %]
-      並未對你公開。
+      并未对你公开。
     [% ELSE %]
-      並不存在。
+      并不存在。
     [% END %]
 
   [% ELSIF error == "missing_resolution" %]
-    [% title = "需要解決方案" %]
-    將 [% terms.bugs %] 標記為[%+ status FILTER upper FILTER html %]需要有效的解決方案。
+    [% title = "需要解决方案" %]
+    将 [% terms.bugs %] 标记为[%+ status FILTER upper FILTER html %]需要有效的解决方案。
 
   [% ELSIF error == "missing_subcategory" %]
-    [% title = "缺少子類" %]
-    你並未指定此系列的子類。
+    [% title = "缺少子类" %]
+    你并未指定此系列的子类。
 
   [% ELSIF error == "missing_version" %]
     [% title = "缺少版本" %]
-    [% admindocslinks = {'versions.html' => '定義版本'} %]
-    很抱歉，產品 <em>[% product.name FILTER html %]</em>
-    必須要至少有一個啟用的版本，才能夠輸入 [% terms.bug %] 。<br>
+    [% admindocslinks = {'versions.html' => '定义版本'} %]
+    很抱歉，产品 <em>[% product.name FILTER html %]</em>
+    必须要至少有一个启用的版本，才能够输入 [% terms.bug %] 。<br>
     [% IF user.in_group("editcomponents", product.id) %]
       <a href="editversions.cgi?action=add&amp;product=[% product.name FILTER uri %]">新增版本</a>。
     [% ELSE %]
-      請洽[% Param("maintainer") %]並要求他們替此產品新增一個版本。
+      请洽[% Param("maintainer") %]并要求他们替此产品新增一个版本。
     [% END %]
 
   [% ELSIF error == "multiple_alias_not_allowed" %]
-    你無法在修改多個 [% terms.bugs %] 時設定別名。
+    你无法在修改多个 [% terms.bugs %] 时设定别名。
 
   [% ELSIF error == "need_quip" %]
-    [% title = "需要智語" %]
-    [% docslinks = {'quips.html' => '關於智語'} %]
-    請在文字欄輸入智語。
+    [% title = "需要智语" %]
+    [% docslinks = {'quips.html' => '关於智语'} %]
+    请在文字栏输入智语。
 
   [% ELSIF error == "need_quipid" %]
-    [% title = "需要智語編號" %]
-    需要輸入有效的智語編號。
+    [% title = "需要智语编号" %]
+    需要输入有效的智语编号。
 
   [% ELSIF error == "new_password_missing" %]
-    [% title = "未輸入新的密碼" %]
-    你必須輸入新的密碼。
+    [% title = "未输入新的密码" %]
+    你必须输入新的密码。
 
   [% ELSIF error == "no_axes_defined" %]
-    [% title = "座標軸未定義" %]
-    [% docslinks = {'reporting.html' => '報告'} %]
-    你並未定義任何座標軸。
+    [% title = "座标轴未定义" %]
+    [% docslinks = {'reporting.html' => '报告'} %]
+    你并未定义任何座标轴。
 
   [% ELSIF error == "no_bugs_chosen" %]
-    [% title = BLOCK %]未選擇 [% terms.Bugs %][% END %]
-    你並未選擇要
+    [% title = BLOCK %]未选择 [% terms.Bugs %][% END %]
+    你并未选择要
     [% IF action == "modify" %]
       修改
     [% ELSIF action == "view" %]
-      瀏覽
+      浏览
     [% ELSIF action == 'summarize' %]
-      瀏覽時間總計
+      浏览时间总计
     [% END %]
     的 [% terms.bugs %] 。
 
   [% ELSIF error == "no_initial_bug_status" %]
-    [% title = "沒有初始的 $terms.Bug 狀態" %]
-    在新增 [% terms.bug %]時沒有初始的 [% terms.bug %] 狀態可以選。
-    請將此問題回報給 [% Param("maintainer") %] 。
+    [% title = "没有初始的 $terms.Bug 状态" %]
+    在新增 [% terms.bug %]时没有初始的 [% terms.bug %] 状态可以选。
+    请将此问题回报给 [% Param("maintainer") %] 。
 
   [% ELSIF error == "no_keywords" %]
-    [% title = "沒有關鍵字" %]
-    [% admindocslinks = {'keywords.html' => '設定關鍵字'} %]
-    此 Bugzilla 沒有定義關鍵字。
+    [% title = "没有关键字" %]
+    [% admindocslinks = {'keywords.html' => '设定关键字'} %]
+    此 Bugzilla 没有定义关键字。
 
   [% ELSIF error == "no_new_quips" %]
-    [% title = "沒有新的智語" %]
-    [% admindocslinks = {'quips.html' => '控管智語的使用'} %]
-    此站台不允許新增智語。
+    [% title = "没有新的智语" %]
+    [% admindocslinks = {'quips.html' => '控管智语的使用'} %]
+    此站台不允许新增智语。
 
   [% ELSIF error == "no_page_specified" %]
-    [% title = "並未指定文件" %]
-    你並未輸入要顯示的文件編號。
+    [% title = "并未指定文件" %]
+    你并未输入要显示的文件编号。
 
   [% ELSIF error == "no_products" %]
-    [% title = "沒有產品" %]
-    [% admindocslinks = {'products.html'   => '設定產品',
-                         'components.html' => '在產品中新增子產品',
-                         'groups.html'     => '群組安全性'} %]
-    並未定義可以輸入 [% terms.bugs %] 的產品，或者你沒有權限可以瀏覽任何產品。
+    [% title = "没有产品" %]
+    [% admindocslinks = {'products.html'   => '设定产品',
+                         'components.html' => '在产品中新增子产品',
+                         'groups.html'     => '群组安全性'} %]
+    并未定义可以输入 [% terms.bugs %] 的产品，或者你没有权限可以浏览任何产品。
 
   [% ELSIF error == "no_tag_to_edit" %]
-    [% title = "未選擇標籤" %]
-    你嘗試新增或移除沒有名稱的標籤。
+    [% title = "未选择标签" %]
+    你尝试新增或移除没有名称的标签。
 
   [% ELSIF error == "number_not_integer" %]
-    [% title = "必須是整數" %]
-    欄位
+    [% title = "必须是整数" %]
+    栏位
     <em>[% field_descs.$field FILTER html %]</em>
-    的數值
+    的数值
     '[% num FILTER html %]'
-    並不是整數。
+    并不是整数。
 
   [% ELSIF error == "number_not_numeric" %]
-    [% title = "必須是數字" %]
-    欄位 <em>[% field_descs.$field FILTER html %]</em> 的數值 '[% num FILTER html %]' 並不是數字。
+    [% title = "必须是数字" %]
+    栏位 <em>[% field_descs.$field FILTER html %]</em> 的数值 '[% num FILTER html %]' 并不是数字。
 
   [% ELSIF error == "number_too_large" %]
-    [% title = "數字過大" %]
-    欄位 <em>[% field_descs.$field FILTER html %]</em> 的數值 '[% num FILTER html %]' 大於允許的最大值
+    [% title = "数字过大" %]
+    栏位 <em>[% field_descs.$field FILTER html %]</em> 的数值 '[% num FILTER html %]' 大於允许的最大值
     '[% max_num FILTER html %]'。
 
   [% ELSIF error == "number_too_small" %]
-    [% title = "數字過小" %]
-    欄位 <em>[% field_descs.$field FILTER html %]</em> 的數值 '[% num FILTER html %]' 小於允許的最小值
+    [% title = "数字过小" %]
+    栏位 <em>[% field_descs.$field FILTER html %]</em> 的数值 '[% num FILTER html %]' 小於允许的最小值
     '[% min_num FILTER html %]'。
 
   [% ELSIF error == "object_not_specified" %]
     [% type = BLOCK %][% INCLUDE object_name class = class %][% END %]
     [% title = BLOCK %]未指定 [% type FILTER ucfirst FILTER html %][% END %]
-    你必須選擇或輸入 [% type FILTER html %] 。
+    你必须选择或输入 [% type FILTER html %] 。
 
   [% ELSIF error == "object_does_not_exist" %]
     [% type = BLOCK %][% INCLUDE object_name class = class %][% END %]
-    [% title = BLOCK %]無效的 [% type FILTER ucfirst FILTER html %][% END %]
+    [% title = BLOCK %]无效的 [% type FILTER ucfirst FILTER html %][% END %]
     [% IF product.defined %]
-      在產品 '[% product.name FILTER html %]' 中
+      在产品 '[% product.name FILTER html %]' 中
     [% END -%]
-    沒有
+    没有
     [%- IF id.defined %]
-      編號是 '[% id FILTER html %]' 的
+      编号是 '[% id FILTER html %]' 的
     [%- ELSE %]
-      名稱為 '[% name FILTER html %]' 的
+      名称为 '[% name FILTER html %]' 的
     [%- END %]
     [%+ type FILTER html %] 。
     [%- IF class == "Bugzilla::User" %]
-      可能是你輸入了錯誤的名稱，或者該使用者尚未建立 [% terms.Bugzilla %] 帳號。
+      可能是你输入了错误的名称，或者该使用者尚未建立 [% terms.Bugzilla %] 帐号。
     [% ELSIF class == "Bugzilla::Keyword" %]
-      參考可用的<a href="describekeywords.cgi">關鍵字</a>列表。
+      参考可用的<a href="describekeywords.cgi">关键字</a>列表。
     [% END %]
 
   [% ELSIF error == "old_password_incorrect" %]
-    [% title = "不正確的密碼" %]
-    你並未正確地輸入密碼。
+    [% title = "不正确的密码" %]
+    你并未正确地输入密码。
 
   [% ELSIF error == "old_password_required" %]
-    [% title = "需要輸入舊密碼" %]
-    你必須輸入舊的密碼，才能變更你的電子郵件地址。
+    [% title = "需要输入旧密码" %]
+    你必须输入旧的密码，才能变更你的电子邮件地址。
 
   [% ELSIF error == "password_change_requests_not_allowed" %]
-    [% title = "不允許修改密碼" %]
-    系統不允許修改密碼。
+    [% title = "不允许修改密码" %]
+    系统不允许修改密码。
 
   [% ELSIF error == "passwords_dont_match" %]
-    [% title = "密碼不符" %]
-    所輸入的兩組密碼不一致。
+    [% title = "密码不符" %]
+    所输入的两组密码不一致。
 
   [% ELSIF error == "password_too_short" %]
-    [% title = "密碼過短" %]
-    密碼不得短於 [% constants.USER_PASSWORD_MIN_LENGTH FILTER html %] 字元。
+    [% title = "密码过短" %]
+    密码不得短於 [% constants.USER_PASSWORD_MIN_LENGTH FILTER html %] 字元。
     [% IF locked_user %]
-      你必須
+      你必须
       <a href="token.cgi?a=reqpw&amp;loginname=[% locked_user.email FILTER uri %]&amp;token=[% issue_hash_token(['reqpw']) FILTER uri %]">
-      申請新的密碼</a>才能再度登入。
+      申请新的密码</a>才能再度登入。
     [% END %]
 
   [% ELSIF error == "password_not_complex" %]
-    [% title = "密碼不符合要求" %]
+    [% title = "密码不符合要求" %]
     [% passregex = Param('password_complexity') %]
-    密碼必須至少包含一個：
+    密码必须至少包含一个：
     <ul>
       [% IF passregex == 'letters_numbers_specialchars' %]
         <li>字母</li>
-        <li>特殊符號</li>
+        <li>特殊符号</li>
       [% ELSIF passregex.search('letters') %]
-        <li>大寫字母</li>
-        <li>小寫字母</li>
+        <li>大写字母</li>
+        <li>小写字母</li>
       [% END %]
       [% IF passregex.search('numbers') %]
-        <li>數字</li>
+        <li>数字</li>
       [% END %]
     </ul>
     [% IF locked_user %]
-      你必須
+      你必须
       <a href="token.cgi?a=reqpw&amp;loginname=[% locked_user.email FILTER uri %]&amp;token=[% issue_hash_token(['reqpw']) FILTER uri %]">
-      申請新的密碼</a>才能再度登入。
+      申请新的密码</a>才能再度登入。
     [% END %]
 
   [% ELSIF error == "product_access_denied" %]
-    [% title = "拒絕存取產品" %]
-    產品
+    [% title = "拒绝存取产品" %]
+    产品
     [%+ IF id.defined %]
-      編號 [% id FILTER html %]
+      编号 [% id FILTER html %]
     [% ELSE %]
       '[% product FILTER html %]'
     [% END %]
-    不存在，或是你沒有存取該產品的權限。
+    不存在，或是你没有存取该产品的权限。
 
   [% ELSIF error == "product_admin_denied" %]
-    [% title = "權限不足" %]
-    無法編輯產品 '[% product FILTER html %]' 的設定。
+    [% title = "权限不足" %]
+    无法编辑产品 '[% product FILTER html %]' 的设定。
 
   [% ELSIF error == "product_blank_name" %]
-    [% title = "不允許產品名稱空白" %]
-    [% admindocslinks = {'products.html' => '管理產品'} %]
-    你必須輸入產品的名稱。
+    [% title = "不允许产品名称空白" %]
+    [% admindocslinks = {'products.html' => '管理产品'} %]
+    你必须输入产品的名称。
 
   [% ELSIF error == "product_disabled" %]
-    [% title = BLOCK %]產品已不允許回報 [% terms.Bug %][% END %]
-    [% admindocslinks = {'products.html' => '管理產品'} %]
-    很抱歉，已不允許在產品 <em>[% product.name FILTER html %]</em> 中回報 [% terms.bug %] 。
+    [% title = BLOCK %]产品已不允许回报 [% terms.Bug %][% END %]
+    [% admindocslinks = {'products.html' => '管理产品'} %]
+    很抱歉，已不允许在产品 <em>[% product.name FILTER html %]</em> 中回报 [% terms.bug %] 。
 
   [% ELSIF error == "product_edit_denied" %]
-    [% title = "權限不足" %]
-    [% admindocslinks = {'products.html' => '管理產品',
-                         'groups.html'   => '群組安全性'} %]
-    你並未被允許在產品 [% product FILTER html %] 中編輯 [% terms.bugs %] 。
+    [% title = "权限不足" %]
+    [% admindocslinks = {'products.html' => '管理产品',
+                         'groups.html'   => '群组安全性'} %]
+    你并未被允许在产品 [% product FILTER html %] 中编辑 [% terms.bugs %] 。
 
   [% ELSIF error == "product_has_bugs" %]
-    [% title = BLOCK %]產品中還有[% terms.Bugs %][% END %]
-    [% admindocslinks = {'products.html' => '管理產品'} %]
-    在此產品中還有 [% nb FILTER html %] 個 [% terms.bugs %] ！
-    在你刪除此產品之前，你必須先搬移這些 [% terms.bugs %] 到另一項產品中。
+    [% title = BLOCK %]产品中还有[% terms.Bugs %][% END %]
+    [% admindocslinks = {'products.html' => '管理产品'} %]
+    在此产品中还有 [% nb FILTER html %] 个 [% terms.bugs %] ！
+    在你删除此产品之前，你必须先搬移这些 [% terms.bugs %] 到另一项产品中。
 
   [% ELSIF error == "product_illegal_group" %]
-    [% title = "無效的群組" %]
-    '[% group.name FILTER html %]' 並非使用中的
-    [% terms.bug %] 群組，因此你無法編輯它的群組控管設定。
+    [% title = "无效的群组" %]
+    '[% group.name FILTER html %]' 并非使用中的
+    [% terms.bug %] 群组，因此你无法编辑它的群组控管设定。
 
   [% ELSIF error == "product_must_define_defaultmilestone" %]
-    [% title = "必須定義新的預設里程碑" %]
-    [% admindocslinks = {'products.html' => '管理產品',
-                         'milestones.html' => '關於里程碑'} %]
-    你必須<a href="editmilestones.cgi?action=add&amp;product=[% product FILTER uri %]">
-    新增里程碑 '[% milestone FILTER html %]' </a>，才能將它設定為產品
-    '[% product FILTER html %]' 的預設里程碑。
+    [% title = "必须定义新的预设里程碑" %]
+    [% admindocslinks = {'products.html' => '管理产品',
+                         'milestones.html' => '关於里程碑'} %]
+    你必须<a href="editmilestones.cgi?action=add&amp;product=[% product FILTER uri %]">
+    新增里程碑 '[% milestone FILTER html %]' </a>，才能将它设定为产品
+    '[% product FILTER html %]' 的预设里程碑。
 
   [% ELSIF error == "product_must_have_description" %]
-    [% title = "必須輸入產品描述" %]
-    [% admindocslinks = {'products.html' => '管理產品'} %]
-    你必須輸入此產品的描述。
+    [% title = "必须输入产品描述" %]
+    [% admindocslinks = {'products.html' => '管理产品'} %]
+    你必须输入此产品的描述。
 
   [% ELSIF error == "product_must_have_version" %]
-    [% title = "必須輸入產品版本" %]
-    [% admindocslinks = {'products.html' => '管理產品',
+    [% title = "必须输入产品版本" %]
+    [% admindocslinks = {'products.html' => '管理产品',
                          'versions.html' => '管理版本'} %]
-    你必須輸入有效的版本，才能新增一項產品。
+    你必须输入有效的版本，才能新增一项产品。
 
   [% ELSIF error == "product_name_already_in_use" %]
-    [% title = "產品名稱已存在" %]
-    [% admindocslinks = {'products.html' => '管理產品'} %]
-    產品名稱 '[% product FILTER html %]' 已存在。
+    [% title = "产品名称已存在" %]
+    [% admindocslinks = {'products.html' => '管理产品'} %]
+    产品名称 '[% product FILTER html %]' 已存在。
 
   [% ELSIF error == "product_name_diff_in_case" %]
-    [% title = "產品名稱僅大小寫不同" %]
-    [% admindocslinks = {'products.html' => '管理產品'} %]
-    產品名稱 '[% product FILTER html %]' 和已存在的產品 '[% existing_product FILTER html %]' 僅大小寫不同。
+    [% title = "产品名称仅大小写不同" %]
+    [% admindocslinks = {'products.html' => '管理产品'} %]
+    产品名称 '[% product FILTER html %]' 和已存在的产品 '[% existing_product FILTER html %]' 仅大小写不同。
 
   [% ELSIF error == "product_name_too_long" %]
-    [% title = "產品名稱過長" %]
-    產品名稱的長度限制為 [% constants.MAX_PRODUCT_SIZE FILTER html %]
-    字元。 '[% name FILTER html %]' 太長了（ [% name.length %] 字元）。
+    [% title = "产品名称过长" %]
+    产品名称的长度限制为 [% constants.MAX_PRODUCT_SIZE FILTER html %]
+    字元。 '[% name FILTER html %]' 太长了（ [% name.length %] 字元）。
 
   [% ELSIF error == "product_unknown_component" %]
-    [% title = "未知的子產品" %]
-    產品 '[% product FILTER html %]' 沒有
+    [% title = "未知的子产品" %]
+    产品 '[% product FILTER html %]' 没有
     [% IF comp_id %]
       ID 是 [% comp_id FILTER html %]
     [% ELSE %]
       叫 '[% comp FILTER html %]'
     [% END %]
-    的子產品。
+    的子产品。
 
   [% ELSIF error == "query_name_missing" %]
-    [% title = "未指定搜尋名稱" %]
-    [% docslinks = {'query.html#list' => "$terms.Bug 清單"} %]
-    你必須輸入你的搜尋名稱。
+    [% title = "未指定搜寻名称" %]
+    [% docslinks = {'query.html#list' => "$terms.Bug 清单"} %]
+    你必须输入你的搜寻名称。
 
   [% ELSIF error == "query_name_too_long" %]
-    [% title = "查詢名稱過長" %]
-    查詢名稱的長度不得超過 [% constants.MAX_LEN_QUERY_NAME FILTER html %] 字元。
+    [% title = "查询名称过长" %]
+    查询名称的长度不得超过 [% constants.MAX_LEN_QUERY_NAME FILTER html %] 字元。
 
   [% ELSIF error == "quicksearch_invalid_query" %]
-    [% title = "無效的搜尋" %]
-    輸入的搜尋無效。
+    [% title = "无效的搜寻" %]
+    输入的搜寻无效。
     [% IF operators %]
-      [% operators.shift FILTER html %] 運算子不能放在
+      [% operators.shift FILTER html %] 运算子不能放在
       [%+ operators.shift FILTER html %] 後面。
     [% ELSE %]
-      搜尋不能以 AND 或 OR 開頭，也不能以 AND 、 OR 或 NOT 結尾。它們是系統保留的運算子。
-      如果你要搜尋這些字串的話，請以引號 (") 將字串包起來。
+      搜寻不能以 AND 或 OR 开头，也不能以 AND 、 OR 或 NOT 结尾。它们是系统保留的运算子。
+      如果你要搜寻这些字串的话，请以引号 (") 将字串包起来。
     [% END %]
 
   [% ELSIF error == "quicksearch_unbalanced_quotes" %]
-    [% title = "搜尋格式不正確" %]
-    Bugzilla 無法正確解析你所輸入的搜尋字串：
+    [% title = "搜寻格式不正确" %]
+    Bugzilla 无法正确解析你所输入的搜寻字串：
     <em>[% string FILTER html %]</em><br>
-    如果你用引號 (") 包覆字串，請確認引號開頭和結尾都有出現。
-    如果你想要搜尋的字串中含有引號時，請在引號前加上反斜線 (\) 。
-    例如，<em>"I'm so \"special\", really"</em>（有引號）就會被解析為要搜尋
+    如果你用引号 (") 包覆字串，请确认引号开头和结尾都有出现。
+    如果你想要搜寻的字串中含有引号时，请在引号前加上反斜线 (\) 。
+    例如，<em>"I'm so \"special\", really"</em>（有引号）就会被解析为要搜寻
     <em>I'm so "special", really</em> 。
 
   [% ELSIF error == "quicksearch_unknown_field" %]
-    [% title = "快速搜尋發生錯誤" %]
-    你的搜尋發生問題：
+    [% title = "快速搜寻发生错误" %]
+    你的搜寻发生问题：
     [% FOREACH field = unknown %]
-      <p><code>[% field FILTER html %]</code> 並非已知的欄位。</p>
+      <p><code>[% field FILTER html %]</code> 并非已知的栏位。</p>
     [% END %]
     [% FOREACH field = ambiguous.keys %]
-      <p><code>[% field FILTER html %]</code> 符合多個欄位：
+      <p><code>[% field FILTER html %]</code> 符合多个栏位：
         [%+ ambiguous.${field}.join(', ') FILTER html %]</p>
     [% END %]
 
     [% IF unknown.size %]
-      <p>有效的欄位名稱
-        <a href="id=quicksearch.html#fields">列於此處</a>。</p>
+      <p>有效的栏位名称
+        <a href="id=quicksearch.html#fields">列於此处</a>。</p>
     [% END %]
 
   [% ELSIF error == "quip_too_long" %]
-    [% title = "智語過長" %]
-    你輸入了長度為 [% length FILTER none %] 字元的智語，但是允許的智語長度為
+    [% title = "智语过长" %]
+    你输入了长度为 [% length FILTER none %] 字元的智语，但是允许的智语长度为
     [% constants.MAX_QUIP_LENGTH FILTER none %] 字元。
 
   [% ELSIF error == "reassign_to_empty" %]
-    [% title = "無效的重新分配" %]
-    要重新分配 [% terms.bug %] ，你必須輸入新的負責人的電子郵件地址。
+    [% title = "无效的重新分配" %]
+    要重新分配 [% terms.bug %] ，你必须输入新的负责人的电子邮件地址。
 
   [% ELSIF error == "relationship_loop_single" %]
-    [% title = "偵測到關係迴圈" %]
+    [% title = "侦测到关系回圈" %]
     [% terms.bug %] [%+ bug_id FILTER html %] 的 [% field_descs.$field_name FILTER html %]
-    對 [% terms.bug %] [%+ dep_id FILTER html %] 的依賴關係是個迴圈。
+    对 [% terms.bug %] [%+ dep_id FILTER html %] 的依赖关系是个回圈。
 
   [% ELSIF error == "report_axis_invalid" %]
-    <em>[% val FILTER html %]</em> 對
-    [%+ IF    fld == "x" %] X 軸
-    [%+ ELSIF fld == "y" %] Y 軸
-    [%+ ELSIF fld == "z" %]多表格／多圖
-    [%+ ELSE %]一份報告的座標[% END %]而言，並非有效的值。
+    <em>[% val FILTER html %]</em> 对
+    [%+ IF    fld == "x" %] X 轴
+    [%+ ELSIF fld == "y" %] Y 轴
+    [%+ ELSIF fld == "z" %]多表格／多图
+    [%+ ELSE %]一份报告的座标[% END %]而言，并非有效的值。
 
   [% ELSIF error == "report_name_missing" %]
-    [% title = "未指定報告名稱" %]
-    你必須為報告指定一個名稱。
+    [% title = "未指定报告名称" %]
+    你必须为报告指定一个名称。
 
   [% ELSIF error == "report_access_denied" %]
-    [% title = "拒絕存取" %]
-    你無法瀏覽此報告。
+    [% title = "拒绝存取" %]
+    你无法浏览此报告。
 
   [% ELSIF error == "request_queue_group_invalid" %]
-    群組欄位 <em>[% group FILTER html %]</em> 無效。
+    群组栏位 <em>[% group FILTER html %]</em> 无效。
 
   [% ELSIF error == "require_component" %]
-    [% title = "需要輸入子產品" %]
-    要將此 [% terms.bug %] 歸檔，必須先選擇一項子產品。
-    有必要的話，就用猜的。
+    [% title = "需要输入子产品" %]
+    要将此 [% terms.bug %] 归档，必须先选择一项子产品。
+    有必要的话，就用猜的。
 
   [% ELSIF error == "require_new_password" %]
-    [% title = "需要新的密碼" %]
-    在輸入新的密碼之前，無法變更密碼。
+    [% title = "需要新的密码" %]
+    在输入新的密码之前，无法变更密码。
 
   [% ELSIF error == "require_summary" %]
-    [% title = "需要輸入摘要" %]
-    你必須對這個 [% terms.bug %] 輸入摘要。
+    [% title = "需要输入摘要" %]
+    你必须对这个 [% terms.bug %] 输入摘要。
 
   [% ELSIF error == "required_field" %]
-    [% title = "需要設定欄位" %]
-    你必須對 '[% field_descs.${field.name} FILTER html %]' 欄位設定數值。
+    [% title = "需要设定栏位" %]
+    你必须对 '[% field_descs.${field.name} FILTER html %]' 栏位设定数值。
 
   [% ELSIF error == "resolution_cant_clear" %]
     [% terms.Bug %] [% bug_id FILTER bug_link(bug_id) FILTER none %]
-    已關閉，因此你無法清除它的解決方案。
+    已关闭，因此你无法清除它的解决方案。
 
   [% ELSIF error == "resolution_not_allowed" %]
-    [% title = "不允許設定解決方案" %]
-    你不能對狀態是開啟的 [% terms.bugs %] 設定解決方案。
+    [% title = "不允许设定解决方案" %]
+    你不能对状态是开启的 [% terms.bugs %] 设定解决方案。
 
   [% ELSIF error == "rest_invalid_resource" %]
-    對於
+    对於
     '[% method FILTER html +%] [%+ path FILTER html %]'
-    沒有找到相對應的 REST API 。
+    没有找到相对应的 REST API 。
 
   [% ELSIF error == "saved_search_used_by_whines" %]
-    [% title = "搜尋名稱使用中" %]
-    [% docslinks = {'whining.html' => '關於訂閱'} %]
-    已儲存的搜尋名稱 <em>[% search_name FILTER html %]</em> 已被用於<a
-    href="editwhines.cgi">訂閱</a>，主題為下列內容：
+    [% title = "搜寻名称使用中" %]
+    [% docslinks = {'whining.html' => '关於订阅'} %]
+    已储存的搜寻名称 <em>[% search_name FILTER html %]</em> 已被用於<a
+    href="editwhines.cgi">订阅</a>，主题为下列内容：
     [%+ subjects FILTER html %]
 
   [% ELSIF error == "search_content_without_matches" %]
-    [% title = "無效的搜尋" %]
-    「內容」欄位只能被用於「符合」搜尋，而「符合」搜尋也只能用於「內容」欄位。
+    [% title = "无效的搜寻" %]
+    「内容」栏位只能被用於「符合」搜寻，而「符合」搜寻也只能用於「内容」栏位。
 
   [% ELSIF error == "search_grouped_field_invalid" %]
-    在群組搜尋條件中， Bugzilla 不支援使用
+    在群组搜寻条件中， Bugzilla 不支援使用
     "[%+ field_descs.$field FILTER html %]" ([% field FILTER html %])
-    欄位。
+    栏位。
 
   [% ELSIF error == "search_grouped_invalid_nesting" %]
-    你不能在群組搜尋條件中使用巢狀條件。
+    你不能在群组搜寻条件中使用巢状条件。
 
   [% ELSIF error == "search_grouped_field_mismatch" %]
-    在群組搜尋中，所有條件必須使用同一欄位。
+    在群组搜寻中，所有条件必须使用同一栏位。
 
   [% ELSIF error == "search_field_operator_invalid" %]
     Bugzilla 不支援在
     "[%+ field_descs.$field FILTER html %]" ([% field FILTER html %])
-    欄位使用
+    栏位使用
     "[% search_descs.$operator FILTER html %]" ([% operator FILTER html %])
-    搜尋。
+    搜寻。
 
   [% ELSIF error == "see_also_self_reference" %]
-    你不能把這個 [% terms.bug %] 放在它自己的
-    [%+ field_descs.see_also FILTER html %] 欄位。
+    你不能把这个 [% terms.bug %] 放在它自己的
+    [%+ field_descs.see_also FILTER html %] 栏位。
 
   [% ELSIF error == "series_already_exists" %]
     [% title = "系列已存在" %]
-    [% docslinks = {'reporting.html' => '報告'} %]
-      名稱是 <em>[% series.category FILTER html %] /
+    [% docslinks = {'reporting.html' => '报告'} %]
+      名称是 <em>[% series.category FILTER html %] /
       [%+ series.subcategory FILTER html %] /
       [%+ series.name FILTER html %]</em>
-      的系列已經存在。
+      的系列已经存在。
 
   [% ELSIF error == "still_unresolved_bugs" %]
-    [% title = "未解決的依賴關係" %]
+    [% title = "未解决的依赖关系" %]
     [% IF bug_id %]
       [% terms.Bug %] [%+ bug_id FILTER bug_link(bug_id) FILTER none %]
     [% ELSE %]
-      這個 [% terms.bug %]
+      这个 [% terms.bug %]
     [% END %]
-    還有 [% dep_count FILTER none %] 個未解決的依賴關係。在你將此
-    [% terms.bug %] 設定為 [% display_value("resolution", "FIXED") FILTER html %]
-    之前，必須解決這些 [% terms.bugs %] 或者把它們從 "[% field_descs.dependson FILTER html %]"
-    欄位中移除。
+    还有 [% dep_count FILTER none %] 个未解决的依赖关系。在你将此
+    [% terms.bug %] 设定为 [% display_value("resolution", "FIXED") FILTER html %]
+    之前，必须解决这些 [% terms.bugs %] 或者把它们从 "[% field_descs.dependson FILTER html %]"
+    栏位中移除。
 
   [% ELSIF error == "sudo_illegal_action" %]
-    [% title = "未授權 sudo" %]
+    [% title = "未授权 sudo" %]
     [% IF NOT sudoer.in_group("bz_sudoers") %]
-      你並未被允許可以 sudo 使用者。
+      你并未被允许可以 sudo 使用者。
     [% ELSIF target_user AND target_user.in_group("bz_sudo_protect") %]
-      你並未被允許可以 sudo [% target_user.identity FILTER html %] 。
+      你并未被允许可以 sudo [% target_user.identity FILTER html %] 。
     [% ELSE %]
       你要 sudo 的使用者不存在。
   [% END %]
@@ -1654,172 +1654,172 @@
   [% ELSIF error == "sudo_in_progress" %]
     [% title = "正在 sudo" %]
     目前正在 sudo [% target FILTER html %] 。
-    在開始新的 sudo 之前，請先利用頁尾的連結結束這個 sudo。
+    在开始新的 sudo 之前，请先利用页尾的连结结束这个 sudo。
 
   [% ELSIF error == "sudo_invalid_cookie" %]
-    [% title = "無效的 sudo cookie" %]
-    你的 sudo cookie 無效。它可能過期了，或是你的 sudo 並未正確開始。
-    請重新整理頁面，或是以你自己的身份載入其他頁面並繼續。
+    [% title = "无效的 sudo cookie" %]
+    你的 sudo cookie 无效。它可能过期了，或是你的 sudo 并未正确开始。
+    请重新整理页面，或是以你自己的身份载入其他页面并继续。
 
   [% ELSIF error == "sudo_password_required" %]
-    [% title = "需要輸入密碼" %]
-    需要輸入你的 [% terms.Bugzilla %] 密碼，來執行 sudo 。請<a
+    [% title = "需要输入密码" %]
+    需要输入你的 [% terms.Bugzilla %] 密码，来执行 sudo 。请<a
     href="relogin.cgi?action=prepare-sudo&amp;target_login=
     [%- target_login FILTER uri %]&amp;reason=
-    [%- reason FILTER uri %]">回到上一頁</a>並輸入密碼。
+    [%- reason FILTER uri %]">回到上一页</a>并输入密码。
 
   [% ELSIF error == "sudo_preparation_required" %]
     [% title = "需要正常流程" %]
-    你無法直接執行 sudo 。請<a
+    你无法直接执行 sudo 。请<a
     href="relogin.cgi?action=prepare-sudo&amp;target_login=
     [%- target_login FILTER uri %]&amp;reason=
-    [%- reason FILTER uri %]">依照正常流程執行 sudo</a> 。
+    [%- reason FILTER uri %]">依照正常流程执行 sudo</a> 。
 
   [% ELSIF error == "sudo_protected" %]
-    [% title = "使用者被保護" %]
-    無法 sudo 使用者 [% login FILTER html %] 。
+    [% title = "使用者被保护" %]
+    无法 sudo 使用者 [% login FILTER html %] 。
 
   [% ELSIF error == "system_group_not_deletable" %]
-    [% title = "無法刪除系統群組" %]
-    <em>[% name FILTER html %]</em> 是一個系統群組。
-    無法刪除此群組。
+    [% title = "无法删除系统群组" %]
+    <em>[% name FILTER html %]</em> 是一个系统群组。
+    无法删除此群组。
 
   [% ELSIF error == "tag_name_too_long" %]
-    [% title = "標籤名稱太長" %]
-    標籤必須少於
+    [% title = "标签名称太长" %]
+    标签必须少於
     [% constants.MAX_LEN_QUERY_NAME FILTER html %]
     字元。
 
   [% ELSIF error == "token_does_not_exist" %]
     [% title = "Token 不存在" %]
-    所送出的 token 不存在、已過期，或是已被取消。
+    所送出的 token 不存在、已过期，或是已被取消。
 
   [% ELSIF error == "too_soon_for_new_token" %]
-    [% title = "要求新 token 速度過快" %]
+    [% title = "要求新 token 速度过快" %]
     你要求新的
     [% IF type == "password" %]
-      密碼
+      密码
     [% ELSIF type == "account" %]
-      帳號
+      帐号
     [% END %]
-    token 速度過快。
-    請過 [% constants.ACCOUNT_CHANGE_INTERVAL FILTER html %] 分鐘後再試。
+    token 速度过快。
+    请过 [% constants.ACCOUNT_CHANGE_INTERVAL FILTER html %] 分钟後再试。
 
   [% ELSIF error == "unknown_action" %]
-    [% title = "未知的動作" %]
+    [% title = "未知的动作" %]
     [% IF action %]
-      未知的動作 "[% action.truncate(20, "...") FILTER html %]" ！
+      未知的动作 "[% action.truncate(20, "...") FILTER html %]" ！
     [% ELSE %]
-      無法理解你想要做什麼事。
+      无法理解你想要做什麽事。
     [% END %]
 
   [% ELSIF error == "unknown_tab" %]
     [% title = "未知的 tab" %]
-    沒有名為 <code>[% current_tab_name FILTER html %]</code> 的 tab 。
+    没有名为 <code>[% current_tab_name FILTER html %]</code> 的 tab 。
 
   [% ELSIF error == "value_inactive" %]
-    [% title = "數值未啟用" %]
+    [% title = "数值未启用" %]
     [% type = BLOCK %][% INCLUDE object_name class = class %][% END %]
-    [% type FILTER html %] 的值 '[% value FILTER html %]' 未啟用。
+    [% type FILTER html %] 的值 '[% value FILTER html %]' 未启用。
 
   [% ELSIF error == "version_already_exists" %]
     [% title = "版本已存在" %]
     [% admindocslinks = {'versions.html' => '管理版本'} %]
-    產品'[%- product FILTER html %]'已存在版本'[% name FILTER html %]'。
+    产品'[%- product FILTER html %]'已存在版本'[% name FILTER html %]'。
 
   [% ELSIF error == "version_blank_name" %]
-    [% title = "不允許版本名稱空白" %]
-    你必須為此版本輸入名稱。
+    [% title = "不允许版本名称空白" %]
+    你必须为此版本输入名称。
 
   [% ELSIF error == "version_has_bugs" %]
-    [% title = BLOCK %]版本中還有 [% terms.Bugs %][% END %]
-    這個版本中還有 [% nb FILTER html %] 個 [% terms.bugs %]！
-    在刪除此版本前，你必須將這些 [% terms.bugs %] 重新分配至另一個版本。
+    [% title = BLOCK %]版本中还有 [% terms.Bugs %][% END %]
+    这个版本中还有 [% nb FILTER html %] 个 [% terms.bugs %]！
+    在删除此版本前，你必须将这些 [% terms.bugs %] 重新分配至另一个版本。
 
   [% ELSIF error == "version_is_last" %]
-    [% title = BLOCK %]此產品的最後一個版本[% END %]
+    [% title = BLOCK %]此产品的最後一个版本[% END %]
     '[% version.name FILTER html %]' 是
-    '[% version.product.name FILTER html %]' 產品的最後一個版本。你無法刪除它。
+    '[% version.product.name FILTER html %]' 产品的最後一个版本。你无法删除它。
 
   [% ELSIF error == "users_deletion_disabled" %]
-    [% title = "未開啟刪除功能" %]
+    [% title = "未开启删除功能" %]
     [% admindocslinks = {'useradmin.html' => '管理使用者'} %]
-    很抱歉，不允許刪除使用者帳號。
+    很抱歉，不允许删除使用者帐号。
 
   [% ELSIF error == "user_has_responsibility" %]
-    [% title = "無法刪除使用者帳號" %]
+    [% title = "无法删除使用者帐号" %]
     [% admindocslinks = {'useradmin.html' => '管理使用者'} %]
-    你想要刪除的使用者被設定為至少一項子產品的 [% terms.bug %] 預設負責人
-    [% IF Param('useqacontact') %]或 QA 連絡人[% END %]。
-    因此，你現在無法刪除該帳號。
+    你想要删除的使用者被设定为至少一项子产品的 [% terms.bug %] 预设负责人
+    [% IF Param('useqacontact') %]或 QA 连络人[% END %]。
+    因此，你现在无法删除该帐号。
 
   [% ELSIF error == "user_access_by_id_denied" %]
-    [% title = "拒絕以編號瀏覽使用者" %]
-    已登出的使用者無法在此功能使用 "ids" 參數瀏覽任何使用者資訊。
+    [% title = "拒绝以编号浏览使用者" %]
+    已登出的使用者无法在此功能使用 "ids" 参数浏览任何使用者资讯。
 
   [% ELSIF error == "user_access_by_match_denied" %]
-    [% title = "拒絕列出符合的使用者" %]
-    已登出的使用者無法在此功能使用 "match" 參數瀏覽任何使用者資訊。
+    [% title = "拒绝列出符合的使用者" %]
+    已登出的使用者无法在此功能使用 "match" 参数浏览任何使用者资讯。
 
   [% ELSIF error == "user_login_required" %]
-    [% title = "需要帳號" %]
+    [% title = "需要帐号" %]
     [% admindocslinks = {'useradmin.html' => '管理使用者'} %]
-    你必須替新使用者輸入帳號。
+    你必须替新使用者输入帐号。
 
   [% ELSIF error == "user_match_failed" %]
-    [% title = "找不到符合的資料" %]
-    <kbd>[% name FILTER html %]</kbd> 並不存在，或者你不被允許看見該使用者。
+    [% title = "找不到符合的资料" %]
+    <kbd>[% name FILTER html %]</kbd> 并不存在，或者你不被允许看见该使用者。
 
   [% ELSIF error == "user_match_too_many" %]
-    [% title = "無法做出結論" %]
-    Bugzilla 無法對你在 [% fields.join(', ') FILTER html %]
-    欄位中所輸入的姓名或電子郵件，做出適合的結論。
+    [% title = "无法做出结论" %]
+    Bugzilla 无法对你在 [% fields.join(', ') FILTER html %]
+    栏位中所输入的姓名或电子邮件，做出适合的结论。
 
   [% ELSIF error == "user_not_insider" %]
-    [% title = "使用者無適當的群組權限" %]
-    很抱歉，但你並未被允許將意見或附件標記或取消隱藏。
+    [% title = "使用者无适当的群组权限" %]
+    很抱歉，但你并未被允许将意见或附件标记或取消隐藏。
 
   [% ELSIF error == "user_not_involved" %]
-    [% title = "使用者未參與 $terms.Bug" %]
-    很抱歉，但你並未參與 [% terms.Bug %] [%+
+    [% title = "使用者未参与 $terms.Bug" %]
+    很抱歉，但你并未参与 [% terms.Bug %] [%+
         bug_id FILTER bug_link(bug_id) FILTER none %] 。
 
   [% ELSIF error == "webdot_too_large" %]
-    [% title = "相依性圖表過大" %]
-    相依性圖表含有過多的 [% terms.bug %] 以致於無法顯示。
+    [% title = "相依性图表过大" %]
+    相依性图表含有过多的 [% terms.bug %] 以致於无法显示。
     （多於
     [% constants.MAX_WEBDOT_BUGS FILTER html %]
-    個 [%+ terms.bug %] ）。
+    个 [%+ terms.bug %] ）。
 
   [% ELSIF error == "wrong_token_for_cancelling_email_change" %]
-    [% title = "錯誤的 token" %]
-    無法使用該 token 取消變更電子郵件。
+    [% title = "错误的 token" %]
+    无法使用该 token 取消变更电子邮件。
 
   [% ELSIF error == "wrong_token_for_changing_passwd" %]
-    [% title = "錯誤的 token" %]
-    無法使用該 token 變更密碼。
+    [% title = "错误的 token" %]
+    无法使用该 token 变更密码。
 
   [% ELSIF error == "wrong_token_for_confirming_email_change" %]
-    [% title = "錯誤的 token" %]
-    無法使用該 token 變更電子郵件。
+    [% title = "错误的 token" %]
+    无法使用该 token 变更电子邮件。
 
   [% ELSIF error == "wrong_token_for_creating_account" %]
-    [% title = "錯誤的 token" %]
-    無法使用該 token 新增帳號。
+    [% title = "错误的 token" %]
+    无法使用该 token 新增帐号。
 
   [% ELSIF error == "xmlrpc_invalid_value" %]
-    "[% value FILTER html %]" 並非
-    &lt;[% type FILTER html %]&gt; 欄位的有效數值。（詳情請參閱
-    XML-RPC 的說明。）
+    "[% value FILTER html %]" 并非
+    &lt;[% type FILTER html %]&gt; 栏位的有效数值。（详情请参阅
+    XML-RPC 的说明。）
 
   [% ELSIF error == "xmlrpc_illegal_content_type" %]
-    使用 XML-RPC 時，你不能將資料以
-    [%+ content_type FILTER html %] 格式傳送。只允許以下格式（以逗號分隔）：
+    使用 XML-RPC 时，你不能将资料以
+    [%+ content_type FILTER html %] 格式传送。只允许以下格式（以逗号分隔）：
     [% constants.XMLRPC_CONTENT_TYPE_WHITELIST.join(', ') FILTER html %] 。
 
   [% ELSIF error == "zero_length_file" %]
-    [% title = "0 字元的檔案" %]
-    你嘗試附加的檔案大小為 0 字元、不存在，或是你沒有讀取它的權限。
+    [% title = "0 字元的档案" %]
+    你尝试附加的档案大小为 0 字元、不存在，或是你没有读取它的权限。
 
   [% ELSE %]
 
@@ -1827,9 +1827,9 @@
     [% error_message = Hook.process("errors") %]
 
     [% IF not error_message %]
-      [% title = "找不到錯誤字串" %]
-      找不到使用者錯誤字串 <code>[% error FILTER html %]</code> 。
-      請寄電子郵件到 [% Param("maintainer") %] ，並描述產生此訊息所做過的動作。
+      [% title = "找不到错误字串" %]
+      找不到使用者错误字串 <code>[% error FILTER html %]</code> 。
+      请寄电子邮件到 [% Param("maintainer") %] ，并描述产生此讯息所做过的动作。
     [% ELSE %]
       [% error_message FILTER none %]
     [% END %]
@@ -1861,7 +1861,7 @@
 </div>
 
 <p id="post_err_msg">
-  請按<b>上一頁</b>再試一次。
+  请按<b>上一页</b>再试一次。
 </p>
 
 [%# If a saved search fails, people want the ability to edit or delete it.
@@ -1875,15 +1875,15 @@
                AND !sharer_id %]
   <p>
     你也可以<a href="buglist.cgi?cmdtype=dorem&amp;remaction=forget&amp;namedcmd=
-                  [% namedcmd FILTER uri %]">刪除</a>
+                  [% namedcmd FILTER uri %]">删除</a>
 
     [% FOREACH q = Bugzilla.user.queries %]
       [% IF q.name == namedcmd %]
-        或是<a href="query.cgi?[% q.url FILTER html %]">編輯</a>
+        或是<a href="query.cgi?[% q.url FILTER html %]">编辑</a>
       [% END %]
     [% END %]
 
-    已儲存的搜尋 '[% namedcmd FILTER html %]'。
+    已储存的搜寻 '[% namedcmd FILTER html %]'。
   </p>
 [% END %]
 
@@ -1895,31 +1895,31 @@
   [% ELSIF class == "Bugzilla::User" %]
     使用者
   [% ELSIF class == "Bugzilla::Classification" %]
-    分類
+    分类
   [% ELSIF class == "Bugzilla::Product" %]
-    產品
+    产品
   [% ELSIF class == "Bugzilla::Component" %]
-    子產品
+    子产品
   [% ELSIF class == "Bugzilla::Version" %]
     版本
   [% ELSIF class == "Bugzilla::Milestone" %]
     里程碑
   [% ELSIF class == "Bugzilla::Status" %]
-    狀態
+    状态
   [% ELSIF class == "Bugzilla::Flag" %]
-    旗標
+    旗标
   [% ELSIF class == "Bugzilla::FlagType" %]
-    旗標種類
+    旗标种类
   [% ELSIF class == "Bugzilla::Field" %]
-    欄位
+    栏位
   [% ELSIF class == "Bugzilla::Group" %]
-    群組
+    群组
   [% ELSIF class == "Bugzilla::Keyword" %]
-    關鍵字
+    关键字
   [% ELSIF class == "Bugzilla::Search::Recent" %]
-    最近搜尋
+    最近搜寻
   [% ELSIF class == "Bugzilla::Search::Saved" %]
-    已儲存的搜尋
+    已储存的搜寻
   [% ELSIF ( matches = class.match('^Bugzilla::Field::Choice::(.+)') ) %]
     [% SET field_name = matches.0 %]
     [% field_descs.$field_name FILTER html %]

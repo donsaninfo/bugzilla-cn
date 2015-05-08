@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -13,7 +13,7 @@
 [% PROCESS "global/field-descs.none.tmpl" %]
 
 [% PROCESS global/header.html.tmpl
-  title = "自訂欄位"
+  title = "自订栏位"
   style_urls = ['skins/standard/admin.css']
   doc_section = "administering/custom-fields.html"
 %]
@@ -23,7 +23,7 @@
 [% columns = [
      {
        name => "name"
-       heading => "編輯自訂欄位…"
+       heading => "编辑自订栏位…"
        contentlink => "editfields.cgi?action=edit&amp;name=%%name%%"
      },
      {
@@ -32,31 +32,31 @@
      },
      {
        name => "sortkey"
-       heading => "排序鍵"
+       heading => "排序键"
      },
      {
        name => "type"
-       heading => "種類"
+       heading => "种类"
      },
      {
        name => "enter_bug"
-       heading => "建立 $terms.Bug 時可以編輯"
+       heading => "建立 $terms.Bug 时可以编辑"
      },
      {
        name => "mailhead"
-       heading => "建立 $terms.Bug 時是否在 $terms.Bug 通知信中通知"
+       heading => "建立 $terms.Bug 时是否在 $terms.Bug 通知信中通知"
      },
      {
        name => "obsolete"
-       heading => "已廢棄"
+       heading => "已废弃"
      },
      {
        name => "is_mandatory"
-       heading => "強制"
+       heading => "强制"
      },
      {
        name => "action"
-       heading => "動作"
+       heading => "动作"
        content => ""
      }
    ]
@@ -79,7 +79,7 @@
 [% overrides.action.obsolete = {
      "1" => {
        override_content => 1
-       content => "刪除"
+       content => "删除"
        override_contentlink => 1
        contentlink => delete_contentlink
      }
@@ -93,7 +93,7 @@
 %]
 
 <p>
-  <a href="editfields.cgi?action=add">新增一個自訂欄位</a>
+  <a href="editfields.cgi?action=add">新增一个自订栏位</a>
 </p>
 
 [% PROCESS global/footer.html.tmpl %]

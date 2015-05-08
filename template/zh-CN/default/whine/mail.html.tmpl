@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -33,9 +33,9 @@
 
     <p>
       [% IF author.login == recipient.login %]
-        <a href="[%+ urlbase FILTER html %]editwhines.cgi">點選此處以編輯你的訂閱排程</a>
+        <a href="[%+ urlbase FILTER html %]editwhines.cgi">点选此处以编辑你的订阅排程</a>
       [% ELSE %]
-        此搜尋結果由 [% author.login FILTER html %] 排定。
+        此搜寻结果由 [% author.login FILTER html %] 排定。
       [% END %]
     </p>
 
@@ -46,7 +46,7 @@
 
     <table>
       <tr>
-        <th>編號</th>
+        <th>编号</th>
         [% FOREACH col = query.columnlist %]
           [% NEXT IF col == 'bug_id' %]
           <th>[% field_descs.$col FILTER html %]</th>
@@ -73,7 +73,7 @@
   [% END %]
 [% ELSE %]
 
-  <h3>找不到符合搜尋標準的 [% terms.bugs %] 。</h3>
+  <h3>找不到符合搜寻标准的 [% terms.bugs %] 。</h3>
 [% END %]
 
   </body>

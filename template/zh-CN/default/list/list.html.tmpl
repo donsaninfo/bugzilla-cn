@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -21,7 +21,7 @@
 [% USE Bugzilla %]
 [% cgi = Bugzilla.cgi %]
 
-[% unfiltered_title = "$terms.Bug 清單" %]
+[% unfiltered_title = "$terms.Bug 清单" %]
 [% IF searchname || defaultsavename %]
   [% unfiltered_title = unfiltered_title _ ": " _ (searchname OR defaultsavename) %]
 [% END %]
@@ -73,10 +73,10 @@
 
   [% IF debug %]
     <div class="bz_query_debug">
-      <p>總執行時間： [% query_time FILTER html %] 秒</p>
+      <p>总执行时间： [% query_time FILTER html %] 秒</p>
       [% FOREACH query = queries %]
         <pre>[% query.sql FILTER html %]</pre>
-        <p>執行時間： [% query.time FILTER html %] 秒</p>
+        <p>执行时间： [% query.time FILTER html %] 秒</p>
         [% IF query.explain %]
           <pre>[% query.explain FILTER html %]</pre>
         [% END %]
@@ -85,7 +85,7 @@
   [% END %]
 
   [% IF user.settings.display_quips.value == 'on' %]
-    [% DEFAULT quip = "Bugzilla 可以在這裡隨機顯示智語，但目前仍未輸入任何智語。" %]
+    [% DEFAULT quip = "Bugzilla 可以在这里随机显示智语，但目前仍未输入任何智语。" %]
     <span class="bz_quip">
       <a href="quips.cgi"><em>[% quip FILTER html %]</em></a>
     </span>
@@ -95,8 +95,8 @@
 
 [% IF toolong %]
   <h2 class="bz_smallminded">
-    此清單對 Bugzilla 而言太長了，因此將不會在每一個 [% terms.bug %]
-    上顯示「第一個／最後一個／前一個／下一個」的選項。
+    此清单对 Bugzilla 而言太长了，因此将不会在每一个 [% terms.bug %]
+    上显示「第一个／最後一个／前一个／下一个」的选项。
   </h2>
 [% END %]
 
@@ -107,10 +107,10 @@
   'nowordssubstr', 'notmatches', 'isempty', 'isnotempty'
 ] %]
 <a id="search_description_controller" class="bz_default_hidden"
-   href="javascript:TUI_toggle_class('search_description')">隱藏搜尋描述</a>
+   href="javascript:TUI_toggle_class('search_description')">隐藏搜寻描述</a>
 [%# Show the link if the browser supports JS %]
 <script type="text/javascript">
-  TUI_alternates['search_description'] = '顯示搜尋描述';
+  TUI_alternates['search_description'] = '显示搜寻描述';
   YAHOO.util.Dom.removeClass('search_description_controller',
                              'bz_default_hidden');
 </script>
@@ -166,10 +166,10 @@
   <ul class="zero_result_links">
     <li>[% PROCESS enter_bug_link %]</li>
     [% IF one_product.defined %]
-      <li><a href="enter_bug.cgi">在不同的產品中回報一個新的 [% terms.bug %]</a></li>
+      <li><a href="enter_bug.cgi">在不同的产品中回报一个新的 [% terms.bug %]</a></li>
     [% END %]
-    <li><a href="[% PROCESS edit_search_url %]">編輯搜尋條件</a></li>
-    <li><a href="query.cgi">開始新的搜尋</a></li>
+    <li><a href="[% PROCESS edit_search_url %]">编辑搜寻条件</a></li>
+    <li><a href="query.cgi">开始新的搜寻</a></li>
   </ul>
 [% END %]
 
@@ -194,21 +194,21 @@
           [% buglist_joined = buglist.join(",") %]
           <input type="hidden" name="id" value="[% buglist_joined FILTER html %]">
           <input type="hidden" name="format" value="multiple">
-          <input type="submit" id="long_format" value="長的格式">
+          <input type="submit" id="long_format" value="长的格式">
         </form>
 
         [% IF user.is_timetracker %]
           <form method="post" action="summarize_time.cgi">
             <input type="hidden" name="id" value="[% buglist_joined FILTER html %]">
-            <input type="submit" id="timesummary" value="時間統計">
+            <input type="submit" id="timesummary" value="时间统计">
           </form>
           [% IF time_summary_limited %]
             <span class="bz_info">
-              時間統計將只會包含上面所顯示的 [% terms.bugs %] 。如要顯示搜尋結果中所有
-              [% terms.bugs%] 的時間統計，你可以
+              时间统计将只会包含上面所显示的 [% terms.bugs %] 。如要显示搜寻结果中所有
+              [% terms.bugs%] 的时间统计，你可以
               <a href="buglist.cgi?[% urlquerypart FILTER html %]
                        [%- "&order=$qorder" FILTER html IF order %]&limit=0">
-                顯示所有搜尋結果</a>。
+                显示所有搜寻结果</a>。
             </span>
           [% END %]
         [% END %]
@@ -235,17 +235,17 @@
         ><img title="iCal 格式" alt="iCal" src="images/ical.png" height="24" width="24"></a>
         <a href="colchange.cgi?[% urlquerypart FILTER html %]&amp;query_based_on=
            [% defaultsavename OR searchname FILTER uri %]"
-        ><button>變更欄位</button></a>
+        ><button>变更栏位</button></a>
 
         [% IF bugs.size > 1 && caneditbugs && !dotweak %]
           <a href="buglist.cgi?[% urlquerypart FILTER html %]
             [%- "&order=$qorder" FILTER html IF order %]&amp;tweak=1"
-          ><button>一次變更多個 [% terms.Bugs %]</button></a>
+          ><button>一次变更多个 [% terms.Bugs %]</button></a>
         [% END %]
 
         [% IF bugowners && user.id %]
           <a href="mailto:[% bugowners FILTER html %]"
-          ><button>寄信給 [% terms.Bug %] 負責人</a></button></a>
+          ><button>寄信给 [% terms.Bug %] 负责人</a></button></a>
         [% END %]
 
         [%# Links to more things users can do with this bug list. %]
@@ -254,7 +254,7 @@
       <br>
     [% END %]
     <div class="bz_query_edit">
-        <a href="[% PROCESS edit_search_url %]"><button>編輯搜尋條件</button></a>
+        <a href="[% PROCESS edit_search_url %]"><button>编辑搜寻条件</button></a>
     </div>
 
     [% IF searchtype == "saved" %]
@@ -262,19 +262,19 @@
         <a href="buglist.cgi?cmdtype=dorem&amp;remaction=forget&amp;namedcmd=
               [% searchname FILTER uri %]&amp;token=
               [% issue_hash_token([search_id, searchname]) FILTER uri %]"
-         ><button>刪除已儲存的搜尋 '[% searchname FILTER html %]'</button></a>
+         ><button>删除已储存的搜寻 '[% searchname FILTER html %]'</button></a>
       </div>
     [% ELSE %]
       <div class="bz_query_remember">
         <form method="get" action="buglist.cgi">
-          <input type="submit" id="remember" value="將搜尋結果儲存為">
+          <input type="submit" id="remember" value="将搜寻结果储存为">
           <input type="hidden" name="newquery"
                  value="[% urlquerypart FILTER html %][% "&order=$qorder" FILTER html IF order %]">
           <input type="hidden" name="cmdtype" value="doit">
           <input type="hidden" name="remtype" value="asnamed">
           <input type="hidden" name="token" value="[% issue_hash_token(['savedsearch']) FILTER html %]">
           <input type="text" id="save_newqueryname" name="newqueryname" size="20"
-                 title="新搜尋名稱" value="[% defaultsavename FILTER html %]">
+                 title="新搜寻名称" value="[% defaultsavename FILTER html %]">
         </form>
       </div>
     [% END %]
@@ -311,13 +311,13 @@
              [%- IF one_component.defined %]&amp;component=
                [%- one_component FILTER uri %][% END %][% END %]">
     [% IF one_product.defined %]
-    在 "[% one_product.name FILTER html %]" 產品
+    在 "[% one_product.name FILTER html %]" 产品
       [% IF one_component.defined %]
-         的子產品 "[% one_component FILTER html %]"
+         的子产品 "[% one_component FILTER html %]"
       [% END %]
     中
     [% END %]
-    回報新的 [% terms.bug %]
+    回报新的 [% terms.bug %]
   </a>
 [% END %]
 
@@ -326,13 +326,13 @@
     [% IF bugs.size == 0 %]
       <span class="zero_results">[% terms.zeroSearchResults %]。</span>
     [% ELSIF default_limited AND bugs.size >= Param('default_search_limit') %]
-      只顯示 [% Param('default_search_limit') FILTER html %] 個
+      只显示 [% Param('default_search_limit') FILTER html %] 个
       [%+ terms.bugs %] 。
       <a href="buglist.cgi?[% urlquerypart FILTER html %]
-              [%- "&order=$qorder" FILTER html IF order %]&limit=0">顯示所有搜尋結果</a>。
+              [%- "&order=$qorder" FILTER html IF order %]&limit=0">显示所有搜寻结果</a>。
       [% time_summary_limited = 1 %]
     [% ELSE %]
-      找到 [% bugs.size %] 個 [%+ terms.bugs %] 。
+      找到 [% bugs.size %] 个 [%+ terms.bugs %] 。
     [% END %]
   </span>
 [% END %]

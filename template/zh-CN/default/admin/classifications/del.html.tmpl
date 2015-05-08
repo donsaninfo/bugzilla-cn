@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -7,17 +7,17 @@
   #%]
 
 [% PROCESS global/header.html.tmpl
-  title = "刪除分類"
+  title = "删除分类"
   style_urls = ['skins/standard/admin.css']
 %]
 
 <table id="admin_table">
   <tr class="column_header">
-    <th>欄位</th>
+    <th>栏位</th>
     <th>值</th>
   </tr>
   <tr>
-    <td>分類</td>
+    <td>分类</td>
     <td>[% classification.name FILTER html %]</td>
   </tr>
   <tr>
@@ -26,21 +26,21 @@
       [% IF classification.description %]
         [% classification.description FILTER html_light %]
       [% ELSE %]
-        <span class="warning">沒有描述</span>
+        <span class="warning">没有描述</span>
       [% END %]
     </td>
   </tr>
   <tr>
-    <td>排序鍵</td>
+    <td>排序键</td>
     <td>[% classification.sortkey FILTER html %]</td>
   </tr>
 </table>
 
-<h2>確認</h2>
+<h2>确认</h2>
 
-<p>你確定要刪除此一分類嗎？</p>
+<p>你确定要删除此一分类吗？</p>
 <form method=post action="editclassifications.cgi">
-  <input type=submit value="是的，刪除">
+  <input type=submit value="是的，删除">
   <input type=hidden name="action" value="delete">
   <input type=hidden name="classification" value="[% classification.name FILTER html %]">
   <input type="hidden" name="token" value="[% token FILTER html %]">

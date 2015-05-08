@@ -1,4 +1,4 @@
-[%# This Source Code Form is subject to the terms of the Mozilla Public
+﻿[%# This Source Code Form is subject to the terms of the Mozilla Public
   # License, v. 2.0. If a copy of the MPL was not distributed with this
   # file, You can obtain one at http://mozilla.org/MPL/2.0/.
   #
@@ -14,7 +14,7 @@
 [% cgi = Bugzilla.cgi %]
 
 [% PROCESS global/header.html.tmpl
-   title = "輸入 $terms.Bug"
+   title = "输入 $terms.Bug"
    onload = "PutDescription()"
    style_urls = ['skins/standard/bug.css']
  %]
@@ -38,17 +38,17 @@ function PutDescription() {
 }
 </script>
 
-<h3 id="step1">步驟 3 之 1 － 你的[% terms.bug %]是否已被回報了？</h3>
+<h3 id="step1">步骤 3 之 1 － 你的[% terms.bug %]是否已被回报了？</h3>
 
 <p class="warning">
-  請勿跳過此步驟－－半數以上的 [% terms.bugs %] 都已回報過了。
+  请勿跳过此步骤－－半数以上的 [% terms.bugs %] 都已回报过了。
 </p>
-<p>檢查兩份最常被回報的 [% terms.bug %] 清單：</p>
+<p>检查两份最常被回报的 [% terms.bug %] 清单：</p>
 <p>
   <a href="duplicates.cgi?product=[% product.name FILTER uri %]&amp;format=simple"
-     target="somebugs">所有時間點的前 100 名 [% terms.bugs %]</a> （預設載入） |
+     target="somebugs">所有时间点的前 100 名 [% terms.bugs %]</a> （预设载入） |
   <a href="duplicates.cgi?product=[% product.name FILTER uri %]&amp;format=simple&amp;sortby=delta&amp;reverse=1&amp;maxrows=100&amp;changedsince=14"
-     target="somebugs">最近兩週的熱門 [% terms.bugs %]</a>
+     target="somebugs">最近两周的热门 [% terms.bugs %]</a>
 </p>
 
 <iframe name="somebugs" id="somebugs"
@@ -57,8 +57,8 @@ function PutDescription() {
 </iframe>
 
 <p>
-    如果 [% terms.bug %] 不在上面，那麼試著輸入一些有關的關鍵字來搜尋 [% terms.Bugzilla %] 。例如：
-    <kbd><b>pop3 信件</b></kbd>或<kbd><b>複製 貼上</b></kbd>。結果將會顯示在上面。
+    如果 [% terms.bug %] 不在上面，那麽试着输入一些有关的关键字来搜寻 [% terms.Bugzilla %] 。例如：
+    <kbd><b>pop3 信件</b></kbd>或<kbd><b>复制 贴上</b></kbd>。结果将会显示在上面。
 </p>
 
 [%# All bugs opened inside the past six months %]
@@ -75,14 +75,14 @@ function PutDescription() {
   </form>
 
 <p>
-  檢視搜尋結果。如果顯示<kbd><b>[% terms.zeroSearchResults %]</b></kbd>的訊息，代表 [% terms.Bugzilla %] 沒找到符合的 [% terms.bugs %] 。看有沒有打錯字，或試試其他關鍵字。如果你找到的 [% terms.bug %] 看起來有點像你遇到的，請在後頭加上一些資訊，而不是新增一個 [% terms.bug %] 。
+  检视搜寻结果。如果显示<kbd><b>[% terms.zeroSearchResults %]</b></kbd>的讯息，代表 [% terms.Bugzilla %] 没找到符合的 [% terms.bugs %] 。看有没有打错字，或试试其他关键字。如果你找到的 [% terms.bug %] 看起来有点像你遇到的，请在後头加上一些资讯，而不是新增一个 [% terms.bug %] 。
 </p>
 
 
-<h3 id="step2">步驟 3 之 2 － 提供資訊</h3>
+<h3 id="step2">步骤 3 之 2 － 提供资讯</h3>
 
 <p>
-  如果你試了幾次搜尋但都找不到，那麼請回報這個 [% terms.bug %] 。
+  如果你试了几次搜寻但都找不到，那麽请回报这个 [% terms.bug %] 。
 </p>
 
 <form id="guided_form" method="post" action="post_bug.cgi">
@@ -96,7 +96,7 @@ function PutDescription() {
 
 <table>
   <tr class="guided_form_field">
-    <th>產品</th>
+    <th>产品</th>
     <td>
       <input type="hidden" name="product" value="[% product.name FILTER html %]">
       [% product.name FILTER html %]
@@ -104,7 +104,7 @@ function PutDescription() {
   </tr>
 
   <tr>
-    <th>子產品</th>
+    <th>子产品</th>
     <td>
       <select name="component" id="component" size="5" onchange="PutDescription()">
         [% IF NOT default.component_ %]
@@ -120,14 +120,14 @@ function PutDescription() {
       </select>
 
       <div id="description" class="comment bz_default_hidden">
-        選擇一項子產品來看它的描述。
+        选择一项子产品来看它的描述。
       </div>
 
       <p>
-        問題發生的區域。你可以藉由使用搜尋結果中類似的 [% terms.bugs %] 來選擇正確的子產品，或是瀏覽
+        问题发生的区域。你可以藉由使用搜寻结果中类似的 [% terms.bugs %] 来选择正确的子产品，或是浏览
         <a href="describecomponents.cgi?product=[% product.name FILTER uri %]"
-           target="_blank" >子產品描述</a>的完整清單（在新視窗開啟）
-        以獲得更多資訊。
+           target="_blank" >子产品描述</a>的完整清单（在新视窗开启）
+        以获得更多资讯。
       </p>
     </td>
   </tr>
@@ -146,7 +146,7 @@ function PutDescription() {
                   "Mac OS X", "Linux", "All", "Other" ] %]
 
   <tr>
-    <th>作業系統</th>
+    <th>作业系统</th>
     <td>
       [% PROCESS select sel = 'op_sys' %]
     </td>
@@ -158,21 +158,21 @@ function PutDescription() {
   [% END %]
 
   <tr class="guided_form_field">
-    <th>Build 辨識</th>
+    <th>Build 辨识</th>
     <td>
       <input type="text" size="80" name="buildid" value="[% buildid FILTER html %]">
       <p>
-        這裡請描述你所使用產品的正確版本。如果上述欄位呈現空白，或者你認為它是錯的，請從產品的「幫助 &gt; 關於」查看。如果產品無法啟動，請直接貼上你下載此產品的網址。
+        这里请描述你所使用产品的正确版本。如果上述栏位呈现空白，或者你认为它是错的，请从产品的「帮助 &gt; 关於」查看。如果产品无法启动，请直接贴上你下载此产品的网址。
       </p>
     </td>
   </tr>
 
   <tr>
-    <th>網址</th>
+    <th>网址</th>
     <td>
       <input type="text" size="80" name="bug_file_loc" value="http://">
       <p>
-        可以展示你所遇到問題的網址（選填）。<br>
+        可以展示你所遇到问题的网址（选填）。<br>
       </p>
    </td>
   </tr>
@@ -183,22 +183,22 @@ function PutDescription() {
       <input type="text" size="80" name="short_desc" id="short_desc"
              maxlength="255" spellcheck="true">
       <p>
-        一個可以將問題簡單說明的句子。請使用大量關鍵字。
+        一个可以将问题简单说明的句子。请使用大量关键字。
       </p>
       <p>
         <kbd>
-          <span class="bad">不好的例子</span>：信件當掉
+          <span class="bad">不好的例子</span>：信件当掉
         </kbd>
         <br>
         <kbd>
-          <span class="good">好的例子</span>：當檢查是否有新的 POP 信件時，關掉信件視窗會當掉
+          <span class="good">好的例子</span>：当检查是否有新的 POP 信件时，关掉信件视窗会当掉
         </kbd>
       </p>
     </td>
   </tr>
 
   <tr>
-    <th>細節</th>
+    <th>细节</th>
     <td>
       [% INCLUDE global/textarea.html.tmpl
         name      = 'comment'
@@ -207,44 +207,44 @@ function PutDescription() {
         mandatory = 1
       %]
       <p>
-        請詳細描述發生了什麼事。
+        请详细描述发生了什麽事。
       </p>
       <p>
         <kbd>
-          <span class="bad">不好的例子</span>： Mozilla 又當了，爛！
+          <span class="bad">不好的例子</span>： Mozilla 又当了，烂！
         </kbd>
         <br>
         <kbd>
           <span class="good">好的例子</span>：
-          我在書籤管理員中排序時當掉。<br>
-          在那之後，我最上層的書籤 Q 到 Z 開頭的都蒸發了。
+          我在书签管理员中排序时当掉。<br>
+          在那之後，我最上层的书签 Q 到 Z 开头的都蒸发了。
         </kbd>
       </p>
     </td>
   </tr>
 
   <tr bgcolor="[% tablecolour %]">
-    <th>可重製性</th>
+    <th>可重制性</th>
     <td>
       <select name="reproducible">
-        <option name="AlwaysReproducible" value="總是可以">
-          每次都會發生。
+        <option name="AlwaysReproducible" value="总是可以">
+          每次都会发生。
         </option>
-        <option name="Sometimes" value="有時候會">
-          有時候會發生。
+        <option name="Sometimes" value="有时候会">
+          有时候会发生。
         </option>
-        <option name="DidntTry" value="尚未試過">
-          還沒試過重製。
+        <option name="DidntTry" value="尚未试过">
+          还没试过重制。
         </option>
-        <option name="NotReproducible" value="無法重製">
-          重製不能。
+        <option name="NotReproducible" value="无法重制">
+          重制不能。
         </option>
       </select>
     </td>
   </tr>
 
   <tr>
-    <th>重製的步驟</th>
+    <th>重制的步骤</th>
     <td>
       [% INCLUDE global/textarea.html.tmpl
         name           = 'reproduce_steps'
@@ -253,13 +253,13 @@ function PutDescription() {
         defaultcontent = "1.\n2.\n3."
       %]
       <p>
-        描述如何一步一步重製問題。請包含任何特殊的設定步驟。
+        描述如何一步一步重制问题。请包含任何特殊的设定步骤。
       </p>
     </td>
   </tr>
 
   <tr class="guided_form_field">
-    <th>實際結果</th>
+    <th>实际结果</th>
     <td>
       [% INCLUDE global/textarea.html.tmpl
         name    = 'actual_results'
@@ -267,13 +267,13 @@ function PutDescription() {
         cols    = constants.COMMENT_COLS
       %]
       <p>
-        重製後發生什麼事？
+        重制後发生什麽事？
       </p>
     </td>
   </tr>
 
   <tr>
-    <th>預期結果</th>
+    <th>预期结果</th>
     <td>
       [% INCLUDE global/textarea.html.tmpl
         name    = 'expected_results'
@@ -281,14 +281,14 @@ function PutDescription() {
         cols    = constants.COMMENT_COLS
       %]
       <p>
-        軟體應該怎樣才對？
+        软体应该怎样才对？
       </p>
     </td>
   </tr>
 
   <tr bgcolor="[% tablecolour %]">
     <td valign="top" align="right">
-      <b>額外資訊</b>
+      <b>额外资讯</b>
     </td>
     <td valign="top">
       [% INCLUDE global/textarea.html.tmpl
@@ -297,12 +297,12 @@ function PutDescription() {
         cols    = constants.COMMENT_COLS
       %]
       <p>
-        加上任何可能相關的資訊，例如你在使用的<b>佈景</b>（這個 [% terms.bug %]
-        在預設佈景下還會發生嗎？），
-        或任何關於<b>你的電腦組態</b>的資訊。較長的資訊，例如 <b>stack trace</b> 或
-        <b>HTML testcase</b> ，應該使用「新增附件」連結。如果你覺得 build 設定也有關聯，請在網址列輸入
-        <kbd>about:buildconfig</kbd> ，並一併輸入該資訊。<br><br>
-        如果你回報的是當掉的情況，請註明在哪個模組裡軟體當掉（例如：<kbd>在 gkhtml.dll 發生應用程式錯誤</kbd>。）
+        加上任何可能相关的资讯，例如你在使用的<b>布景</b>（这个 [% terms.bug %]
+        在预设布景下还会发生吗？），
+        或任何关於<b>你的电脑组态</b>的资讯。较长的资讯，例如 <b>stack trace</b> 或
+        <b>HTML testcase</b> ，应该使用「新增附件」连结。如果你觉得 build 设定也有关联，请在网址列输入
+        <kbd>about:buildconfig</kbd> ，并一并输入该资讯。<br><br>
+        如果你回报的是当掉的情况，请注明在哪个模组里软体当掉（例如：<kbd>在 gkhtml.dll 发生应用程式错误</kbd>。）
       </p>
     </td>
   </tr>
@@ -312,26 +312,26 @@ function PutDescription() {
     <td>
       <select name="bug_severity">
         <option name="critical" value="critical">
-          Critical ：會導致當機，或者資料損毀。
+          Critical ：会导致当机，或者资料损毁。
         </option>
         <option name="major" value="major">
-          Major ：主要的功能壞了。
+          Major ：主要的功能坏了。
         </option>
         <option name="normal" value="normal" selected="selected">
-          Normal ：這是一個應該要修好的 [% terms.bug %] 。
+          Normal ：这是一个应该要修好的 [% terms.bug %] 。
         </option>
         <option name="minor" value="minor">
-          Minor ：小功能壞了，而且有方法可以避開。
+          Minor ：小功能坏了，而且有方法可以避开。
         </option>
         <option name="trivial" value="trivial">
-          Trivial ：一些無傷大雅的問題，例如打錯字或者排版有問題。
+          Trivial ：一些无伤大雅的问题，例如打错字或者排版有问题。
         </option>
         <option name="enhancement" value="enhancement">
-          Enhancement ：想要新功能或加強舊有功能。
+          Enhancement ：想要新功能或加强旧有功能。
         </option>
       </select>
       <p>
-        說明該問題的嚴重性，或者你只是想要加新功能。
+        说明该问题的严重性，或者你只是想要加新功能。
       </p>
     </td>
   </tr>
@@ -340,18 +340,18 @@ function PutDescription() {
 </table>
 
 
-<h3 id="step3">步驟 3 之 3 － 送出 [% terms.bug %] 回報</h3>
+<h3 id="step3">步骤 3 之 3 － 送出 [% terms.bug %] 回报</h3>
 
 <p>
-  <input type="submit" id="report" value="送出 [% terms.bug %] 回報">
+  <input type="submit" id="report" value="送出 [% terms.bug %] 回报">
 </p>
 
 <p>
-  就這樣！非常感謝。如果有任何進度，將會以電子郵件通知。
+  就这样！非常感谢。如果有任何进度，将会以电子邮件通知。
 </p>
 <p>
-  請瞭解到我們收到一堆 [% terms.bug %] 回報－－可能要一段時間才會看到你的回報。你可以藉由清楚描述
-  [%+ terms.bug %] 來幫助我們更快瞭解問題所在，並回覆電子郵件中任何可能詢問的問題。
+  请了解到我们收到一堆 [% terms.bug %] 回报－－可能要一段时间才会看到你的回报。你可以藉由清楚描述
+  [%+ terms.bug %] 来帮助我们更快了解问题所在，并回覆电子邮件中任何可能询问的问题。
 </p>
 
     </form>
