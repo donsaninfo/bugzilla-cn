@@ -29,7 +29,7 @@ Download is powered by github [releases](https://github.com/repeat/bugzilla-cn/r
 
 ### Maintainer
 Repeat Yang (zh-TW)
-xfree (zh-CN)
+xfree86 (zh-CN)
 
 ### License
 [Mozilla Public License 2.0](https://www.mozilla.org/MPL/2.0/)
